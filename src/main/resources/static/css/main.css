@@ -1,0 +1,110 @@
+@charset "utf-8";
+
+#container {
+  width: 100%;
+  margin: 0px auto;
+  border: 0px solid #bcbcbc;
+}
+header {
+  border: 0px solid #bcbcbc;
+  background-image: url("/image/header_img.png");
+  height: 207px;
+  
+}
+article {
+  padding: 5px;
+  border: 0px solid #bcbcbc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer {
+  clear: both;
+  padding: 5px;
+  border: 0px solid #bcbcbc;
+  background-color: #F6FFF4;
+  height: 200px;
+}
+      
+header #logo{
+	width:150; 
+	height: 91; 
+	float:left; 
+	margin-left: 28px; 
+	margin-top: 63px;
+}
+
+header #hd_center{
+	width: 527px; 
+	height: 147px; 
+	float: left; 
+	margin-left: 278px; 
+	margin-top: 43px;
+}
+
+header #hd_txt{
+	width: 527px; 
+	height: 65px;
+}
+
+header #search_sec{
+	margin-top:39px; 
+	margin-left: 40px;
+}
+
+header #search_txt{
+	float: left;
+	width:340px; 
+	height:40px; 
+	border-radius: 5px; 
+	background-color: #FFFFFF;
+}
+
+header #search_btn{
+	float: left; 
+	margin-left: 8px; 
+	width:40px; 
+	height: 40px;
+}
+
+header #head_link{
+	float: left; 
+	margin-left: 150px;
+	margin-top: 91px;
+}
+
+header #head_link li{
+	padding: 0px 5px;
+	font-family: BM HANNA_TTF;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 24px;
+	float: left;
+}
+
+header #head_link ul {
+	list-style: none;
+}
+
+
+footer #logo{
+	width:85; 
+	height: 36; 
+	float:left; 
+	margin-left: 50px; 
+	margin-top: 30px;
+}
+
+footer #company_info{
+	float:left; 
+	margin-left: 60px; 
+	margin-top: 20px;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 20px;
+	text-align: left;
+}

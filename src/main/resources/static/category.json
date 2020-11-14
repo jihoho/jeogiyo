@@ -1,0 +1,46 @@
+[
+	{
+		"name": "전체보기",
+		"img_file": "/image/ct_img/tot_ct_img.png"
+	},
+	{
+		"name": "치킨",
+		"img_file": "/image/ct_img/chicken_ct_img.png"
+	},
+	{
+		"name": "피자/양식",
+		"img_file": "/image/ct_img/pizza_ct_img.png"
+	},
+	{
+		"name": "중국집",
+		"img_file": "/image/ct_img/china_ct_img.png"
+	},
+	{
+		"name": "한식",
+		"img_file": "/image/ct_img/korea_ct_img.png"
+	},
+	{
+		"name": "족발/보쌈",
+		"img_file": "/image/ct_img/bossam_ct_img.png"
+	},
+	{
+		"name": "야식",
+		"img_file": "/image/ct_img/nightsnack_ct_img.png"
+	},
+	{
+		"name": "분식",
+		"img_file": "/image/ct_img/bunsik_ct_img.png"
+	},
+	{
+		"name": "카페/디저트",
+		"img_file": "/image/ct_img/cafe_ct_img.png"
+	},
+	{
+		"name": "편의점/마트",
+		"img_file": "/image/ct_img/mart_ct_img.png"
+	},
+	{
+		"name": "패스트 푸드",
+		"img_file": "/image/ct_img/fastfood_ct_img.png"
+	}
+]
