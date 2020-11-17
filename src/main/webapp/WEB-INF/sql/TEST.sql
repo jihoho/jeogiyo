@@ -24,8 +24,46 @@ insert into SHOP(SHOP_ID, SHOP_NAME,ROAD_ADDRESS,JIBEON_ADDRESS,DETAIL_ADDRESS,
                 네네치킨은 건강한 환경에서 건강하게 자란 100% 국내산 닭고기를 사용합니다 ~!',11,30,00,30);   
                 
                 
-select shop_intro from shop;
+select shop_id from shop;
 
 insert into SHOP_CATEGORY(SHOP_CATEGORY_NAME,SHOP_ID)
         values(
-                "chicken'
+                'chicken',400);
+                
+          
+insert into DELIVERY_AREA(DO_ADDRESS,SI_ADDRESS,GU_ADDRESS,DONG_ADDRESS,SHOP_ID)
+        values(
+            '경기도','용인시','수지구','풍덕천동',400
+        );
+   
+insert into DELIVERY_AREA(DO_ADDRESS,SI_ADDRESS,GU_ADDRESS,DONG_ADDRESS,SHOP_ID)
+        values(
+            '경기도','용인시','수지구','상현동',400
+        );
+        
+insert into DELIVERY_AREA(DO_ADDRESS,SI_ADDRESS,GU_ADDRESS,DONG_ADDRESS,SHOP_ID)
+        values(
+            '경기도','용인시','수지구','신봉동',400
+        );
+        
+insert into DELIVERY_AREA(DO_ADDRESS,SI_ADDRESS,GU_ADDRESS,DONG_ADDRESS,SHOP_ID)
+        values(
+            '경기도','용인시','수지구','동천동',400
+        );
+                
+SELECT * FROM DELIVERY_AREA;
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
