@@ -72,7 +72,8 @@ SELECT * FROM SHOP
         "OPEN_TIME_H" NUMBER(3,0),
         "OPEN_TIME_M" NUMBER(3,0),
         "CLOSE_TIME_H" NUMBER(3,0),
-        "CLOSE_TIME_M" NUMBER(3,0)
+        "CLOSE_TIME_M" NUMBER(3,0),
+        "IMAGE_FILE" VARCHAR2(200)
         
     );
     

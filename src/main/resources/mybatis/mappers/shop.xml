@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.jeogiyo.shop.dao.ShopDAO">
+
+	<resultMap id="shopResult" type="shopVO">
+		<result property="shop_id" column="shop_id" />
+		<result property="shop_name" column="shop_name" />
+		<result property="road_address" column="road_address" />
+		<result property="jibeon_address" column="jibeon_address" />
+		<result property="detail_address" column="detail_address" />
+		<result property="zipcode" column="zipcode" />
+		<result property="tel1" column="tel1" />
+		<result property="tel2" column="tel2" />
+		<result property="tel3" column="tel3" />
+		<result property="hp1" column="hp1" />
+		<result property="hp2" column="hp2" />
+		<result property="hp3" column="hp3" />
+		<result property="min_order_price" column="min_order_price" />
+		<result property="delivery_tip" column="delivery_tip" />
+		<result property="deviery_min_time" column="deviery_min_time" />
+		<result property="deviery_max_time" column="deviery_max_time" />
+		<result property="shop_owner_id" column="shop_owner_id" />
+		<result property="shop_regis_number" column="shop_regis_number" />
+		<result property="star_avg" column="star_avg" />
+		<result property="star_cnt" column="star_cnt" />
+		<result property="dib_cnt" column="dib_cnt" />
+		<result property="review_cnt" column="review_cnt" />
+		<result property="shop_intro" column="shop_intro" />
+		<result property="open_time_h" column="open_time_h" />
+		<result property="open_time_m" column="open_time_m" />
+		<result property="close_time_h" column="close_time_h" />
+		<result property="close_time_m" column="close_time_m" />
+		<result property="image_file" column="image_file"/>
+	</resultMap>
+	
+	
+<!-- 	<resultMap id="categoryResult" type="shopCategoryVO">
+		<result property="shop_category_name" column="shop_category_name" />
+		<result property="shop_id" column="shop_id" />
+	</resultMap> -->
+	
+	<select id="selectShopListByCategory" parameterType="String" resultMap="shopResult">
+		<![CDATA[
+			SELECT s.* 
+			FROM SHOP s, SHOP_CATEGORY c
+			WHERE c.SHOP_CATEGORY_NAME = #{category}
+			and s.SHOP_ID=c.SHOP_ID
+		]]>
+	</select>
+	
+	
+
+</mapper>

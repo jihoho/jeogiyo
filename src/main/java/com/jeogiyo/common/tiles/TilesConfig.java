@@ -12,7 +12,8 @@ public class TilesConfig {
 	@Bean
 	public TilesConfigurer tilesConfigurer() {
 		final TilesConfigurer configurer= new TilesConfigurer();
-		configurer.setDefinitions(new String[] {"WEB-INF/tiles/tiles-main.xml"});
+		configurer.setDefinitions(new String[] {"WEB-INF/tiles/tiles-main.xml","WEB-INF/tiles/tiles-shop.xml"});
+		
 		configurer.setCheckRefresh(true);
 		return configurer;
 	}

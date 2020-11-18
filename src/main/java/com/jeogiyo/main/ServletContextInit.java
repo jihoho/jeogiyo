@@ -25,14 +25,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class ServletContextInit implements ServletContextInitializer {
-	private static String CATEGORY_CONFIGURE_FILE="C:\\Users\\hojun\\myJSP\\sts_workspace\\jeogiyo\\src\\main\\resources\\static\\category.json";
 	
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		JSONParser parser = new JSONParser();
 		try {
-//			JSONArray jsonArray=(JSONArray) parser.parse(new FileReader("../../../../resources/static/category.json"));
-			JSONArray jsonArray=(JSONArray) parser.parse(new FileReader(CATEGORY_CONFIGURE_FILE));
+			
+			String category_list_file= servletContext.getRealPath("/")+"resources\\category.json";
+			System.out.println("category file: "+ category_list_file);
+			JSONArray jsonArray=(JSONArray) parser.parse(new FileReader(category_list_file));
 			List<Map<String, String>> categoryList=getListMapFromJsonArray(jsonArray);
 			servletContext.setAttribute("categoryList", categoryList);
 			System.out.println("name:"+categoryList.get(0).get("name"));

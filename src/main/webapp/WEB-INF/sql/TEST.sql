@@ -14,7 +14,7 @@ select * from shop_owner;
 insert into SHOP(SHOP_ID, SHOP_NAME,ROAD_ADDRESS,JIBEON_ADDRESS,DETAIL_ADDRESS,
                 ZIPCODE,TEL1,TEL2,TEL3,HP1,HP2,HP3,MIN_ORDER_PRICE,DELIVERY_TIP,
                 DELIVERY_MIN_TIME,DELIVERY_MAX_TIME,SHOP_OWNER_ID,SHOP_REGIS_NUMBER,
-                SHOP_INTRO,OPEN_TIME_H,OPEN_TIME_M,CLOSE_TIME_H,CLOSE_TIME_M)
+                SHOP_INTRO,OPEN_TIME_H,OPEN_TIME_M,CLOSE_TIME_H,CLOSE_TIME_M,IMAGE_FILE)
         VALUES(SEQ_SHOP_ID.NEXTVAL,'네네치킨-수지2지구점','경기도 용인시 수지구 풍덕천동 1047-3','경기도 용인시 수지구 정평로 40-3','거묵상가2 111호',
                 '4321','031','111','1234','010','111','1111',15000,2000,
                 40,50,'jihoho','1420915566',
@@ -28,8 +28,11 @@ select shop_id from shop;
 
 insert into SHOP_CATEGORY(SHOP_CATEGORY_NAME,SHOP_ID)
         values(
-                'chicken',400);
-                
+                'chicken_ct',400);
+            
+            
+select * from shop_category;
+delete from shop_category where shop_category_name='chicken';
           
 insert into DELIVERY_AREA(DO_ADDRESS,SI_ADDRESS,GU_ADDRESS,DONG_ADDRESS,SHOP_ID)
         values(

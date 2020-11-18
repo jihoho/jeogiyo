@@ -4,15 +4,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.*" %>
 <%
-  request.setCharacterEncoding("UTF-8");
+ 	request.setCharacterEncoding("UTF-8");
+	ServletContext context=request.getServletContext();
+	List categoryList= (ArrayList)context.getAttribute("categoryList");
 
 %> 
 
-<% 
-	ServletContext context=request.getServletContext();
-	List categoryList= (ArrayList)context.getAttribute("categoryList");
-%>
-
+<style>
+	section {
+		padding: 5px;
+		border: 0px solid #bcbcbc;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	#shop_img{
+		width: 300px; 
+		height: 300px;
+	}
+</style>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  /> 
 
 <!DOCTYPE html>
@@ -22,6 +33,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<section>
 	<table>
 	<%
 		for(int i=0;i<categoryList.size();i++){
@@ -32,10 +44,13 @@
 			}
 			Map category=(Map)categoryList.get(i);
 			%>
-			<td style="width: 300px; height: 300px;">
-				<span style="margin-left:5px; margin-top: 5px;"><%= category.get("name") %></span><br>
-				<img  src="<%= category.get("img_file") %>" style="margin-right: 5px; margin-bottom: 5px;width: 125px; height: 125px;">
-			</td>
+				<td>
+					<a href="${contextPath}/shop/searchShopListByCategory.do?category=<%=category.get("name")%>">
+					<div>
+						<img  id="shop_img" src="<%= category.get("img_file") %>">
+					</div>
+					</a>
+				</td>
 			<%
 			if (i%4==3){
 				%>
@@ -45,5 +60,6 @@
 		}
 	%>
 	</table>
+	</section>
 </body>
 </html>
