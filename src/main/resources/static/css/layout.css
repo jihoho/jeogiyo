@@ -9,15 +9,18 @@ header {
   border: 0px solid #bcbcbc;
   background-image: url("/image/header_img.png");
   height: 207px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
 }
-/* article {
+article {
   padding: 5px;
   border: 0px solid #bcbcbc;
   display: flex;
   justify-content: center;
   align-items: center;
-} */
+}
 
 footer {
   clear: both;
@@ -25,6 +28,9 @@ footer {
   border: 0px solid #bcbcbc;
   background-color: #F6FFF4;
   height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
       
 header #logo{

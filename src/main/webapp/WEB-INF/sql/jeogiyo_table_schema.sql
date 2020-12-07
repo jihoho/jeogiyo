@@ -87,7 +87,7 @@ SELECT * FROM SHOP
     (
         "SHOP_CATEGORY_NAME" VARCHAR2(100 BYTE),
         "SHOP_ID" NUMBER(20,0) REFERENCES SHOP(SHOP_ID)
-        
+        CONSTRAINT pk_category PRIMARY KEY (shop_category_name, shop_id)
     );
     
 --------------------------------------------------------
