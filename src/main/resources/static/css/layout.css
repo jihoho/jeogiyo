@@ -16,10 +16,6 @@ header {
 }
 article {
   padding: 5px;
-  border: 0px solid #bcbcbc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 footer {

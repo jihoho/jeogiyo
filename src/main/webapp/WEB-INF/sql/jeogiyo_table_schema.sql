@@ -22,10 +22,10 @@ SELECT * FROM SHOP
 	"HP1" VARCHAR2(20 BYTE), 
 	"HP2" VARCHAR2(20 BYTE), 
 	"HP3" VARCHAR2(20 BYTE), 
-	"SMSSTS_YN"  NUMBER(1) CHECK(SMSSTS_YN IN(0,1)), 
+	"SMSSTS_YN"  VARCHAR(20 BYTE) CHECK(SMSSTS_YN IN('Y','N')), 
 	"EMAIL1" VARCHAR2(20 BYTE), 
 	"EMAIL2" VARCHAR2(20 BYTE), 
-	"EMAILSTS_YN" NUMBER(1) CHECK(EMAILSTS_YN IN(0,1)), 
+	"EMAILSTS_YN" VARCHAR2(20 BYTE) CHECK(EMAILSTS_YN IN('Y','N')), 
 	"ZIPCODE" VARCHAR2(20 BYTE), 
 	"ROAD_ADDRESS" VARCHAR2(500 BYTE), 
 	"JIBEON_ADDRESS" VARCHAR2(500 BYTE), 
@@ -33,9 +33,9 @@ SELECT * FROM SHOP
 	"BIRTH_Y" VARCHAR2(20 BYTE), 
 	"BIRTH_M" VARCHAR2(20 BYTE), 
 	"BIRTH_D" VARCHAR2(20 BYTE), 
-	"BIRTH_GN" NUMBER(1) CHECK(BIRTH_GN IN(0,1)), 
+	"BIRTH_GN" varchar2(20 BYTE), 
 	"JOIN_DATE" DATE DEFAULT sysdate, 
-	"DEL_YN" NUMBER(1) DEFAULT 0
+	"DEL_YN" varchar2(20 BYTE) CHECK(DEL_YN IN('Y','N')) 
    ) ;
    
 --------------------------------------------------------
@@ -171,3 +171,30 @@ SELECT * FROM SHOP
 
 
 
+--------------------------------------------------------
+--  DDL for Table MEMBER
+--------------------------------------------------------
+
+ 
+
+
+
+   
+--------------------------------------------------------
+--  create sequences
+--------------------------------------------------------  
+
+CREATE SEQUENCE  "SEQ_SHOP_ID"  MINVALUE 1 MAXVALUE 10000000 INCREMENT BY 1 START WITH 400 NOCACHE ORDER  NOCYCLE ;
+
+
+
+--------------------------------------------------------
+--  create triggers
+--------------------------------------------------------  
+CREATE OR REPLACE TRIGGER TRI_SHOP_shop_id BEFORE INSERT ON SHOP
+FOR EACH ROW
+BEGIN
+	SELECT SEQ_SHOP_ID.nextval
+	INTO :new.shop_id
+	FROM dual;
+END;

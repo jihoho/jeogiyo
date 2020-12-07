@@ -4,6 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 
+    #memform{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     #detail_table {
     	width: 590px; font-size: 0.75em;
     }
@@ -43,6 +49,8 @@
 <html>
 <head>
 <meta charset="utf-8">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="./javascript.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 
@@ -77,8 +85,8 @@ function execDaumPostcode() {
 
       // 우편번호와 주소 정보를 해당 필드에 넣는다.
       document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
-      document.getElementById('roadAddress').value = fullRoadAddr;
-      document.getElementById('jibunAddress').value = data.jibunAddress;
+      document.getElementById('road_address').value = fullRoadAddr;
+      document.getElementById('jibeon_address').value = data.jibunAddress;
 
       // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
       if(data.autoRoadAddress) {
@@ -100,6 +108,7 @@ function execDaumPostcode() {
 
 function fn_overlapped(){
     var _id=$("#_member_id").val();
+
     if(_id==''){
    	 alert("ID를 입력하세요");
    	 return;
@@ -121,7 +130,7 @@ function fn_overlapped(){
           }
        },
        error:function(data,textStatus){
-          alert("에러가 발생했습니다.");ㅣ
+          alert("에러가 발생했습니다.");
        },
        complete:function(data,textStatus){
           //alert("작업을완료 했습니다");
@@ -131,6 +140,7 @@ function fn_overlapped(){
 </script>
 </head>
 <body>
+    <section id= "memform">
 	<form action="${contextPath}/member/addMember.do" method="post">
 	<div id="detail_table">
 	    <h3>필수입력사항</h3>
@@ -163,7 +173,7 @@ function fn_overlapped(){
 				<tr class="dot_line">
 					<td class="fixed_join">법정생년월일</td>
 					<td>
-					<select name="member_birth_y">
+					<select name="birth_y">
 
 					     <c:forEach var="year" begin="1" end="100">
 					       <c:choose>
@@ -177,7 +187,7 @@ function fn_overlapped(){
 					   	</c:forEach>
 
 					</select>년
-					 <select name="member_birth_m" >
+					 <select name="birth_m" >
 					   <c:forEach var="month" begin="1" end="12">
 					       <c:choose>
 					         <c:when test="${month==5 }">
@@ -189,7 +199,7 @@ function fn_overlapped(){
 							</c:choose>
 					   	</c:forEach>
 					</select>월
-					<select name="member_birth_d">
+					<select name="birth_d">
 							<c:forEach var="day" begin="1" end="31">
 					       <c:choose>
 					         <c:when test="${day==10 }">
@@ -201,9 +211,9 @@ function fn_overlapped(){
 							</c:choose>
 					   	</c:forEach>
 					</select>일 <span style="padding-left:50px"></span>
-					  <input type="radio" name="member_birth_gn" value="2" checked />양력
+					  <input type="radio" name="birth_gn" value="2" checked />양력
 						 <span style="padding-left:50px"></span>
-						<input type="radio"  name="member_birth_gn" value="1" />음력
+						<input type="radio"  name="birth_gn" value="1" />음력
 				  </td>
 				</tr>
 				<tr class="dot_line">
@@ -274,9 +284,9 @@ function fn_overlapped(){
 					   <input type="text" id="zipcode" name="zipcode" size="10" > <a href="javascript:execDaumPostcode()">우편번호검색</a>
 					  <br>
 					  <p>
-					   지번 주소:<br><input type="text" id="roadAddress"  name="roadAddress" size="50"><br><br>
-					  도로명 주소: <input type="text" id="jibunAddress" name="jibunAddress" size="50"><br><br>
-					  나머지 주소: <input type="text"  name="namujiAddress" size="50" />
+					   지번 주소:<br><input type="text" id="road_address"  name="road_address" size="50"><br><br>
+					  도로명 주소: <input type="text" id="jibeon_address" name="jibeon_address" size="50"><br><br>
+					  나머지 주소: <input type="text"  name="detail_address" size="50" />
 					 <!--   <span id="guide" style="color:#999"></span> -->
 					   </p>
 					</td>
@@ -296,5 +306,6 @@ function fn_overlapped(){
 	</table>
 	</div>
 </form>
+<section>
 </body>
 </html>
