@@ -11,7 +11,7 @@ public class DemoController {
 	@ResponseBody
 	@RequestMapping("/")
 	public String home() {
-		System.out.println("hello boot!!");
+		System.out.println("hello boot12!!");
 		return "hello boot!!";
 	}
 	
