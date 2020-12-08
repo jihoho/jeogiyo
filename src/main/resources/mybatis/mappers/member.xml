@@ -35,6 +35,13 @@
 		<result property="join_date" column="join_date" />
 	</resultMap>
 
+	<select id="login" resultType="memberVO" parameterType="java.util.Map">
+		<![CDATA[
+			select * from member
+			where member_id=#{member_id}
+			and member_pw=#{member_pw}
+		]]>
+	</select>
 
 	<select id="selectOverlappedID" parameterType="String" resultType="String">
 		<![CDATA[

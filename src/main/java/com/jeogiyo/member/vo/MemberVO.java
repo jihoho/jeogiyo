@@ -1,5 +1,8 @@
 package com.jeogiyo.member.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component("memberVO")
 public class MemberVO {
     private String member_id;
     private String member_pw;

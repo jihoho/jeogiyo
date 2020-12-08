@@ -45,7 +45,7 @@
 			Map category=(Map)categoryList.get(i);
 			%>
 				<td>
-					<a href="${contextPath}/shop/searchShopListByCategory.do?category=<%=category.get("name")%>">
+					<a href="${contextPath}/shop/listShop.do?category=<%=category.get("name")%>">
 					<div>
 						<img  id="shop_img" src="<%= category.get("img_file") %>">
 					</div>

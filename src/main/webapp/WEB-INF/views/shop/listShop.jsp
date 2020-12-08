@@ -116,7 +116,7 @@
 		<%
 			for(int i=0;i<categoryList.size();i++){
 				Map category=(Map)categoryList.get(i);
-				%><a id=<%=category.get("name")%> href="${contextPath}/shop/searchShopListByCategory.do?category=<%=category.get("name")%>">
+				%><a id=<%=category.get("name")%> href="${contextPath}/shop/listShop.do?category=<%=category.get("name")%>">
 					<span><%=category.get("ko_name") %></span>
 					</a><%
 			}

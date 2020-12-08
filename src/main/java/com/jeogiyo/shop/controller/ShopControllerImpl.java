@@ -24,11 +24,11 @@ public class ShopControllerImpl extends BaseController implements ShopController
 
 	
 	@Override
-	@RequestMapping(value="/searchShopListByCategory.do", method=RequestMethod.GET)
+	@RequestMapping(value="/listShop.do", method=RequestMethod.GET)
 	public ModelAndView searchShopListByCategory(@RequestParam("category") String category,
 									HttpServletRequest request, HttpServletResponse response ) throws Exception{
 		String viewName=(String)request.getAttribute("viewName");
-		System.out.println("shopController.searchShopsByCategory view name : "+viewName+"category: "+category);
+		System.out.println("shopController.searchShopsByCategory view name : "+viewName+"  category: "+category);
 		List<ShopVO> shopList=shopService.searchShopListByCategory(category);
 		if(shopList==null) {
 			System.out.println("shopList null");

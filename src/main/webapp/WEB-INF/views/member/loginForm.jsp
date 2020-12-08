@@ -6,7 +6,50 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <%
    request.setCharacterEncoding("UTF-8");
-%>     
+%>
+<style>
+    #login_sect{
+		text-align : center;
+    }
+    #login_sect a img{
+        width : 250px;
+        height : 150px;
+        margin-top: 200px;
+    }
+
+    #login_sect .login_input{
+        margin-top : 30px;
+    }
+
+    #login_sect .login_input input{
+        width: 500px;
+        height: 70px;
+        font-size: 36px;
+    }
+
+    #login_butt{
+        background-color: #046D22;
+        color: #FFFFFF;
+    }
+
+    #login_sect hr{
+        margin-top: 50px;
+        border-top: 2px dashed black;
+        width: 500px;
+    }
+
+    #login_sect #sub_link a{
+        color:black;
+        text-decoration:none;
+    }
+    #login_sect #sub_link span{
+        width:160px;
+        font-weight: bold;
+        font-size: 24px;
+        text-align: center;
+    }
+
+</style>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,27 +67,47 @@
 </head>
 
 <body>
-<form name="frmLogin" method="post"  action="${contextPath}/member/login.do">
-   <table border="1"  width="80%" align="center" >
-      <tr align="center">
-         <td>아이디</td>
-         <td>비밀번호</td>
-      </tr>
-      <tr align="center">
-         <td>
-	    <input type="text" name="id" value="" size="20">
-	 </td>
-         <td>
-	    <input type="password" name="pwd" value="" size="20">
-	 </td>
-      </tr>
-      <tr align="center">
-         <td colspan="2">
-            <input type="submit" value="로그인" > 
-            <input type="reset"  value="다시입력" > 
-         </td>
-      </tr>
-   </table>
-</form>
+    <section id="login_sect">
+        <div>
+            <a href="${contextPath}/main/main.do">
+                <img src="${contextPath}/image/login_logo.png"/>
+            </a>
+        </div>
+        <div>
+            <form name="frmLogin" method="post"  action="${contextPath}/member/login.do">
+                <div class="login_input">
+                    <input type="text" name="member_id" placeholder="아이디" size="20">
+                </div>
+                <div class="login_input">
+                    <input type="password" name="member_pw" placeholder="비밀번호" size="20">
+                </div>
+                <div class="login_input" >
+                    <input type="submit" id="login_butt" value="로그인" >
+                </div>
+            </form>
+        </div>
+        <div>
+            <hr/>
+        </div>
+        <div id= "sub_link">
+            <a href="${contextPath}/member/findMemberId.do">
+                <span>
+                    아이디 찾기
+                </span>
+            </a>
+            |
+            <a href="${contextPath}/member/findMemberPw.do">
+                <span>
+                    비밀번호 찾기
+                </span>
+            </a>
+            |
+            <a href="${contextPath}/member/memberForm.do">
+                <span>
+                    회원가입
+                <span>
+            </a>
+        </div>
+    </section>
 </body>
 </html>

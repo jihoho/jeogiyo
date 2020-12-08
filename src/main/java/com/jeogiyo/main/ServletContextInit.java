@@ -1,8 +1,6 @@
 package com.jeogiyo.main;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -33,7 +31,10 @@ public class ServletContextInit implements ServletContextInitializer {
 			
 			String category_list_file= servletContext.getRealPath("/")+"resources\\category.json";
 			System.out.println("category file: "+ category_list_file);
-			JSONArray jsonArray=(JSONArray) parser.parse(new FileReader(category_list_file));
+			JSONArray jsonArray=
+                    (JSONArray) parser.parse(new BufferedReader(
+                                                new InputStreamReader(
+                                                        new FileInputStream(category_list_file),"euc-kr")));
 			List<Map<String, String>> categoryList=getListMapFromJsonArray(jsonArray);
 			servletContext.setAttribute("categoryList", categoryList);
 			System.out.println("name:"+categoryList.get(0).get("name"));

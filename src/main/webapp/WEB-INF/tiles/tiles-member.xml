@@ -4,21 +4,20 @@
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
 
-<!--    <definition name="/member/listMembers" extends="baseLayout">
-      <put-attribute name="title" value="회원목록창" />
-      <put-attribute name="body" value="/WEB-INF/views/member/listMembers.jsp" />
+   <definition name="loginLayout"  template="/WEB-INF/views/common/loginLayout.jsp">
+      <put-attribute name="title" value="" />
+      <put-attribute name="body" value="" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
-   
-
-    
-   <definition name="/member/loginForm" extends="baseLayout">
-      <put-attribute name="title" value="로그인창" />
-      <put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp" />
-   </definition> -->
       
    <definition name="/member/memberForm" extends="baseLayout">
       <put-attribute name="title" value="회원등록창" />
       <put-attribute name="body" value="/WEB-INF/views/member/memberForm.jsp" />
+   </definition>
+
+   <definition name="/member/loginForm" extends="loginLayout">
+      <put-attribute name="title" value="로그인" />
+      <put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp" />
    </definition>
 
    <!--<definition name="/member/viewDetail" extends="baseLayout">

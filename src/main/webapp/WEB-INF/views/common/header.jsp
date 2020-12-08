@@ -37,12 +37,12 @@
 		<ul>
 			<c:choose>
 				<c:when test="${isLogOn==true}">
-					<li><a href="${contextPath}/member/logout.do">로그아웃</a></li>
-					<li><a href="${contextPath}/member/logout.do">마이페이지</a></li>
+					<li><a href="${contextPath}/member/logout.do"><span>로그아웃</span></a></li>
+					<li><a href="${contextPath}/member/logout.do"><span>마이페이지</span></a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="${contextPath}/member/login.do">로그인</a></li>
-					<li><a href="${contextPath}/member/memberForm.do">회원가입</a></li>
+					<li><a href="${contextPath}/member/loginForm.do"><span>로그인</span></a></li>
+					<li><a href="${contextPath}/member/memberForm.do"><span>회원가입</span></a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>
