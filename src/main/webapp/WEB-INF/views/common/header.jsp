@@ -12,41 +12,48 @@
 <html>
 <head>
   <meta charset="UTF-8">
-<title>헤더</title>
-</head>
-<body>
+<title>header</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
-	<div id="logo">
-		<a href="${contextPath}/main/main.do">
-			<img src="${contextPath}/image/logo.png">
-		</a>
-	</div>
-	<div id="hd_center" >
-		<div id="hd_txt">
-			<img src="${contextPath}/image/header_txt.png">
-		</div>
-		<div id="search_sec">
-			<input type="text" name="search_txt" id="search_txt" disabled="disabled"  value="건물명, 도로명, 지번으로 검색하세요." >
-			<a id="search_btn" href="${contextPath}/main/main.do">
-				<img src="${contextPath}/image/search_btn.png">
-			</a>
-		</div>
-	</div>
+</head>
+<body>	
+	    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-image: url('/image/header_img.png'); height: 250px; width: 100%;" >
+          <div class="container-fluid">
+			<a class="navbar-brand" href="${contextPath}/main/main.do"><img src="${contextPath}/image/logo.png"></a>
+			
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+             
+				<div style="margin-left: auto!important;margin-right: auto!important;">
+					<img src="${contextPath}/image/header_txt.png">
+				</div>
+
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-right: 15px;" >
+                    <c:choose>
+                    <c:when test="${isLogOn==true}">
+                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/member/logout.do"><span style="font-weight: 900; color: #046D22; font-size: large;">로그아웃</span></a></li>
+                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/member/mypage.do"><span style="font-weight: 900; color: #046D22; font-size: large;">마이페이지</span></a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/member/loginForm.do"><span style="font-weight: 900; color: #046D22; font-size: large;">로그인</span></a></li>
+                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/member/memberForm.do"><span style="font-weight: 900; color: #046D22; font-size: large;">회원가입</span></a></li>
+                    </c:otherwise>
+                </c:choose>
+				</ul>
+
+				<div>
+					<form class="d-flex">
+						<input class="form-control me-2" type="search" placeholder="search dong address" aria-label="Search">
+						<button class="btn btn-success" type="submit">Search</button>
+					</form>
+				</div>
+            </div>
+        </nav>
+
 	
-	<div id="head_link">
-		<ul>
-			<c:choose>
-				<c:when test="${isLogOn==true}">
-					<li><a href="${contextPath}/member/logout.do"><span>로그아웃</span></a></li>
-					<li><a href="${contextPath}/member/logout.do"><span>마이페이지</span></a></li>
-				</c:when>
-				<c:otherwise>
-					<li><a href="${contextPath}/member/loginForm.do"><span>로그인</span></a></li>
-					<li><a href="${contextPath}/member/memberForm.do"><span>회원가입</span></a></li>
-				</c:otherwise>
-			</c:choose>
-		</ul>
-	</div>
 
 
 </body>

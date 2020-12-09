@@ -8,7 +8,8 @@ insert into SHOP_OWNER( SHOP_OWNER_ID, SHOP_OWNER_PW, SHOP_OWNER_NAME, SHOP_OWNE
                 '1994','09','13',0,0);    
                     
 select * from shop_owner;               
-                
+           
+select member_id, member_pw from member;     
                 
 
 insert into SHOP( SHOP_NAME,ROAD_ADDRESS,JIBEON_ADDRESS,DETAIL_ADDRESS,

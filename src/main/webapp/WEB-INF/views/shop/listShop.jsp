@@ -29,7 +29,6 @@
 	}
 	
 	#ct_menu a{
-		color: black;
 	}
 	
 	#shop_list{
