@@ -55,6 +55,9 @@
 <head>
   <meta charset="UTF-8">
 <title>로그인창</title>
+
+<link href="${contextPath}/lib/bootstrap-5.0.0-beta1-dist/css/bootstrap.css" rel="stylesheet" >
+<script src="${contextPath}/lib/bootstrap-5.0.0-beta1-dist/js/bootstrap.js" type="text/javascripta"></script>
 <c:choose>
 	<c:when test="${result=='loginFailed' }">
 	  <script>
@@ -89,6 +92,7 @@
         <div>
             <hr/>
         </div>
+
         <div id= "sub_link">
             <a href="${contextPath}/member/findMemberId.do">
                 <span>

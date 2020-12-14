@@ -8,9 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Map;
 
 @Mapper
-@Repository("memberDAO")
 public interface MemberDAO {
-    public String selectOverlappedID(String id) throws DataAccessException;
+    public String selectOverlappedID(Map<String,String> idMap) throws DataAccessException;
 
     public void insertNewMember(MemberVO memberVO) throws DataAccessException;
 

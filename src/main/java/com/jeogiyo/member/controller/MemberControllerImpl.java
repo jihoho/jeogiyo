@@ -3,6 +3,7 @@ package com.jeogiyo.member.controller;
 import com.jeogiyo.common.base.BaseController;
 import com.jeogiyo.member.service.MemberService;
 import com.jeogiyo.member.vo.MemberVO;
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller("memberController")
@@ -85,7 +87,10 @@ public class MemberControllerImpl extends BaseController implements MemberContro
     @RequestMapping(value = "/overlapped.do", method = RequestMethod.POST)
     public ResponseEntity overlapped(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception{
         ResponseEntity resEntity=null;
-        String result = memberService.overlapped(id);
+        HashMap<String,String> idMap=new HashMap<String,String>();
+        idMap.put("id",id);
+        idMap.put("type","NORMAL");
+        String result = memberService.overlapped(idMap);
         resEntity=new ResponseEntity(result, HttpStatus.OK);
         return resEntity;
     }
@@ -101,6 +106,8 @@ public class MemberControllerImpl extends BaseController implements MemberContro
         ResponseEntity resEntity = null;
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+//        일반 계정의 타입 설정
+        _memberVO.setMember_type("NORMAL");
         try {
             memberService.addMember(_memberVO);
             message  = "<script>";

@@ -6,6 +6,8 @@ DROP TABLE DIB;
 DROP TABLE REVIEW;
 DROP TABLE SHOP CASCADE CONSTRAINTS;
 DROP TABLE SHOP_OWNER CASCADE CONSTRAINTS;
+
+DROP TABLE member;
 SELECT * FROM SHOP 
 --------------------------------------------------------
 --  DDL for Table SHOP_OWNER
@@ -175,7 +177,15 @@ SELECT * FROM SHOP
 --  DDL for Table MEMBER
 --------------------------------------------------------
 
- 
+   CREATE TABLE "MEMBER" 
+   (	"MEMBER_ID" VARCHAR2(20 BYTE),
+   "MEMBER_TYPE" VARCHAR2(50 BYTE) DEFAULT 'NORMAL',
+	"MEMBER_PW" VARCHAR2(30 BYTE), 
+    "NICK_NAME" VARCHAR2(200 BYTE),
+	"HP" VARCHAR2(50 BYTE),
+	"DEL_YN" varchar2(20 BYTE) CHECK(DEL_YN IN('Y','N')),
+    CONSTRAINT pk_member PRIMARY KEY (MEMBER_ID, MEMBER_TYPE)
+   ) ;
 
 
 

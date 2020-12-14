@@ -5,7 +5,7 @@ import com.jeogiyo.member.vo.MemberVO;
 import java.util.Map;
 
 public interface MemberService {
-    public String overlapped(String id) throws Exception;
+    public String overlapped(Map<String,String> idMap) throws Exception;
 
     public void addMember(MemberVO memberVO) throws Exception;
 

@@ -13,8 +13,8 @@
 <head>
   <meta charset="UTF-8">
 <title>header</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<link href="${contextPath}/lib/bootstrap-5.0.0-beta1-dist/css/bootstrap.css" rel="stylesheet" >
+<script src="${contextPath}/lib/bootstrap-5.0.0-beta1-dist/js/bootstrap.js" type="text/javascripta"></script>
 
 </head>
 <body>	
@@ -34,12 +34,12 @@
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-right: 15px;" >
                     <c:choose>
                     <c:when test="${isLogOn==true}">
-                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/member/logout.do"><span style="font-weight: 900; color: #046D22; font-size: large;">로그아웃</span></a></li>
-                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/member/mypage.do"><span style="font-weight: 900; color: #046D22; font-size: large;">마이페이지</span></a></li>
+                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/member/logout.do"><span style="font-weight: 900; color: #046D22; ">로그아웃</span></a></li>
+                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/member/mypage.do"><span style="font-weight: 900; color: #046D22; ">마이페이지</span></a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/member/loginForm.do"><span style="font-weight: 900; color: #046D22; font-size: large;">로그인</span></a></li>
-                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/member/memberForm.do"><span style="font-weight: 900; color: #046D22; font-size: large;">회원가입</span></a></li>
+                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/member/loginForm.do"><span style="font-weight: 900; color: #046D22; ">로그인</span></a></li>
+                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/member/memberForm.do"><span style="font-weight: 900; color: #046D22; ">회원가입</span></a></li>
                     </c:otherwise>
                 </c:choose>
 				</ul>

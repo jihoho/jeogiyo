@@ -20,9 +20,9 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public String overlapped(String id) throws Exception{
-        System.out.println("call service overlapped id :" +id);
-        String result =memberDAO.selectOverlappedID(id);
+    public String overlapped(Map idMap) throws Exception{
+        System.out.println("call service overlapped id :" +idMap.get("id"));
+        String result =memberDAO.selectOverlappedID(idMap);
         System.out.println("result: "+result);
         return result;
     }

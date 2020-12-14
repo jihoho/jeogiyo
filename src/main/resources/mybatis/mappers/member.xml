@@ -7,32 +7,11 @@
 	<!-- 리절트 맵 정의 -->
 	<resultMap id="memberResult" type="memberVO">
 		<result property="member_id" column="member_id" />
+		<result property="member_type" column="member_type"/>
 		<result property="member_pw" column="member_pw" />
-		<result property="member_name" column="member_name" />
-		<result property="member_gender" column="member_gender" />
-
-		<result property="birth_y" column="birth_y" />
-		<result property="birth_m" column="birth_m" />
-		<result property="birth_d" column="birth_d" />
-
-		<result property="birth_gn" column="birth_gn" />
-		<result property="tel1" column="tel1" />
-		<result property="tel2" column="tel2" />
-		<result property="tel3" column="tel3" />
-
-		<result property="hp1" column="hp1" />
-		<result property="hp2" column="hp2" />
-		<result property="hp3" column="hp3" />
-		<result property="smssts_yn" column="smssts_yn" />
-		<result property="email1" column="email1" />
-		<result property="email2" column="email2" />
-		<result property="emailsts_yn" column="emailsts_yn" />
-
-		<result property="zipcode" column="zipcode" />
-		<result property="road_address" column="road_address" />
-		<result property="jibeon_address" column="jibeon_address" />
-		<result property="detail_address" column="detail_address" />
-		<result property="join_date" column="join_date" />
+		<result property="nick_name" column="nick_name"/>
+		<result property="hp" column="hp" />
+		<result property="del_yn" column="del_yn"/>
 	</resultMap>
 
 	<select id="login" resultType="memberVO" parameterType="java.util.Map">
@@ -43,60 +22,22 @@
 		]]>
 	</select>
 
-	<select id="selectOverlappedID" parameterType="String" resultType="String">
+	<select id="selectOverlappedID" parameterType="java.util.Map" resultType="String">
 		<![CDATA[
 			select decode(count(*),1,'true',0,'false')
 			from member
-			where member_id=#{id}
+			where member_id=#{id} and member_type=#{type}
 		]]>
 	</select>
 
 	<select id="insertNewMember" parameterType="memberVO">
 		<![CDATA[
-			insert into member(member_id,
-				 					 member_pw,
-                                     member_name,
-                                     member_gender,
-                                     birth_y,
-                                     birth_m,
-                                     birth_d,
-                                     birth_gn,
-                                     tel1,
-                                     tel2,
-                                     tel3,
-                                     hp1,
-                                     hp2,
-                                     hp3,
-                                     smssts_yn,
-                                     email1,
-                                     email2,
-                                     emailsts_yn,
-                                     zipcode,
-                                     road_address,
-                                     jibeon_address,
-                                     detail_address)
+			insert into member(member_id,member_type,member_pw,nick_name,hp)
 							 values(#{member_id},
+							        #{member_type},
 									#{member_pw},
-									#{member_name},
-                                 	#{member_gender},
-                                   	#{birth_y},
-                                   	#{birth_m},
-                                    #{birth_d},
-                                    #{birth_gn},
-                                    #{tel1},
-                                    #{tel2},
-                                    #{tel3},
-                                    #{hp1},
-                                    #{hp2},
-                                    #{hp3},
-                                    #{smssts_yn},
-                                    #{email1},
-                                    #{email2},
-                                    #{emailsts_yn},
-                                    #{zipcode},
-                                    #{road_address},
-                                    #{jibeon_address},
-                                    #{detail_address})
+							        #{nick_name},
+							        #{hp})
 
 		]]>
 	</select>
