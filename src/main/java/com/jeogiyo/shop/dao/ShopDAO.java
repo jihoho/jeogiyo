@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 import com.jeogiyo.shop.vo.ShopVO;
 
 @Mapper
-@Repository("shopDAO")
 public interface ShopDAO {
 
 	
 	public List<ShopVO> selectShopListByCategory(String category) throws DataAccessException;
 
+    public ShopVO selectShopById(String shop_id) throws DataAccessException;
 }

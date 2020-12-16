@@ -9,7 +9,7 @@ insert into SHOP_OWNER( SHOP_OWNER_ID, SHOP_OWNER_PW, SHOP_OWNER_NAME, SHOP_OWNE
                     
 select * from shop_owner;               
            
-select member_id, member_pw from member;       
+select member_id, member_pw, member_type from member;       
 
 insert into SHOP( SHOP_NAME,ROAD_ADDRESS,JIBEON_ADDRESS,DETAIL_ADDRESS,
                 ZIPCODE,TEL1,TEL2,TEL3,HP1,HP2,HP3,MIN_ORDER_PRICE,DELIVERY_TIP,
@@ -79,9 +79,12 @@ commit;
                 
                 
                 
-                
-                
-                
+
+select count(*)
+from member
+where member_id='jihoho@gmail.com' and member_type='NORMAL';
+               
+select member_id, member_type from member ;
                 
                 
                 

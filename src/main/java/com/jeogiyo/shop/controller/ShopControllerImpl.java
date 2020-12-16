@@ -40,4 +40,16 @@ public class ShopControllerImpl extends BaseController implements ShopController
 		mav.addObject("shopList", shopList);
 		return mav;
 	}
+
+	@Override
+	@RequestMapping(value = "/shopDetail.do", method = RequestMethod.GET)
+	public ModelAndView shopDetail(@RequestParam("shop_id") String shop_id, HttpServletRequest request, HttpServletResponse response)throws Exception{
+		String viewName=(String) request.getAttribute("viewName");
+		ShopVO shopVO =shopService.searchShopById(shop_id);
+		System.out.println("shop:"+shopVO);
+		ModelAndView mav=new ModelAndView(viewName);
+		mav.addObject("shop",shopVO);
+
+		return mav;
+	}
 }

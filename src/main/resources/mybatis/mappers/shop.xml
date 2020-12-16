@@ -50,6 +50,14 @@
 			and s.SHOP_ID=c.SHOP_ID
 		]]>
 	</select>
+
+	<select id="selectShopById" parameterType="String" resultMap="shopResult">
+		<![CDATA[
+			SELECT *
+			FROM SHOP
+			WHERE SHOP_ID= #{shop_id}
+		]]>
+	</select>
 	
 	
 

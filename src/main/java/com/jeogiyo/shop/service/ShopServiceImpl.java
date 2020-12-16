@@ -12,7 +12,7 @@ import com.jeogiyo.shop.vo.ShopVO;
 
 @Service("shopService")
 @Transactional(propagation = Propagation.REQUIRED)
-// ÁøÇà ÁßÀÎ Æ®·£Àè¼ÇÀÌ ÀÖ´Â °æ¿ì ÇØ´ç Æ®·£Àè¼Ç »ç¿ë
+// ì§„í–‰ ì¤‘ì¸ íŠ¸ëœì­ì…˜ì´ ìˆëŠ” ê²½ìš° í•´ë‹¹ íŠ¸ëœì­ì…˜ ì‚¬ìš©
 public class ShopServiceImpl implements ShopService {
 	@Autowired
 	ShopDAO shopDAO;
@@ -21,5 +21,11 @@ public class ShopServiceImpl implements ShopService {
 	public List<ShopVO> searchShopListByCategory(String category) throws Exception{
 		List shopList=shopDAO.selectShopListByCategory(category);
 		return shopList;
+	}
+
+	@Override
+	public ShopVO searchShopById(String shop_id) {
+		ShopVO shopVO=shopDAO.selectShopById(shop_id);
+		return shopVO;
 	}
 }

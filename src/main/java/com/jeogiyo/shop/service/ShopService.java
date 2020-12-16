@@ -6,6 +6,7 @@ import com.jeogiyo.shop.vo.ShopVO;
 
 public interface ShopService {
 
-	List<ShopVO> searchShopListByCategory(String category) throws Exception;
+	public List<ShopVO> searchShopListByCategory(String category) throws Exception;
 
+    public ShopVO searchShopById(String shop_id);
 }
