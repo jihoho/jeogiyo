@@ -3,12 +3,22 @@
 "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
+   <definition name="ctLayout"  template="/WEB-INF/views/common/ct_layout.jsp">
+      <put-attribute name="title" value="" />
+      <put-attribute name="header" value="/WEB-INF/views/common/ct_header.jsp" />
+      <put-attribute name="body" value="" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
 
-   <definition name="/shop/listShop" extends="baseLayout">
+   <definition name="/shop/listShop" extends="ctLayout">
       <put-attribute name="title" value="카테고리 검색 결과 페이지" />
       <put-attribute name="body" value="/WEB-INF/views/shop/listShop.jsp" />
    </definition>
 
+   <definition name="/shop/shopDetail" extends="ctLayout">
+      <put-attribute name="title" value="가게 검색 페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/shop/shopDetail.jsp" />
+   </definition>
 
 <!--    <definition name="/member/listMembers" extends="baseLayout">
       <put-attribute name="title" value="회원목록창" />

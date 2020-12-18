@@ -67,7 +67,15 @@ insert into MEMBER(MEMBER_ID,MEMBER_PW,NICK_NAME,HP)
         'jihoho@gmail.com', 'ghwns12', '지호호', '01056254589'
     );           
                 
-                
+       
+       
+       
+insert into FOOD(FOOD_NAME,FOOD_DESC,FOOD_PRICE,SHOP_ID)
+    values(
+        'jihoho@gmail.com', 'ghwns12', '지호호', '01056254589'
+    );   
+    
+    
 SELECT s.* 
 FROM SHOP s, SHOP_CATEGORY c
 WHERE c.SHOP_CATEGORY_NAME = 'chicken_ct'
@@ -86,6 +94,6 @@ where member_id='jihoho@gmail.com' and member_type='NORMAL';
                
 select member_id, member_type from member ;
                 
-                
-                
+select * from food;
+select * from food_category;            
                 
