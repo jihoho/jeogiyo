@@ -57,8 +57,10 @@
 <head>
   <meta charset="UTF-8">
 <title>header</title>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link href="${contextPath}/lib/bootstrap-5.0.0-beta1-dist/css/bootstrap.css" rel="stylesheet" >
-<script src="${contextPath}/lib/bootstrap-5.0.0-beta1-dist/js/bootstrap.js" type="text/javascripta"></script>
+<script src="${contextPath}/lib/bootstrap-5.0.0-beta1-dist/js/bootstrap.js" type="text/javascript"></script>
+<script src="${contextPath}/lib/bootstrap-5.0.0-beta1-dist/js/bootstrap.bundle.js" type="text/javascript"></script>
 
 </head>
 <body onload="menu_check();">

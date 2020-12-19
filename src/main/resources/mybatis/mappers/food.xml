@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.jeogiyo.food.dao.FoodDAO">
+
+	<resultMap id="foodResult" type="foodVO">
+		<result property="food_id" column="food_id" />
+		<result property="food_name" column="food_name" />
+		<result property="food_desc" column="food_desc" />
+		<result property="food_price" column="food_price" />
+		<result property="image_file" column="image_file" />
+		<result property="reg_date" column="reg_date" />
+		<result property="shop_id" column="shop_id" />
+	</resultMap>
+	
+
+	
+	<select id="selectFoodListByShopIdAndCategory" parameterType="String" resultMap="foodResult">
+		<![CDATA[
+			SELECT f.*
+			FROM FOOD f, FOOD_CATEGORY c
+			WHERE f.SHOP_ID=#{shop_id}
+			  	and f.FOOD_ID=c.FOOD_ID
+				and c.FOOD_CATEG_NAME = #{food_category}
+		]]>
+	</select>
+
+	
+
+</mapper>

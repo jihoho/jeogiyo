@@ -39,7 +39,7 @@ public class FileDownloadController {
 	
 	
 	@RequestMapping("/shopThumbnails.do")
-	protected void thumbnails(@RequestParam("fileName") String fileName,
+	protected void shopThumbnails(@RequestParam("fileName") String fileName,
                             	@RequestParam("shop_id") String shop_id,
                             	HttpServletRequest request,
 			                 HttpServletResponse response) throws Exception {
@@ -49,6 +49,30 @@ public class FileDownloadController {
 		File image=new File(filePath);
 		
 		if (image.exists()) { 
+			Thumbnails.of(image).size(121,154).outputFormat("png").toOutputStream(out);
+		}
+		byte[] buffer = new byte[1024 * 8];
+		out.write(buffer);
+		out.close();
+	}
+
+	/*
+	* 	shop_id, food_id를 parameter로 food image 썸네일 출력
+	* 	food image file name은 food_[food_id].png
+	* 	ex) food_401.png
+_	* */
+	@RequestMapping("/foodThumbnails.do")
+	protected void foodThumbnails(@RequestParam("food_id") String food_id,
+							  @RequestParam("shop_id") String shop_id,
+							  HttpServletRequest request,
+							  HttpServletResponse response) throws Exception {
+		OutputStream out = response.getOutputStream();
+		String fileName="food_"+food_id+".png";
+		String filePath=request.getRealPath("/")+"resources\\shop_img\\"+shop_id+"\\food\\"+fileName;
+		System.out.println("shop image file : "+filePath);
+		File image=new File(filePath);
+
+		if (image.exists()) {
 			Thumbnails.of(image).size(121,154).outputFormat("png").toOutputStream(out);
 		}
 		byte[] buffer = new byte[1024 * 8];

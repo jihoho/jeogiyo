@@ -8,5 +8,5 @@ public interface ShopService {
 
 	public List<ShopVO> searchShopListByCategory(String category) throws Exception;
 
-    public ShopVO searchShopById(String shop_id);
+    public ShopVO searchShopById(String shop_id) throws  Exception;
 }
