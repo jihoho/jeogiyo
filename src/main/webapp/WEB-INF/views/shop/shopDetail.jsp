@@ -2,6 +2,10 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<%@ taglib prefix="form" uri="http://sslext.sourceforge.net/sslext" %>--%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page import="com.jeogiyo.order.vo.OrderFood" %>
+
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <c:set var="shop" value="${shop}"/>
 
@@ -255,26 +259,42 @@
 		var food_price=document.getElementById("modal_food_price").innerText;
 		var food_qty=document.getElementById("modal_food_qty").innerText;
 
-		// create dynamic html
 		var orderContent=document.getElementById("order_content");
+		// create dynamic html
 		var newDiv=document.createElement("div");
 		newDiv.setAttribute("style","height:80px; border: 1px solid black;");
+		newDiv.setAttribute("class","order_food");
+		// create food id <input>
+		var foodIdInput=document.createElement("input");
+		foodIdInput.setAttribute("type","hidden");
+		foodIdInput.value=food_id;
+		foodIdInput.setAttribute("class","order_food_id");
+		foodIdInput.setAttribute("style","disabled: true;");
+
+		// create food name <Div>
 		var foodNameDiv=document.createElement("div");
-		foodNameDiv.innerText=food_name;
+		var foodNameSpan=document.createElement("span");
+		foodNameSpan.innerText=food_name;
+		foodNameSpan.setAttribute("class","order_food_name");
+		foodNameDiv.appendChild(foodNameSpan);
+
+		// create food price and remove button <div>
 		var foodPriceDiv=document.createElement("div");
-		var xA=document.createElement("a");
-		var xImg=document.createElement("img");
-		xImg.setAttribute("src","${contextPath}/image/x_butt.png");
-		xImg.setAttribute("style","height:20px; width:20px;");
-		xA.appendChild(xImg);
+		var removeA=document.createElement("a");
+		removeA.setAttribute("class","order_remove_butt");
+		var removeImg=document.createElement("img");
+		removeImg.setAttribute("src","${contextPath}/image/x_butt.png");
+		removeImg.setAttribute("style","height:20px; width:20px;");
+		removeA.appendChild(removeImg);
 		foodPriceDiv.setAttribute("style","float:left;");
-		foodPriceDiv.appendChild(xA);
+		foodPriceDiv.appendChild(removeA);
 		var foodPriceSpan=document.createElement("span");
-		foodPriceSpan.setAttribute("class","food_order")
+		foodPriceSpan.setAttribute("class","order_food_price")
 		foodPriceSpan.innerText=food_price;
 		foodPriceDiv.appendChild(foodPriceSpan);
 
 
+		//create food Quantity and plus,minus button <div>
 		var foodQtyDiv=document.createElement("div");
 		foodQtyDiv.setAttribute("style","float:right;");
 		var foodQtySpan=document.createElement("span");
@@ -289,7 +309,7 @@
 
 		var minusA=document.createElement("a");
 		minusA.setAttribute("class","order_minus_butt");
-		minusA.setAttribute("onclick","orderQtyClick()")
+		// minusA.setAttribute("onclick","orderQtyClick()")
 		var minusImg=document.createElement("img");
 		minusImg.setAttribute("src","${contextPath}/image/minus_butt.png");
 		minusImg.setAttribute("style","height:20px; width:20px;");
@@ -299,7 +319,7 @@
 		foodQtyDiv.appendChild(foodQtySpan);
 		foodQtyDiv.appendChild(plusA);
 
-
+		newDiv.appendChild(foodIdInput);
 		newDiv.appendChild(foodNameDiv);
 		newDiv.appendChild(foodPriceDiv);
 		newDiv.appendChild(foodQtyDiv);
@@ -309,8 +329,25 @@
 		orderContentNone.setAttribute("style","display:none;");
 		$('#foodDetailModal').modal('hide');
 		// alert(food_name+","+food_id+","+food_price+","+food_qty)
+		calcFoodTotalPrice();
 	}
 
+
+	function calcFoodTotalPrice(){
+		var order=document.getElementsByClassName("order_food");
+		var dv_tip=Number(document.getElementById("order_dv_price").innerText);
+		var totalPrice=dv_tip;
+		for(var i=0;i<order.length;i++){
+			var foodDiv=order[i];
+			var foodNameSpan=foodDiv.getElementsByClassName("order_food_name").item(0);
+			var foodPriceSpan=foodDiv.getElementsByClassName("order_food_price").item(0);
+			var foodQtySpan=foodDiv.getElementsByClassName("order_food_qty").item(0);
+			totalPrice+= Number(foodPriceSpan.innerText)*Number(foodQtySpan.innerText);
+			console.log(foodNameSpan.innerText+","+foodPriceSpan.innerText+","+foodQtySpan.innerText);
+		}
+		var totalPriceSpan=document.getElementById("order_total_price");
+		totalPriceSpan.innerText=String(totalPrice);
+	}
 
 	// modal 창에서 음식 수량 버튼 처리
 	function modalQtyClick(buttId){
@@ -333,27 +370,66 @@
 
 	/*
 		주문표에서 음식 수량 버튼 이벤트 처리
+		동적으로 생성된 태그이므로 아래와 같이 on 함수로 이벤트 처리해주어야함
 	* */
-	function orderQtyClick(){
-		var _class=$('#'+this).attr("class");
-		console.log(_class);
-		// var childs=parent.childNodes;
-		// var foodQty=childs[1];
-		// var foodPrice=document.getElementById("order_food_price");
-		// // var totalPrice=document.getElementById("modal_total_price");
-		// var qty=Number(foodQty.innerText);
-		// if(buttClass=="order_plus_butt"){
-		// 	qty+=1;
-		// }else if(buttClass=="order_minus_butt"){
-		// 	if(qty>1) {
-		// 		qty-=1;
-		// 	}
-		// }else{
-		// 	console.log("unknown food quantity button id!!");
-		// }
-		// foodQty.innerText=String(qty);
-		// // totalPrice.innerText=String(qty*Number(foodPrice.innerText));
-	}
+	$(document).on("click",".order_minus_butt",function(){
+		var foodQtySpan=$(this).next();
+		var qty=Number(foodQtySpan.text());
+		if(qty>1){
+			qty-=1;
+		}
+		foodQtySpan.text(String(qty));
+		calcFoodTotalPrice();
+
+	});
+
+	$(document).on("click",".order_plus_butt",function(){
+		var foodQtySpan=$(this).prev();
+		var qty=Number(foodQtySpan.text());
+
+		qty+=1;
+
+		foodQtySpan.text(String(qty));
+		calcFoodTotalPrice();
+
+	});
+
+	$(document).on("click",".order_remove_butt",function(){
+		var orderDiv=$(this).parent().parent();
+		orderDiv.remove();
+		calcFoodTotalPrice();
+
+	});
+
+	/*
+	*  주문하기 button 클릭 시 food에 대한 id, 수량(qty)을 input tag로 동적 추가하여 form submit
+	* */
+	$(document).on("click","#order_butt",function(){
+		var orderFoodList=document.getElementsByClassName("order_food");
+		var form=document.getElementById("orderForm");
+
+		for(var i=0;i<orderFoodList.length;i++){
+			var foodDiv=orderFoodList[i];
+			var foodQtySpan=foodDiv.getElementsByClassName("order_food_qty")[0];
+			var foodIdInput=foodDiv.getElementsByClassName("order_food_id")[0];
+
+			// form으로 전송할 input 태그 생성
+			var formFoodId=document.createElement("input");
+			formFoodId.setAttribute("name","orderFoodList["+i+"].food_id");
+			formFoodId.setAttribute("type","hidden");
+			formFoodId.value=foodIdInput.value;
+			var formFoodQty=document.createElement("input");
+			formFoodQty.setAttribute("name","orderFoodList["+i+"].food_qty");
+			formFoodQty.setAttribute("type","hidden");
+			formFoodQty.value=foodQtySpan.innerText;
+
+			form.appendChild(formFoodId);
+			form.appendChild(formFoodQty);
+
+			console.log("food id: "+foodIdInput.value+", food qty: "+foodQtySpan.innerText);
+		}
+		form.submit();
+	});
 </script>
 
 
@@ -487,15 +563,16 @@
 							<c:set var="foodList" value="${sideFoodList}"/>
 							<c:choose>
 								<c:when test="${empty foodList}">
-									<a class="food_list_a" href="#">
+									<a class="food_list_a" href="javascript:void(0);">
 										<div class="food_list">
-											등록된 사이드 메뉴가 없습니다.
+											등록된 메인 메뉴가 없습니다.
 										</div>
 									</a>
 								</c:when>
 								<c:otherwise>
 									<c:forEach var="i" begin="0" end="${foodList.size()-1}" step="1">
-										<a class="food_list_a" href="#">
+										<a class="food_list_a" onclick="foodListClick('${shop.shop_id}','${foodList.get(i).food_id}','${foodList.get(i).food_name}',
+												'${foodList.get(i).food_desc}','${foodList.get(i).food_price}');">
 											<div class="food_list">
 												<div class="food_txt" >
 													<div>
@@ -528,15 +605,16 @@
 							<c:set var="foodList" value="${setFoodList}"/>
 							<c:choose>
 								<c:when test="${empty foodList}">
-									<a class="food_list_a" href="#">
+									<a class="food_list_a" href="javascript:void(0);">
 										<div class="food_list">
-											등록된 세트 메뉴가 없습니다.
+											등록된 메인 메뉴가 없습니다.
 										</div>
 									</a>
 								</c:when>
 								<c:otherwise>
 									<c:forEach var="i" begin="0" end="${foodList.size()-1}" step="1">
-										<a class="food_list_a" href="#">
+										<a class="food_list_a" onclick="foodListClick('${shop.shop_id}','${foodList.get(i).food_id}','${foodList.get(i).food_name}',
+												'${foodList.get(i).food_desc}','${foodList.get(i).food_price}');">
 											<div class="food_list">
 												<div class="food_txt" >
 													<div>
@@ -569,15 +647,16 @@
 							<c:set var="foodList" value="${beverageFoodList}"/>
 							<c:choose>
 								<c:when test="${empty foodList}">
-									<a class="food_list_a" href="#">
+									<a class="food_list_a" href="javascript:void(0);">
 										<div class="food_list">
-											등록된 음료 메뉴가 없습니다.
+											등록된 메인 메뉴가 없습니다.
 										</div>
 									</a>
 								</c:when>
 								<c:otherwise>
 									<c:forEach var="i" begin="0" end="${foodList.size()-1}" step="1">
-										<a class="food_list_a" href="#">
+										<a class="food_list_a" onclick="foodListClick('${shop.shop_id}','${foodList.get(i).food_id}','${foodList.get(i).food_name}',
+												'${foodList.get(i).food_desc}','${foodList.get(i).food_price}');">
 											<div class="food_list">
 												<div class="food_txt" >
 													<div>
@@ -616,7 +695,6 @@
 					</div>
 
 				</div>
-
 				<div class="col-sm-4 d-none d-lg-block"  style="">
 					<div id="order_sect">
 						<div id="order_header">
@@ -626,8 +704,21 @@
 							<div id="order_content_none" style="height: 80px;">
 								주문표에 담긴 메뉴가 없음.
 							</div>
+							<input type="hidden" name="food">
+						</div>
+						<div id="order_price">
+							<div style="float: right">
+								배달요금 <span id="order_dv_price">${shop.delivery_tip}</span>원 별도
+							</div>
+							<div style="clear: both;">
+								<div style="float: right;">
+									합계 : <span id="order_total_price">0</span>원
+								</div>
+							</div>
 						</div>
 						<div>
+							<form:form modelAttribute="orderFood" id="orderForm" name="orderForm" action="${contextPath}/order/orderDetail.do">
+							</form:form>
 							<button type="button" id="order_butt"><span>주문하기</span></button>
 						</div>
 					</div>
