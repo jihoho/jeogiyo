@@ -95,5 +95,9 @@ where member_id='jihoho@gmail.com' and member_type='NORMAL';
 select member_id, member_type from member ;
                 
 select * from food;
-select * from food_category;            
+select * from food_category;     
+
+SELECT * FROM DIB;
+
+insert into DIBS(MEMBER_ID,MEMBER_TYPE,SHOP_ID ) values (';);
                 

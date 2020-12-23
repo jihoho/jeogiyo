@@ -123,18 +123,30 @@ SELECT * FROM SHOP
 --  DDL for Table DIB
 --------------------------------------------------------  
 
---    CREATE TABLE "SHOP_DIB" 
---    (
---        "DONG_ADDRESS" VARCHAR2(100 BYTE),
---        "SHOP_ID" NUMBER(20,0) REFERENCES SHOP(SHOP_ID)
---        
---    );
+    CREATE TABLE "DIBS" 
+    (
+        "MEMBER_ID" VARCHAR2(200 byte),
+        "MEMBER_TYPE" VARCHAR2(50 byte),
+        "SHOP_ID" NUMBER(20,0) REFERENCES SHOP(SHOP_ID),
+        "REG_DATE" DATE DEFAULT sysdate, 
+        CONSTRAINT fk_member FOREIGN KEY(MEMBER_ID,MEMBER_TYPE) REFERENCES MEMBER(MEMBER_ID,MEMBER_TYPE),
+        CONSTRAINT pk_dibs PRIMARY KEY (member_id, shop_id,member_type)
+    );
     
+    alter table DIBS drop CONSTRAINT "PK_DIBS";
+    ALTER TABLE DIBS ADD (CONSTRAINT "PK_DIBS" PRIMARY KEY(MEMBER_ID,SHOP_ID,MEMBER_TYPE));
     
-    
-    
-    
-    
+SELECT * 
+
+FROM ALL_TAB_COLUMNS
+
+WHERE TABLE_NAME = 'dibs'
+
+insert into DIBS(MEMBER_ID, SHOP_ID,MEMBER_TYPE) values('member1@naver.com','401','NORMAL');
+SELECT * FROM DIBS;
+select * from member;
+commit;
+
 --------------------------------------------------------
 --  DDL for Table FOOD
 --------------------------------------------------------  
@@ -178,7 +190,7 @@ SELECT * FROM SHOP
 --------------------------------------------------------
 
    CREATE TABLE "MEMBER" 
-   (	"MEMBER_ID" VARCHAR2(20 BYTE),
+   (	"MEMBER_ID" VARCHAR2(200 BYTE),
    "MEMBER_TYPE" VARCHAR2(50 BYTE) DEFAULT 'NORMAL',
 	"MEMBER_PW" VARCHAR2(30 BYTE), 
     "NICK_NAME" VARCHAR2(200 BYTE),
@@ -187,6 +199,7 @@ SELECT * FROM SHOP
     CONSTRAINT pk_member PRIMARY KEY (MEMBER_ID, MEMBER_TYPE)
    ) ;
 
+    ALTER TABLE MEMBER MODIFY member_id VARCHAR2(200 BYTE);
 
 
    

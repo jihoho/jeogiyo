@@ -30,7 +30,7 @@
 		]]>
 	</select>
 
-	<select id="insertNewMember" parameterType="memberVO">
+	<select id="insertNewMember" parameterType="memberVO" >
 		<![CDATA[
 			insert into member(member_id,member_type,member_pw,nick_name,hp)
 							 values(#{member_id},

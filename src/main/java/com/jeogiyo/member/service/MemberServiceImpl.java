@@ -5,10 +5,13 @@ import com.jeogiyo.member.dao.MemberDAO;
 import com.jeogiyo.member.vo.MemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
 @Service("memberService")
+@Transactional(propagation = Propagation.REQUIRED)
 public class MemberServiceImpl implements MemberService{
 
     @Autowired

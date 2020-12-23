@@ -165,16 +165,116 @@
 </style>
 <script type="text/javascript">
 
+	/*		페이지 로딩 이후,
+			로그인이 아닐 경우 찜버튼이 빈 하트 이미지
+		    로그인이고, 해당 member가 shop을 찜한 경우 빨간색 하트 이미지로 변경 */
 
-/*
-* 	menuButt 클릭시 해당 메뉴의 리스트의 display를 none 또는 block으로 변경
-* 	예) mainManuButt -> mainManuList 로 변환 하여 target element 추출
-* */
+	function init(){
+		// 세션에서 isLogOn(로그인 : true, 로그아웃: false) 값을 가져옴
+		var isLogOn="<%=String.valueOf(session.getAttribute("isLogOn"))%>";
+		console.log(isLogOn);
+		var dib_butt=document.getElementById("dibs_butt");
+		if(isLogOn=="false" || isLogOn=="null"){ //로그인이 안되어 있을 경우
+			dib_butt.setAttribute("src","/image/dib/none_dib_butt.png");
+		}else if (isLogOn=="true"){
+			// 로그인이 되어 있을 경우 shop id, member id, member type을 rest controller에 전달
+			var shop_id="${shop.shop_id}";
+			var member_id="${memberInfo.member_id}";
+			var member_type="${memberInfo.member_type}";
+			console.log(shop_id+","+member_id+","+member_type);
+
+			$.ajax({
+            type:"get",
+            async:false,
+            url:"${contextPath}/dibs",
+				dataType:"text",
+				data: {shop_id:shop_id, member_id:member_id, member_type:member_type},
+				success:function (data,textStatus){
+					if(data=='false'){
+						dib_butt.setAttribute("src","/image/dib/none_dib_butt.png");
+					}else{
+						dib_butt.setAttribute("src","/image/dib/dib_butt.png");
+					}
+				},
+				error:function(data,textStatus){
+					alert("에러가 발생했습니다.");
+				},
+				complete:function(data,textStatus){
+					//alert("작업을완료 했습니다");
+				}
+			});  //end ajax!
+		}
+	}
+	window.onload=function (){
+		init();
+	}
+
+
+	/*
+	* 	찜 버튼 클릭 시 찜 버튼 이미지에 따라 해당 가게를 찜하거나 찜을 취소하는 function
+	* */
+	function dibsButtClick(){
+		var action="";
+		var dibs_butt=document.getElementById("dibs_butt");
+		var imageSrc=dibs_butt.getAttribute("src");
+		var isLogOn="<%=String.valueOf(session.getAttribute("isLogOn"))%>";
+		// 로그인 상태가 아닌 경우
+		if(isLogOn=="false" || isLogOn=="null") {
+			alert("로그인 해주세요");
+		}else{
+			var shop_id="${shop.shop_id}";
+			var member_id="${memberInfo.member_id}";
+			var member_type="${memberInfo.member_type}";
+			// src에 none_dib_butt.png일 경우 빈 하트 이미지 이므로 찜 추가
+			if(imageSrc.indexOf("none")!==-1){
+				$.ajax({
+					type:"post",
+					async:false,
+					url:"${contextPath}/dibs",
+					dataType:"text",
+					data: {shop_id:shop_id, member_id:member_id, member_type:member_type},
+					success:function (data,textStatus){
+						dibs_butt.setAttribute("src","/image/dib/dib_butt.png");
+					},
+					error:function(data,textStatus){
+						alert("에러가 발생했습니다.");
+					},
+					complete:function(data,textStatus){
+						//alert("작업을완료 했습니다");
+					}
+				});  //end ajax!
+			}
+			// src에 none이 포함되어있지 않을 경우 빨간 하트 이미지이므로 찜 삭제
+			else{
+				$.ajax({
+					type:"delete",
+					async:false,
+					url:"${contextPath}/dibs",
+					dataType:"text",
+					data: {shop_id:shop_id, member_id:member_id, member_type:member_type},
+					success:function (data,textStatus){
+						dibs_butt.setAttribute("src","/image/dib/none_dib_butt.png");
+					},
+					error:function(data,textStatus){
+						alert("에러가 발생했습니다.");
+					},
+					complete:function(data,textStatus){
+						//alert("작업을완료 했습니다");
+					}
+				});  //end ajax!
+			}
+		}
+	}
+
+	/*
+	* 	menuButt 클릭시 해당 메뉴의 리스트의 display를 none 또는 block으로 변경
+	* 	예) mainManuButt -> mainManuList 로 변환 하여 target element 추출
+	* */
 	function menuButtClick(menu_id){
 		var tmp=menu_id.split('Butt');
 		var target_id=tmp[0]+"List";
+		console.log(target_id);
 		var target_el=document.getElementById(target_id);
-		var el=document.getElementById("mainMenuList");
 
 		if(target_el.style.display=="block"){
 			target_el.style.display="none";
@@ -475,6 +575,14 @@
 									<li>
 										<span>리뷰 </span>${shop.review_cnt}
 									</li>
+									<li>
+										<span>찜 </span>${shop.dib_cnt}
+									</li>
+									<li>
+										<a onclick="dibsButtClick();">
+											<img id="dibs_butt" style="width: 50px;height: 50px;">
+										</a>
+									</li>
 								</ul>
 
 							</div>
@@ -508,177 +616,64 @@
                                 ***menuButt 클릭 시 ***menuList로 target Element 추출하여 display 값을 block or none으로 지정하기 때문
                             ex) mainManuButt -> mainManuList 	--%>
 
-						<%-- main menu List --%>
-						<div class="menu_butt_frame">
-							<button id="mainMenuButt" class="menu_butt" type="button" onclick="menuButtClick(this.id);" >
-								메인 메뉴
-							</button>
-						</div>
-						<div class="menu_list_frame" id="mainMenuList">
-							<c:set var="foodList" value="${mainFoodList}"/>
-							<c:choose>
-								<c:when test="${empty foodList}">
-									<a class="food_list_a" href="javascript:void(0);">
-										<div class="food_list">
-											등록된 메인 메뉴가 없습니다.
-										</div>
-									</a>
-								</c:when>
-								<c:otherwise>
-									<c:forEach var="i" begin="0" end="${foodList.size()-1}" step="1">
-										<a class="food_list_a" onclick="foodListClick('${shop.shop_id}','${foodList.get(i).food_id}','${foodList.get(i).food_name}',
-																						'${foodList.get(i).food_desc}','${foodList.get(i).food_price}');">
+						<c:set var="menuArray" value="<%=new String[]{\"mainMenu\",\"sideMenu\",\"setMenu\",\"beverageMenu\"}%>"/>
+						<c:forEach var="menu" items="${menuArray}">
+							<div class="menu_butt_frame">
+								<button id="${menu}Butt" class="menu_butt" type="button" onclick="menuButtClick(this.id);" >
+									<c:choose>
+										<c:when test="${menu eq 'mainMenu'}">메인 메뉴</c:when>
+										<c:when test="${menu eq 'sideMenu'}">사이드 메뉴</c:when>
+										<c:when test="${menu eq 'setMenu'}">세트 메뉴</c:when>
+										<c:when test="${menu eq 'beverageMenu'}">음료 메뉴</c:when>
+									</c:choose>
+								</button>
+							</div>
+							<div class="menu_list_frame" id="${menu}List">
+								<c:choose>
+									<c:when test="${menu eq 'mainMenu'}"><c:set var="foodList" value="${mainFoodList}"/></c:when>
+									<c:when test="${menu eq 'sideMenu'}"><c:set var="foodList" value="${sideFoodList}"/></c:when>
+									<c:when test="${menu eq 'setMenu'}"><c:set var="foodList" value="${setFoodList}"/></c:when>
+									<c:when test="${menu eq 'beverageMenu'}"><c:set var="foodList" value="${beverageFoodList}"/></c:when>
+								</c:choose>
+
+								<c:choose>
+									<c:when test="${empty foodList}">
+										<a class="food_list_a" href="javascript:void(0);">
 											<div class="food_list">
-												<div class="food_txt" >
-													<div>
-														${foodList.get(i).food_name}
-													</div>
-													<div>
-															${foodList.get(i).food_desc}
-													</div>
-													<div>
-															${foodList.get(i).food_price}
-													</div>
-												</div>
-												<div class ="food_img">
-													<img alt="" src="${contextPath}/foodThumbnails.do?shop_id=${foodList.get(i).shop_id}&food_id=${foodList.get(i).food_id}">
-												</div>
+												등록된 메뉴가 없습니다.
 											</div>
 										</a>
-									</c:forEach>
-								</c:otherwise>
-							</c:choose>
-
-
-
-						</div>
-
-						<%-- side menu List --%>
-						<div class="menu_butt_frame">
-							<button id="sideMenuButt" class="menu_butt" type="button" onclick="menuButtClick(this.id);" >
-								사이드 메뉴
-							</button>
-						</div>
-						<div class="menu_list_frame" id="sideMenuList">
-							<c:set var="foodList" value="${sideFoodList}"/>
-							<c:choose>
-								<c:when test="${empty foodList}">
-									<a class="food_list_a" href="javascript:void(0);">
-										<div class="food_list">
-											등록된 메인 메뉴가 없습니다.
-										</div>
-									</a>
-								</c:when>
-								<c:otherwise>
-									<c:forEach var="i" begin="0" end="${foodList.size()-1}" step="1">
-										<a class="food_list_a" onclick="foodListClick('${shop.shop_id}','${foodList.get(i).food_id}','${foodList.get(i).food_name}',
-												'${foodList.get(i).food_desc}','${foodList.get(i).food_price}');">
-											<div class="food_list">
-												<div class="food_txt" >
-													<div>
-															${foodList.get(i).food_name}
+									</c:when>
+									<c:otherwise>
+										<c:forEach var="i" begin="0" end="${foodList.size()-1}" step="1">
+											<a class="food_list_a" onclick="foodListClick('${shop.shop_id}','${foodList.get(i).food_id}','${foodList.get(i).food_name}',
+													'${foodList.get(i).food_desc}','${foodList.get(i).food_price}');">
+												<div class="food_list">
+													<div class="food_txt" >
+														<div>
+																${foodList.get(i).food_name}
+														</div>
+														<div>
+																${foodList.get(i).food_desc}
+														</div>
+														<div>
+																${foodList.get(i).food_price}
+														</div>
 													</div>
-													<div>
-															${foodList.get(i).food_desc}
-													</div>
-													<div>
-															${foodList.get(i).food_price}
+													<div class ="food_img">
+														<img alt="" src="${contextPath}/foodThumbnails.do?shop_id=${foodList.get(i).shop_id}&food_id=${foodList.get(i).food_id}">
 													</div>
 												</div>
-												<div class ="food_img">
-													<img alt="" src="${contextPath}/foodThumbnails.do?shop_id=${foodList.get(i).shop_id}&food_id=${foodList.get(i).food_id}">
-												</div>
-											</div>
-										</a>
-									</c:forEach>
-								</c:otherwise>
-							</c:choose>
-						</div>
+											</a>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</div>
 
-						<%-- set menu List --%>
-						<div class="menu_butt_frame">
-							<button id="setMenuButt" class="menu_butt" type="button" onclick="menuButtClick(this.id);" >
-								세트 메뉴
-							</button>
-						</div>
-						<div class="menu_list_frame" id="setMenuList">
-							<c:set var="foodList" value="${setFoodList}"/>
-							<c:choose>
-								<c:when test="${empty foodList}">
-									<a class="food_list_a" href="javascript:void(0);">
-										<div class="food_list">
-											등록된 메인 메뉴가 없습니다.
-										</div>
-									</a>
-								</c:when>
-								<c:otherwise>
-									<c:forEach var="i" begin="0" end="${foodList.size()-1}" step="1">
-										<a class="food_list_a" onclick="foodListClick('${shop.shop_id}','${foodList.get(i).food_id}','${foodList.get(i).food_name}',
-												'${foodList.get(i).food_desc}','${foodList.get(i).food_price}');">
-											<div class="food_list">
-												<div class="food_txt" >
-													<div>
-															${foodList.get(i).food_name}
-													</div>
-													<div>
-															${foodList.get(i).food_desc}
-													</div>
-													<div>
-															${foodList.get(i).food_price}
-													</div>
-												</div>
-												<div class ="food_img">
-													<img alt="" src="${contextPath}/foodThumbnails.do?shop_id=${foodList.get(i).shop_id}&food_id=${foodList.get(i).food_id}">
-												</div>
-											</div>
-										</a>
-									</c:forEach>
-								</c:otherwise>
-							</c:choose>
-						</div>
-
-						<%-- set menu List --%>
-						<div class="menu_butt_frame">
-							<button id="beverageMenuButt" class="menu_butt" type="button" onclick="menuButtClick(this.id);" >
-								음료 메뉴
-							</button>
-						</div>
-						<div class="menu_list_frame" id="beverageMenuList" >
-							<c:set var="foodList" value="${beverageFoodList}"/>
-							<c:choose>
-								<c:when test="${empty foodList}">
-									<a class="food_list_a" href="javascript:void(0);">
-										<div class="food_list">
-											등록된 메인 메뉴가 없습니다.
-										</div>
-									</a>
-								</c:when>
-								<c:otherwise>
-									<c:forEach var="i" begin="0" end="${foodList.size()-1}" step="1">
-										<a class="food_list_a" onclick="foodListClick('${shop.shop_id}','${foodList.get(i).food_id}','${foodList.get(i).food_name}',
-												'${foodList.get(i).food_desc}','${foodList.get(i).food_price}');">
-											<div class="food_list">
-												<div class="food_txt" >
-													<div>
-															${foodList.get(i).food_name}
-													</div>
-													<div>
-															${foodList.get(i).food_desc}
-													</div>
-													<div>
-															${foodList.get(i).food_price}
-													</div>
-												</div>
-												<div class ="food_img">
-													<img alt="" src="${contextPath}/foodThumbnails.do?shop_id=${foodList.get(i).shop_id}&food_id=${foodList.get(i).food_id}">
-												</div>
-											</div>
-										</a>
-									</c:forEach>
-								</c:otherwise>
-							</c:choose>
-						</div>
+						</c:forEach>
 					</div>
+
+
 					<div id="collapse2_sect" style="display: none;">
 						<div style="border:1px solid #000000;padding:0;">
 							<button type="button"  style="width: 100%; height: 100%">
