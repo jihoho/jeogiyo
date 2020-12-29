@@ -196,11 +196,51 @@ commit;
     "NICK_NAME" VARCHAR2(200 BYTE),
 	"HP" VARCHAR2(50 BYTE),
 	"DEL_YN" varchar2(20 BYTE) CHECK(DEL_YN IN('Y','N')),
+    "JOIN_DATE" DATE DEFAULT sysdate,
     CONSTRAINT pk_member PRIMARY KEY (MEMBER_ID, MEMBER_TYPE)
    ) ;
-
+    
+    ALTER TABLE MEMBER add REG_DATE DATE DEFAULT sysdate;
     ALTER TABLE MEMBER MODIFY member_id VARCHAR2(200 BYTE);
+    ALTER TABLE MEMBER RENAME column JOINT_DATE TO JOIN_DATE;
+    select * from MEMBER;
+--------------------------------------------------------
+--  DDL for Table REVIEW
+--------------------------------------------------------
 
+   CREATE TABLE "REVIEW" 
+   (	"REVIEW_ID" NUMBER(20,0) primary key,
+        "SHOP_ID" NUMBER(20,0) REFERENCES SHOP(SHOP_ID),
+        "STAR_POINT" NUMBER(10,1) not null, 
+        "CONTENT" CLOB not null,
+        "REG_DATE" DATE DEFAULT sysdate, 
+        "MEMBER_ID" VARCHAR2(200 BYTE),
+        "MEMBER_TYPE" VARCHAR2(50 byte),
+        CONSTRAINT fk_review FOREIGN KEY(MEMBER_ID,MEMBER_TYPE) REFERENCES MEMBER(MEMBER_ID,MEMBER_TYPE)
+   ) ;
+   
+--------------------------------------------------------
+--  DDL for Table REVIEW
+--------------------------------------------------------
+
+   CREATE TABLE "REVIEW_IMAGE" 
+   (	"REVIEW_IMAGE_ID" NUMBER(20,0) primary key,
+        "REVIEW_ID" NUMBER(20,0) REFERENCES REVIEW(REVIEW_ID),
+        "FILE_NAME" VARCHAR2(200),
+        "REG_DATE" DATE DEFAULT sysdate
+   ) ;
+   
+--------------------------------------------------------
+--  DDL for Table REVIEW
+--------------------------------------------------------
+
+   CREATE TABLE "REVIEW_REPLY" 
+   (	"REPLY_ID" NUMBER(20,0) primary key,
+        "REVIEW_ID" NUMBER(20,0) REFERENCES REVIEW(REVIEW_ID),
+        "CONTENT" CLOB,
+        "REG_DATE" DATE DEFAULT sysdate,
+        "SHOP_OWNER_ID" varchar2(20 BYTE) REFERENCES SHOP_OWNER(SHOP_OWNER_ID)
+   ) ;   
 
    
 --------------------------------------------------------
@@ -209,7 +249,9 @@ commit;
 
 CREATE SEQUENCE  "SEQ_SHOP_ID"  MINVALUE 1 MAXVALUE 10000000 INCREMENT BY 1 START WITH 400 NOCACHE ORDER  NOCYCLE ;
 CREATE SEQUENCE  "SEQ_FOOD_ID"  MINVALUE 1 MAXVALUE 10000000 INCREMENT BY 1 START WITH 400 NOCACHE ORDER  NOCYCLE ;
-
+CREATE SEQUENCE  "SEQ_REVIEW_ID"  MINVALUE 1 MAXVALUE 10000000 INCREMENT BY 1 START WITH 1 NOCACHE ORDER  NOCYCLE ;
+CREATE SEQUENCE  "SEQ_REVIEW_IMAGE_ID"  MINVALUE 1 MAXVALUE 10000000 INCREMENT BY 1 START WITH 1 NOCACHE ORDER  NOCYCLE ;
+CREATE SEQUENCE  "SEQ_REVIEW_REPLY_ID"  MINVALUE 1 MAXVALUE 10000000 INCREMENT BY 1 START WITH 1 NOCACHE ORDER  NOCYCLE ;
 
 
 --------------------------------------------------------
@@ -231,3 +273,31 @@ BEGIN
 	INTO :new.food_id
 	FROM dual;
 END;
+
+CREATE OR REPLACE TRIGGER TRI_REVIEW_review_id BEFORE INSERT ON REVIEW
+FOR EACH ROW
+BEGIN
+	SELECT SEQ_REVIEW_ID.nextval
+	INTO :new.review_id
+	FROM dual;
+END;
+
+CREATE OR REPLACE TRIGGER TRI_review_image_id BEFORE INSERT ON REVIEW_IMAGE
+FOR EACH ROW
+BEGIN
+	SELECT SEQ_REVIEW_IMAGE_ID.nextval
+	INTO :new.review_image_id
+	FROM dual;
+END;
+
+CREATE OR REPLACE TRIGGER TRI_review_reply_id BEFORE INSERT ON REVIEW_REPLY
+FOR EACH ROW
+BEGIN
+	SELECT SEQ_REVIEW_REPLY_ID.nextval
+	INTO :new.reply_id
+	FROM dual;
+END;
+
+select * from shop where shop_id=401;
+
+select * from member;

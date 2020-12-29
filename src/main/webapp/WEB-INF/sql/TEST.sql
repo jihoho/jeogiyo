@@ -18,12 +18,9 @@ insert into SHOP( SHOP_NAME,ROAD_ADDRESS,JIBEON_ADDRESS,DETAIL_ADDRESS,
         VALUES('네네치킨5','경기도 용인시 수지구 풍덕천동 1047-3','경기도 용인시 수지구 정평로 40-3','거묵상가2 111호',
                 '4321','031','111','1234','010','111','1111',15000,2000,
                 40,50,'jihoho','1420915566',
-                '리뷰 이벤트 !!
-                ####미니 핫도그도 공짜
-                리뷰란 이벤트 내용참고하세요!
-                네네치킨은 건강한 환경에서 건강하게 자란 100% 국내산 닭고기를 사용합니다 ~!',11,30,00,30,'네네치킨.png');   
+                '리뷰 이벤트 !! ####미니 핫도그도 공짜리뷰란 이벤트 내용참고하세요! 네네치킨은 건강한 환경에서 건강하게 자란 100% 국내산 닭고기를 사용합니다 ~!',11,30,00,30,'네네치킨.png');   
                 
-                
+        
 select shop_id,shop_name from shop;
 
 insert into SHOP_CATEGORY(SHOP_CATEGORY_NAME,SHOP_ID)
@@ -53,6 +50,7 @@ insert into DELIVERY_AREA(DO_ADDRESS,SI_ADDRESS,GU_ADDRESS,DONG_ADDRESS,SHOP_ID)
         values(
             '경기도','용인시','수지구','동천동',401
         );
+           
                 
 SELECT * FROM DELIVERY_AREA;
 
@@ -97,7 +95,24 @@ select member_id, member_type from member ;
 select * from food;
 select * from food_category;     
 
-SELECT * FROM DIB;
+SELECT * FROM DIBs;
+select * from shop;
 
-insert into DIBS(MEMBER_ID,MEMBER_TYPE,SHOP_ID ) values (';);
+
+insert into REVIEW(SHOP_ID,STAR_POINT,CONTENT,MEMBER_ID,MEMBER_TYPE)
+    values(
+        '401', 4.5,'너무 맛있고, 양도 푸짐합니다!', 'member1@naver.com','NORMAL'
+    ); 
+insert into REVIEW_IMAGE(REVIEW_ID,FILE_NAME)
+    values(
+        '3','review_2.jpg'
+    );
+insert into REVIEW_REPLY(REVIEW_ID,CONTENT,SHOP_OWNER_ID)
+    values(
+        '401',,'jihoho'
+    );
+SELECT * FROM REVIEW;    
+SELECT * FROM REVIEW_IMAGE;
+SELECT * FROM SHOP_OWNER;
+SELECT * FROM SHOP;
                 

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.jeogiyo.review.dao.ReviewDAO">
+
+	<resultMap id="shopResult" type="shopVO">
+		<result property="shop_id" column="shop_id" />
+	</resultMap>
+	
+	
+<!-- 	<resultMap id="categoryResult" type="shopCategoryVO">
+		<result property="shop_category_name" column="shop_category_name" />
+		<result property="shop_id" column="shop_id" />
+	</resultMap> -->
+	
+	<select id="selectShopListByCategory" parameterType="String" resultMap="shopResult">
+		<![CDATA[
+			SELECT s.* 
+			FROM SHOP s, SHOP_CATEGORY c
+			WHERE c.SHOP_CATEGORY_NAME = #{category}
+			and s.SHOP_ID=c.SHOP_ID
+		]]>
+	</select>
+
+	<select id="selectShopById" parameterType="String" resultMap="shopResult">
+		<![CDATA[
+			SELECT *
+			FROM SHOP
+			WHERE SHOP_ID= #{shop_id}
+		]]>
+	</select>
+	
+	
+
+</mapper>

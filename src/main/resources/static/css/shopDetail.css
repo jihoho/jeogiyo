@@ -1,0 +1,151 @@
+@charset "utf-8";
+#shopInfo{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    /*align-items: center;*/
+}
+
+/*
+    shop header
+*/
+
+#shop_header{
+    border:1px solid #000000;
+    overflow: hidden;
+}
+.shop_img{
+    float: left;
+    padding: 5px 5px;
+}
+.shop_img img{
+    width: 150px;
+    height: 150px;
+}
+.shop_txt{
+    float:left;
+}
+.shop_name{
+    padding: 15px 0 0 15px;
+    clear: both;
+}
+
+#shop_header ul{
+    float: top;
+    padding: 10px 10px;
+}
+#shop_header .shop_dv li{
+    list-style: none;
+    padding: 5px;
+}
+.shop_dv_txt{
+    font-size: 90%;
+    color: #999;
+    line-height: 1.7em;
+}
+.shop_star{
+    float: right;
+}
+.shop_star li{
+    list-style: none;
+    padding: 5px;
+}
+
+/*
+    order
+*/
+
+#order_sect{
+    border: 1px solid black;
+    padding: 0;
+    width: 100%;
+}
+#order_header{
+    background-color: #4E654A;
+    width: 100%;
+}
+#order_header span{
+    font-weight: 900;
+    font-size: 24px;
+    color: white;
+}
+
+#order_content{
+    border: 0.2px solid black;
+}
+
+#order_butt{
+    width: 100%;
+    height: 100%;
+    background-color: #046D22;
+    border: 0.5px solid black;
+    outline: 0;
+    text-align: center;
+}
+#order_butt span{
+    font-weight: 900;
+    font-size: 24px;
+    color: white;
+}
+
+
+
+/*
+    shop content
+*/
+.collapse_butt{
+    width: 100%;
+    height: 100%;
+    border: 0.5px solid black;
+    outline: 0;
+    background-color:  #EEECEC;
+}
+
+.menu_butt_frame{
+    padding: 0;
+}
+
+.menu_butt{
+    width: 100%;
+    height: 100%;
+    background-color: #C4C4C4;
+    text-align: left;
+    border: 0.5px solid black;
+    outline: 0;
+}
+
+.menu_list_frame{
+    padding:0;
+    display: none;
+}
+
+.menu_list{
+    width: 100%;
+    height: 100%;
+    border: 0.2px solid black;
+    background-color: white;
+}
+.food_list{
+    height: 100px;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.food_list_a{
+    color: black;
+    text-decoration:none;
+}
+.food_txt{
+    float:left;
+}
+.food_img{
+    float: right;
+    width: 100px;
+    height: 100%;
+    border: 1px solid black;
+}
+
+.food_img img{
+    width: 100%;
+    height: 100%;
+}

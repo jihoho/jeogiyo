@@ -24,7 +24,7 @@ public class ShopServiceImpl implements ShopService {
 	}
 
 	@Override
-	public ShopVO searchShopById(String shop_id) {
+	public ShopVO searchShopById(int shop_id) {
 		ShopVO shopVO=shopDAO.selectShopById(shop_id);
 		return shopVO;
 	}

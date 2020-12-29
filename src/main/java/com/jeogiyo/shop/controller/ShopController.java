@@ -12,7 +12,7 @@ public interface ShopController {
 
 	public ModelAndView searchShopListByCategory(String category, HttpServletRequest request,
 												 HttpServletResponse response) throws Exception;
-	public ModelAndView shopDetail(@RequestParam("shop_id") String shop_id,
+	public ModelAndView shopDetail(@RequestParam("shop_id") int shop_id,
 								   HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	
 }

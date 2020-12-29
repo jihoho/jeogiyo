@@ -9,160 +9,7 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <c:set var="shop" value="${shop}"/>
 
-<style>
 
-	#shopInfo{
-		margin-top: 30px;
-		display: flex;
-		justify-content: center;
-		/*align-items: center;*/
-	}
-
-	/*
-		shop header
-	*/
-
-	#shop_header{
-		border:1px solid #000000;
-		overflow: hidden;
-	}
-	.shop_img{
-		float: left;
-		padding: 5px 5px;
-	}
-	.shop_img img{
-		width: 150px;
-		height: 150px;
-	}
-	.shop_txt{
-		float:left;
-	}
-	.shop_name{
-		padding: 15px 0 0 15px;
-		clear: both;
-	}
-
-	#shop_header ul{
-		float: top;
-		padding: 10px 10px;
-	}
-	#shop_header .shop_dv li{
-		list-style: none;
-		padding: 5px;
-	}
-	.shop_dv_txt{
-		font-size: 90%;
-		color: #999;
-		line-height: 1.7em;
-	}
-	.shop_star{
-		float: right;
-	}
-	.shop_star li{
-		list-style: none;
-		padding: 5px;
-	}
-
-	/*
-		order
-	*/
-
-	#order_sect{
-		border: 1px solid black;
-		padding: 0;
-		width: 100%;
-	}
-	#order_header{
-		background-color: #4E654A;
-		width: 100%;
-	}
-	#order_header span{
-		font-weight: 900;
-		font-size: 24px;
-		color: white;
-	}
-
-	#order_content{
-		border: 0.2px solid black;
-	}
-
-	#order_butt{
-		width: 100%;
-		height: 100%;
-		background-color: #046D22;
-		border: 0.5px solid black;
-		outline: 0;
-		text-align: center;
-	}
-	#order_butt span{
-		font-weight: 900;
-		font-size: 24px;
-		color: white;
-	}
-
-
-
-	/*
-		shop content
-	*/
-	.collapse_butt{
-		width: 100%;
-		height: 100%;
-		border: 0.5px solid black;
-		outline: 0;
-		background-color:  #EEECEC;
-	}
-
-	.menu_butt_frame{
-		padding: 0;
-	}
-
-	.menu_butt{
-		width: 100%;
-		height: 100%;
-		background-color: #C4C4C4;
-		text-align: left;
-		border: 0.5px solid black;
-		outline: 0;
-	}
-
-	.menu_list_frame{
-		padding:0;
-		display: none;
-	}
-
-	.menu_list{
-		width: 100%;
-		height: 100%;
-		border: 0.2px solid black;
-		background-color: white;
-	}
-	.food_list{
-		height: 100px;
-		border: 1px solid black;
-		padding: 10px;
-	}
-
-	.food_list_a{
-		color: black;
-		text-decoration:none;
-	}
-	.food_txt{
-		float:left;
-	}
-	.food_img{
-		float: right;
-		width: 100px;
-		height: 100%;
-		border: 1px solid black;
-	}
-
-	.food_img img{
-		width: 100%;
-		height: 100%;
-	}
-
-</style>
 <script type="text/javascript">
 
 	/*		페이지 로딩 이후,
@@ -536,8 +383,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link href="${contextPath}/css/shopDetail.css" rel="stylesheet" type="text/css" media="screen">
 </head>
 <body>
 	<section id="shopInfo">
@@ -675,17 +523,78 @@
 
 
 					<div id="collapse2_sect" style="display: none;">
-						<div style="border:1px solid #000000;padding:0;">
-							<button type="button"  style="width: 100%; height: 100%">
-								menu2_sect!!!
-							</button>
+						<div style="border:1px solid #000000; padding:40px;">
+							<div style="text-align: center;">
+								<span style="font-size: 64px;">${shop.star_avg}</span>
+							</div>
+							<div style="text-align: right;">
+								<button>리뷰 쓰기</button>
+							</div>
+
+							<div style="padding: 20px 0 20px 0;">
+								<c:choose>
+									<c:when test="${empty reviewList}">
+										<div style="text-align: center;">
+											리뷰가 없습니다.
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div>
+											리뷰가 있음.
+										</div>
+									</c:otherwise>
+								</c:choose>
+							</div>
 						</div>
 					</div>
 					<div id="collapse3_sect" style="display: none;">
-						<div  style="border:1px solid #000000;padding:0;">
-							<button type="button"  style="width: 100%; height: 100%">
-								menu3_sect!!!
-							</button>
+						<div  style="border:1px solid #000000;padding:40px;">
+							<div style="margin:40px 0px 40px 0px;">
+								<h4>가게소개</h4>
+								<hr>
+								<div>
+									<span>${shop.shop_intro}</span>
+								</div>
+							</div>
+
+							<div style="margin:40px 0px 40px 0px;">
+								<h4>업체 정보</h4>
+								<hr>
+								<div>
+									<span style="width: 10px; text-align: left;">영업시간</span>
+									<span>${shop.open_time_h}:${shop.open_time_m} - ${shop.close_time_h}:${shop.close_time_m}</span>
+								</div>
+								<div>
+									<span style="width: 10px; text-align: left;">전화번호</span>
+									<span>${shop.tel1}-${shop.tel2}-${shop.tel3}</span>
+								</div>
+								<div>
+									<span style="width: 10px; text-align: left;">주소</span>
+									<span>${shop.road_address} ${shop.detail_address}</span>
+								</div>
+							</div>
+
+							<div style="margin:40px 0px 40px 0px;">
+								<h4>결제정보</h4>
+								<hr>
+								<div>
+									<span style="width: 10px; text-align: left;">최소주문금액</span>
+									<span>${shop.min_order_price}원</span>
+								</div>
+							</div>
+
+							<div style="margin:40px 0px 40px 0px;">
+								<h4>사업자정보</h4>
+								<hr>
+								<div>
+									<span style="width: 10px; text-align: left;">상호명</span>
+									<span>${shop.shop_name}</span>
+								</div>
+								<div>
+									<span style="width: 10px; text-align: left;">사업자등록번호</span>
+									<span>${shop.shop_regis_number}</span>
+								</div>
+							</div>
 						</div>
 					</div>
 

@@ -14,7 +14,7 @@
   <meta charset="UTF-8">
 <title>header</title>
 <link href="${contextPath}/lib/bootstrap-5.0.0-beta1-dist/css/bootstrap.css" rel="stylesheet" >
-<script src="${contextPath}/lib/bootstrap-5.0.0-beta1-dist/js/bootstrap.js" type="text/javascripta"></script>
+<script src="${contextPath}/lib/bootstrap-5.0.0-beta1-dist/js/bootstrap.js" type="text/javascript"></script>
 
 </head>
 <body>	

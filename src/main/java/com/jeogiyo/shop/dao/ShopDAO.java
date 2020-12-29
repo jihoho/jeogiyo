@@ -14,5 +14,5 @@ public interface ShopDAO {
 	
 	public List<ShopVO> selectShopListByCategory(String category) throws DataAccessException;
 
-    public ShopVO selectShopById(String shop_id) throws DataAccessException;
+    public ShopVO selectShopById(int shop_id) throws DataAccessException;
 }

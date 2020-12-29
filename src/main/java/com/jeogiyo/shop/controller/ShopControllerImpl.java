@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jeogiyo.food.service.FoodService;
 import com.jeogiyo.food.vo.FoodVO;
+import com.jeogiyo.review.service.ReviewService;
+import com.jeogiyo.review.vo.ReviewVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,8 @@ public class ShopControllerImpl extends BaseController implements ShopController
 	ShopService shopService;
 	@Autowired
 	FoodService foodService;
+	@Autowired
+	ReviewService reviewService;
 	
 	@Override
 	@RequestMapping(value="/listShop.do", method=RequestMethod.GET)
@@ -46,7 +50,7 @@ public class ShopControllerImpl extends BaseController implements ShopController
 
 	@Override
 	@RequestMapping(value = "/shopDetail.do", method = RequestMethod.GET)
-	public ModelAndView shopDetail(@RequestParam("shop_id") String shop_id, HttpServletRequest request, HttpServletResponse response)throws Exception{
+	public ModelAndView shopDetail(@RequestParam("shop_id") int shop_id, HttpServletRequest request, HttpServletResponse response)throws Exception{
 		String viewName=(String) request.getAttribute("viewName");
 		ModelAndView mav=new ModelAndView(viewName);
 
@@ -55,10 +59,10 @@ public class ShopControllerImpl extends BaseController implements ShopController
 		System.out.println("******shop info******************************************************************");
 		System.out.println(shopVO);
 
-		List<FoodVO> mainFoodList=foodService.searchFoodByShopIdAndCategory(shop_id,"main_menu");
-		List<FoodVO> sideFoodList=foodService.searchFoodByShopIdAndCategory(shop_id,"side_menu");
-		List<FoodVO> setFoodList=foodService.searchFoodByShopIdAndCategory(shop_id,"set_menu");
-		List<FoodVO> beverageFoodList=foodService.searchFoodByShopIdAndCategory(shop_id,"beverage_menu");
+		List<FoodVO> mainFoodList=foodService.searchFoodByShopIdAndCategory(String.valueOf(shop_id),"main_menu");
+		List<FoodVO> sideFoodList=foodService.searchFoodByShopIdAndCategory(String.valueOf(shop_id),"side_menu");
+		List<FoodVO> setFoodList=foodService.searchFoodByShopIdAndCategory(String.valueOf(shop_id),"set_menu");
+		List<FoodVO> beverageFoodList=foodService.searchFoodByShopIdAndCategory(String.valueOf(shop_id),"beverage_menu");
 		mav.addObject("mainFoodList",mainFoodList);
 		mav.addObject("sideFoodList",sideFoodList);
 		mav.addObject("setFoodList",setFoodList);
@@ -75,7 +79,7 @@ public class ShopControllerImpl extends BaseController implements ShopController
 		System.out.println("******beverage food info******************************************************************");
 		beverageFoodList.forEach(s->System.out.println(s.toString()));
 
-
+//		List<ReviewVO> reviewList=reviewService.searchReviewByShopId(shop_id);
 
 
 		return mav;

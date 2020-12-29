@@ -51,7 +51,7 @@
 		]]>
 	</select>
 
-	<select id="selectShopById" parameterType="String" resultMap="shopResult">
+	<select id="selectShopById" parameterType="int" resultMap="shopResult">
 		<![CDATA[
 			SELECT *
 			FROM SHOP
