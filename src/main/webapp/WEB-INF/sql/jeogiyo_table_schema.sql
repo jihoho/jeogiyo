@@ -203,7 +203,49 @@ commit;
     ALTER TABLE MEMBER add REG_DATE DATE DEFAULT sysdate;
     ALTER TABLE MEMBER MODIFY member_id VARCHAR2(200 BYTE);
     ALTER TABLE MEMBER RENAME column JOINT_DATE TO JOIN_DATE;
-    select * from MEMBER;
+    select * from MEMBER; 
+    
+--------------------------------------------------------
+--  DDL for Table ORDER
+--------------------------------------------------------
+    commit;
+   CREATE TABLE "J_ORDER" 
+   (	
+        "ORDER_ID" NUMBER(20,0) primary key,
+        "IMP_UID" VARCHAR2(200 BYTE) unique,
+        "PG" VARCHAR2(200 BYTE),
+        "SHOP_ID" NUMBER(20,0),
+        "SHOP_NAME" VARCHAR2(100 BYTE) NOT NULL,
+        "REG_DATE" DATE DEFAULT sysdate,
+        "ORDERER_ID" VARCHAR2(200 BYTE),
+        "ORDERER_TYPE" VARCHAR2(50 BYTE),
+        "ORDERER_NAME" VARCHAR2(50 BYTE) NOT NULL,
+        "ORDERER_TEL" VARCHAR2(50 BYTE) NOT NULL,
+        "JIBEON_ADDRESS" VARCHAR2(500 BYTE) NOT NULL,
+        "ROAD_ADDRESS" VARCHAR2(500 BYTE) NOT NULL,
+        "DETAIL_ADDRESS" VARCHAR2(500 BYTE) NOT NULL,
+        "ORDER_PRICE" NUMBER(20,0) NOT NULL,
+        "DELIVERY_TIP" NUMBER(10,0) NOT NULL,
+        "TOTAL_PRICE" NUMBER(20,0) NOT NULL,
+        "ORDER_REQUESTS" VARCHAR2(500 BYTE),
+        "PAY_METHOD" VARCHAR2(100 BYTE) NOT NULL,
+        CONSTRAINT fk_order_1 FOREIGN KEY(SHOP_ID) REFERENCES SHOP(SHOP_ID),
+        CONSTRAINT fk_order_2 FOREIGN KEY(ORDERER_ID,ORDERER_TYPE) REFERENCES MEMBER(MEMBER_ID,MEMBER_TYPE)
+   ) ;
+    
+    
+    CREATE TABLE "J_ORDER_FOOD" 
+   (	
+        "ORDER_ID" NUMBER(20,0),
+        "FOOD_ID" NUMBER(20,0),
+        "FOOD_NAME" VARCHAR2(200 BYTE) NOT NULL,
+        "FOOD_QTY" NUMBER(10,0) NOT NULL,
+        "FOOD_PRICE" NUMBER(20,0) NOT NULL,
+        CONSTRAINT pk_order_food PRIMARY KEY (ORDER_ID, FOOD_ID),
+        CONSTRAINT fk_order_food_1 FOREIGN KEY(ORDER_ID) REFERENCES J_ORDER(ORDER_ID),
+        CONSTRAINT fk_order_food_2 FOREIGN KEY(FOOD_ID) REFERENCES FOOD(FOOD_ID)
+   ) ;
+   
 --------------------------------------------------------
 --  DDL for Table REVIEW
 --------------------------------------------------------
@@ -242,62 +284,3 @@ commit;
         "SHOP_OWNER_ID" varchar2(20 BYTE) REFERENCES SHOP_OWNER(SHOP_OWNER_ID)
    ) ;   
 
-   
---------------------------------------------------------
---  create sequences
---------------------------------------------------------  
-
-CREATE SEQUENCE  "SEQ_SHOP_ID"  MINVALUE 1 MAXVALUE 10000000 INCREMENT BY 1 START WITH 400 NOCACHE ORDER  NOCYCLE ;
-CREATE SEQUENCE  "SEQ_FOOD_ID"  MINVALUE 1 MAXVALUE 10000000 INCREMENT BY 1 START WITH 400 NOCACHE ORDER  NOCYCLE ;
-CREATE SEQUENCE  "SEQ_REVIEW_ID"  MINVALUE 1 MAXVALUE 10000000 INCREMENT BY 1 START WITH 1 NOCACHE ORDER  NOCYCLE ;
-CREATE SEQUENCE  "SEQ_REVIEW_IMAGE_ID"  MINVALUE 1 MAXVALUE 10000000 INCREMENT BY 1 START WITH 1 NOCACHE ORDER  NOCYCLE ;
-CREATE SEQUENCE  "SEQ_REVIEW_REPLY_ID"  MINVALUE 1 MAXVALUE 10000000 INCREMENT BY 1 START WITH 1 NOCACHE ORDER  NOCYCLE ;
-
-
---------------------------------------------------------
---  create triggers
---------------------------------------------------------  
-CREATE OR REPLACE TRIGGER TRI_SHOP_shop_id BEFORE INSERT ON SHOP
-FOR EACH ROW
-BEGIN
-	SELECT SEQ_SHOP_ID.nextval
-	INTO :new.shop_id
-	FROM dual;
-END;
-
-
-CREATE OR REPLACE TRIGGER TRI_FOOD_food_id BEFORE INSERT ON FOOD
-FOR EACH ROW
-BEGIN
-	SELECT SEQ_FOOD_ID.nextval
-	INTO :new.food_id
-	FROM dual;
-END;
-
-CREATE OR REPLACE TRIGGER TRI_REVIEW_review_id BEFORE INSERT ON REVIEW
-FOR EACH ROW
-BEGIN
-	SELECT SEQ_REVIEW_ID.nextval
-	INTO :new.review_id
-	FROM dual;
-END;
-
-CREATE OR REPLACE TRIGGER TRI_review_image_id BEFORE INSERT ON REVIEW_IMAGE
-FOR EACH ROW
-BEGIN
-	SELECT SEQ_REVIEW_IMAGE_ID.nextval
-	INTO :new.review_image_id
-	FROM dual;
-END;
-
-CREATE OR REPLACE TRIGGER TRI_review_reply_id BEFORE INSERT ON REVIEW_REPLY
-FOR EACH ROW
-BEGIN
-	SELECT SEQ_REVIEW_REPLY_ID.nextval
-	INTO :new.reply_id
-	FROM dual;
-END;
-
-select * from shop where shop_id=401;
-
-select * from member;

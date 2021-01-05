@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.jeogiyo.order.dao.OrderDAO">
+
+	<resultMap id="orderResult" type="orderVO">
+		<result property="order_id" column="order_id" />
+		<result property="img_uid" column="img_uid" />
+		<result property="pg" column="pg" />
+		<result property="shop_id" column="shop_id" />
+		<result property="shop_name" column="shop_name" />
+		<result property="reg_date" column="reg_date" />
+		<result property="orderer_id" column="orderer_id" />
+		<result property="orderer_type" column="orderer_type" />
+		<result property="orderer_name" column="orderer_name" />
+		<result property="orderer_tel" column="orderer_tel" />
+		<result property="jibeon_address" column="jibeon_address" />
+		<result property="road_address" column="road_address" />
+		<result property="detail_address" column="detail_address" />
+		<result property="order_price" column="order_price" />
+		<result property="delivery_tip" column="delivery_tip" />
+		<result property="total_price" column="total_price" />
+		<result property="order_requests" column="order_requests" />
+		<result property="pay_method" column="pay_method" />
+	</resultMap>
+	
+
+	
+	<insert id="insertOrder" parameterType="orderVO">
+		<![CDATA[
+			insert into J_ORDER(IMP_UID,PG,SHOP_ID,SHOP_NAME,ORDERER_ID,ORDERER_TYPE,ORDERER_NAME,
+								ORDERER_TEL,JIBEON_ADDRESS,ROAD_ADDRESS,DETAIL_ADDRESS,ORDER_PRICE,DELIVERY_TIP,TOTAL_PRICE,
+								ORDER_REQUESTS,PAY_METHOD)
+			values(
+				#{imp_uid},#{pg},#{shop_id},#{shop_name},#{orderer_id},#{orderer_type},#{orderer_name},
+				#{orderer_tel},#{jibeon_address},#{road_address},#{detail_address},#{order_price},#{delivery_tip},#{total_price},
+				#{order_requests},#{pay_method}
+				)
+		]]>
+	</insert>
+	
+	<select id="selectCurrentOrderIdSequence" resultType="int">
+		<![CDATA[
+			SELECT SEQ_J_ORDER_ID.CURRVAL
+			FROM DUAL
+		]]>
+	</select>
+
+	<insert id="insertOrderFood" parameterType="java.util.Map">
+		<![CDATA[
+			INSERT INTO J_ORDER_FOOD(ORDER_ID,FOOD_ID,FOOD_NAME,FOOD_QTY,FOOD_PRICE)
+			values(
+			       #{order_id},#{food_id},#{food_name},#{food_qty},#{food_price}
+				  )
+		]]>
+	</insert>
+	
+	
+
+</mapper>

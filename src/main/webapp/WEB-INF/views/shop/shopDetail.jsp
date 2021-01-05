@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--<%@ taglib prefix="form" uri="http://sslext.sourceforge.net/sslext" %>--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page import="com.jeogiyo.order.vo.OrderFood" %>
+<%@ page import="com.jeogiyo.order.vo.OrderFoodVO" %>
 
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <c:set var="shop" value="${shop}"/>
@@ -349,34 +349,84 @@
 	});
 
 	/*
-	*  주문하기 button 클릭 시 food에 대한 id, 수량(qty)을 input tag로 동적 추가하여 form submit
+	*  주문하기 button 클릭 시 가게에 대한 정보,food에 대한 id, 수량(qty)을 input tag로 동적 추가하여 form submit
 	* */
 	$(document).on("click","#order_butt",function(){
 		var orderFoodList=document.getElementsByClassName("order_food");
 		var form=document.getElementById("orderForm");
+		var shopNameSpan=document.getElementById("shop_name");
+		var shopIdInput=document.getElementById("shop_id");
+		var deliveryTipSpan= document.getElementById("shop_dv_tip");
+
+		var formShopName=document.createElement("input");
+		formShopName.setAttribute("name","shopName");
+		formShopName.setAttribute("type","hidden");
+		formShopName.value=shopNameSpan.innerText;
+		var formShopId=document.createElement("input");
+		formShopId.setAttribute("name","shopId");
+		formShopId.setAttribute("type","hidden");
+		formShopId.value=shopIdInput.value;
+		var formDeliveryTip=document.createElement("input");
+		formDeliveryTip.setAttribute("name","deliveryTip");
+		formDeliveryTip.setAttribute("type","hidden");
+		formDeliveryTip.value=deliveryTipSpan.innerText;
+
+		var formRoadAddress=document.createElement("input");
+		formRoadAddress.setAttribute("name","roadAddress");
+		formRoadAddress.setAttribute("type","hidden");
+		formRoadAddress.value="풍덕천로 52";
+
+		var formJibeonAddress=document.createElement("input");
+		formJibeonAddress.setAttribute("name","jibeonAddress");
+		formJibeonAddress.setAttribute("type","hidden");
+		formJibeonAddress.value="경기도 용인시 수지구 풍덕천동 1112 신정마을 현대성우아파트";
+
+		form.appendChild(formShopName);
+		form.appendChild(formShopId);
+		form.appendChild(formDeliveryTip);
+		form.appendChild(formRoadAddress);
+		form.appendChild(formJibeonAddress);
+
 
 		for(var i=0;i<orderFoodList.length;i++){
 			var foodDiv=orderFoodList[i];
-			var foodQtySpan=foodDiv.getElementsByClassName("order_food_qty")[0];
 			var foodIdInput=foodDiv.getElementsByClassName("order_food_id")[0];
+			var foodNameSpan=foodDiv.getElementsByClassName("order_food_name")[0];
+			var foodPriceSpan=foodDiv.getElementsByClassName("order_food_price")[0];
+			var foodQtySpan=foodDiv.getElementsByClassName("order_food_qty")[0];
 
 			// form으로 전송할 input 태그 생성
 			var formFoodId=document.createElement("input");
-			formFoodId.setAttribute("name","orderFoodList["+i+"].food_id");
+			formFoodId.setAttribute("name","orderFoodList["+i+"].foodId");
 			formFoodId.setAttribute("type","hidden");
 			formFoodId.value=foodIdInput.value;
+			var formFoodName=document.createElement("input");
+			formFoodName.setAttribute("name","orderFoodList["+i+"].foodName");
+			formFoodName.setAttribute("type","hidden");
+			formFoodName.value=foodNameSpan.innerText;
+			var formFoodPrice=document.createElement("input");
+			formFoodPrice.setAttribute("name","orderFoodList["+i+"].foodPrice");
+			formFoodPrice.setAttribute("type","hidden");
+			formFoodPrice.value=foodPriceSpan.innerText;
 			var formFoodQty=document.createElement("input");
-			formFoodQty.setAttribute("name","orderFoodList["+i+"].food_qty");
+			formFoodQty.setAttribute("name","orderFoodList["+i+"].foodQty");
 			formFoodQty.setAttribute("type","hidden");
 			formFoodQty.value=foodQtySpan.innerText;
 
 			form.appendChild(formFoodId);
+			form.appendChild(formFoodName);
+			form.appendChild(formFoodPrice);
 			form.appendChild(formFoodQty);
 
-			console.log("food id: "+foodIdInput.value+", food qty: "+foodQtySpan.innerText);
+			console.log("food id: "+formFoodId.value+", food name: "+formFoodName.value
+			+", food price: "+formFoodPrice.value+", food qty: "+formFoodQty.value);
 		}
+		// var shop_name=document.getElementsByClassName("shop_name").getElementsByTagName("span").innerText;
+		// alert(shop_name);
 		form.submit();
 	});
+
+
 </script>
 
 
@@ -398,19 +448,20 @@
 							<img alt="" src="${contextPath}/shopThumbnails.do?shop_id=${shop.shop_id}&fileName=${shop.image_file}">
 						</div>
 						<div class="shop_txt">
-							<div class="shop_name">
+							<div id="shop_name">
 								<h6><span style="color: black; font-weight: 900;">${shop.shop_name}</span></h6>
 							</div>
+							<input id="shop_id"type="hidden" value="${shop.shop_id}">
 							<ul class="shop_dv">
 
 								<li>
-									<span class="shop_dv_txt" >최소 주문 금액 </span>${shop.min_order_price}원
+									<span class="shop_dv_txt">최소 주문 금액 </span>${shop.min_order_price}원
 								</li>
 								<li>
 									<span class="shop_dv_txt">배달 시간 </span>${shop.delivery_min_time}~${shop.delivery_max_time}분
 								</li>
 								<li>
-									<span class="shop_dv_txt">배달 팁 </span>${shop.delivery_tip}원
+									<span class="shop_dv_txt">배달 팁 </span><span id="shop_dv_tip">${shop.delivery_tip}</span>원
 								</li>
 							</ul>
 						</div>
@@ -621,9 +672,10 @@
 							</div>
 						</div>
 						<div>
-							<form:form modelAttribute="orderFood" id="orderForm" name="orderForm" action="${contextPath}/order/orderDetail.do">
+							<form:form modelAttribute="orderFormVO" id="orderForm" name="orderForm" action="${contextPath}/order/orderForm.do">
 							</form:form>
 							<button type="button" id="order_butt"><span>주문하기</span></button>
+
 						</div>
 					</div>
 				</div>

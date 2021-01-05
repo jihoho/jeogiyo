@@ -8,6 +8,6 @@
      <mapper resource="mybatis/mappers/member.xml"/>
      <mapper resource="mybatis/mappers/food.xml"/>
      <mapper resource="mybatis/mappers/dibs.xml"/>
-   <!-- <mapper resource="mybatis/mappers/board.xml"/> -->
+     <mapper resource="mybatis/mappers/order.xml"/>
  </mappers>
 </configuration>

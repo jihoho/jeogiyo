@@ -10,19 +10,17 @@
 %> 
 
 
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  /> 
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
-<script>
-	function paymentClick(){
-		alert("payment click!!");
-	}
-</script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="${contextPath}/css/orderDetail.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="${contextPath}/css/orderForm.css" rel="stylesheet" type="text/css" media="screen">
 </head>
 <body>
 	<div class="container" >
@@ -37,19 +35,21 @@
 								<span>배달 정보</span>
 							</div>
 							<div class="order_info_body">
-								<div><span class="info_txt_lg">용인시 수지구 풍덕천동 1112</span></div>
-								<div><span class="info_txt_md">[도로명] 풍덕천로 52</span></div>
+								<div><span id="jibeon_address" class="info_txt_lg">${orderFormInfo.jibeonAddress}</span></div>
+								<div>
+									[도로명] <span id="road_address" class="info_txt_md">${orderFormInfo.roadAddress}</span>
+								</div>
 								<div>
 									<div style="float: left;">
 										<span>상세주소 </span>
 									</div>
 									<div>
-										<input type="text" placeholder="상세 주소 입력해주세요."/>
+										<input id="detail_address" type="text" placeholder="상세 주소 입력해주세요."/>
 									</div>
 								</div>
 								<div>
 									<div style="float: left;">
-										<span class="info_txt_md">01056254589</span>
+										<span class="info_txt_md" id="orderer_tel">${memberInfo.hp}</span>
 									</div>
 									<div>
 										<button class="info_txt_md">
@@ -81,26 +81,26 @@
 							<div class="order_info_body">
 								<table>
 									<tr>
-										<td onclick="paymentClick()">
+										<td id="tmp_id">
 											<span class="info_txt_lg">카카오페이</span>
 										</td>
-										<td onclick="paymentClick()">
+										<td>
 											<span class="info_txt_lg">KG Inicis</span>
 										</td>
 									</tr>
 									<tr>
-										<td onclick="paymentClick()">
+										<td>
 											<span class="info_txt_lg">카카오페이</span>
 										</td>
-										<td onclick="paymentClick()">
+										<td>
 											<span class="info_txt_lg">KG Inicis</span>
 										</td>
 									</tr>
 									<tr>
-										<td onclick="paymentClick()">
+										<td >
 											<span class="info_txt_lg">카카오페이</span>
 										</td>
-										<td onclick="paymentClick()">
+										<td>
 											<span class="info_txt_lg">KG Inicis</span>
 										</td>
 									</tr>
@@ -117,41 +117,50 @@
 						<div id="order_header">
 							<span>주문표</span>
 						</div>
-						<div id="order_shop_name">
-							<span>네네치킨 풍덕점</span>
+						<div id="order_shop_name_div">
+							<span id="order_shop_name">${orderFormInfo.shopName}</span>
+							<input type="hidden" id="order_shop_id" value="${orderFormInfo.shopId}"/>
+							<input type="hidden" id="orderer_id" value="${memberInfo.member_id}"/>
+							<input type="hidden" id="orderer_name" value="${memberInfo.nick_name}"/>
+							<input type="hidden" id="orderer_type" value="${memberInfo.member_type}"/>
 						</div>
 						<div id="order_content">
 							<ul>
-								<li>
-									<div class="order_food">
-										<span>양념치킨 X 1 :</span>
-									</div>
-									<div class="order_food_price">
-										<span>18000원</span>
-									</div>
-								</li>
-								<li>
-								<div class="order_food">
-									<span>후라이드치킨 X 1 :</span>
-								</div>
-								<div class="order_food_price">
-									<span>16000원</span>
-								</div>
-							</li>
+								<c:set var ="price_sum" value="${orderFormInfo.deliveryTip}"/>
+								<c:forEach var="food" items="${orderFormInfo.orderFoodList}">
+									<li class="order_food_list">
+										<div class="order_food_name_qty">
+											<input type="hidden" class="food_id" value="${food.foodId}"/>
+											<span class="food_name">${food.foodName}</span> X <span class="food_qty">${food.foodQty}</span> :
+										</div>
+										<div class="order_food_price">
+											<span class="food_price">${food.foodPrice}</span>
+											<span>원</span>
+										</div>
+									</li>
+									<c:set var="price_sum" value="${price_sum+food.foodQty*food.foodPrice}"/>
+								</c:forEach>
 							</ul>
 						</div>
 						<div id="order_dv_tip">
-							<span>배달요금 2000원 별도</span>
+							<span>배달요금 </span>
+							<span id="delivery_tip">${orderFormInfo.deliveryTip}</span>
+							<span>원 별도</span>
 						</div>
 						<div id="order_total_price">
-							<span>합계: 56000원</span>
+							<span>합계: </span>
+							<span id="total_price">${price_sum}</span>
+							<span>원</span>
 						</div>
 						<div>
 							<button type="button" id="order_butt"><span>결제하기</span></button>
+							<span>${contextPath}</span>
 						</div>
 					</div>
 				</div>
 			</div>
 	</div>
+
+	<script src="${contextPath}/js/orderForm.js"></script>
 </body>
 </html>

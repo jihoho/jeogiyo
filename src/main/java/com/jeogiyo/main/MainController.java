@@ -14,10 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.jeogiyo.common.base.BaseController;
 
 @Controller("mainController")
+@RequestMapping("/main")
 public class MainController extends BaseController{
 	
 	
-	@RequestMapping(value="/main/main.do", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value="/main.do", method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
 		ModelAndView mav=new ModelAndView();

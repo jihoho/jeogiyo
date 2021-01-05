@@ -68,12 +68,12 @@
     color: white;
 
 }
-#order_shop_name{
+#order_shop_name_div{
     height:50px;
     padding:10px;
     border:0.5px solid black;
 }
-#order_shop_name span{
+#order_shop_name{
     font-size: 20px;
 }
 
