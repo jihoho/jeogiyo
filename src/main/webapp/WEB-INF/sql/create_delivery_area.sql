@@ -1,0 +1,6 @@
+SELECT * FROM DELIVERY_AREA;
+
+INSERT INTO DELIVERY_AREA(BCODE, SHOP_ID)
+values(
+    '4146510100','401');
+select * from Delivery_area;

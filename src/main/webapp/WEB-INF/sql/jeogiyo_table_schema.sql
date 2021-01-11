@@ -54,6 +54,7 @@ SELECT * FROM SHOP
         "JIBEON_ADDRESS" VARCHAR2(500 BYTE),
         "DETAIL_ADDRESS" VARCHAR2(500 BYTE),
         "ZIPCODE" VARCHAR2(20 BYTE),
+        "BCODE" VARCHAR2 (100 BYTE),
         "TEL1" VARCHAR2(20 BYTE), 
         "TEL2" VARCHAR2(20 BYTE), 
         "TEL3" VARCHAR2(20 BYTE), 
@@ -79,7 +80,7 @@ SELECT * FROM SHOP
         
     );
     
-    
+    ALTER TABLE SHOP ADD BCODE VARCHAR(100BYTE);
 
 --------------------------------------------------------
 --  DDL for Table SHOP_CATEGORY

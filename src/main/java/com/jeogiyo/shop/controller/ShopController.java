@@ -10,7 +10,8 @@ public interface ShopController {
 
 	
 
-	public ModelAndView searchShopListByCategory(String category, HttpServletRequest request,
+	public ModelAndView searchShopListByCategory(String category,
+												 @RequestParam("bcode") String bcode,HttpServletRequest request,
 												 HttpServletResponse response) throws Exception;
 	public ModelAndView shopDetail(@RequestParam("shop_id") int shop_id,
 								   HttpServletRequest request, HttpServletResponse response)  throws Exception;

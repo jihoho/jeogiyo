@@ -16,7 +16,7 @@
 			로그인이 아닐 경우 찜버튼이 빈 하트 이미지
 		    로그인이고, 해당 member가 shop을 찜한 경우 빨간색 하트 이미지로 변경 */
 
-	function init(){
+	function shopDetailInit(){
 		// 세션에서 isLogOn(로그인 : true, 로그아웃: false) 값을 가져옴
 		var isLogOn="<%=String.valueOf(session.getAttribute("isLogOn"))%>";
 		console.log(isLogOn);
@@ -52,9 +52,7 @@
 			});  //end ajax!
 		}
 	}
-	window.onload=function (){
-		init();
-	}
+
 
 
 	/*
@@ -352,80 +350,88 @@
 	*  주문하기 button 클릭 시 가게에 대한 정보,food에 대한 id, 수량(qty)을 input tag로 동적 추가하여 form submit
 	* */
 	$(document).on("click","#order_butt",function(){
-		var orderFoodList=document.getElementsByClassName("order_food");
-		var form=document.getElementById("orderForm");
-		var shopNameSpan=document.getElementById("shop_name");
-		var shopIdInput=document.getElementById("shop_id");
-		var deliveryTipSpan= document.getElementById("shop_dv_tip");
+		var isLogOn="<%=String.valueOf(session.getAttribute("isLogOn"))%>";
+		console.log("isLogOn: "+isLogOn);
+		if(isLogOn=="false"||isLogOn=="null"){
+			alert("로그인 해주세요");
+		}else {
+			var orderFoodList = document.getElementsByClassName("order_food");
+			var form = document.getElementById("orderForm");
+			var shopNameSpan = document.getElementById("shop_name");
+			var shopIdInput = document.getElementById("shop_id");
+			var deliveryTipSpan = document.getElementById("shop_dv_tip");
 
-		var formShopName=document.createElement("input");
-		formShopName.setAttribute("name","shopName");
-		formShopName.setAttribute("type","hidden");
-		formShopName.value=shopNameSpan.innerText;
-		var formShopId=document.createElement("input");
-		formShopId.setAttribute("name","shopId");
-		formShopId.setAttribute("type","hidden");
-		formShopId.value=shopIdInput.value;
-		var formDeliveryTip=document.createElement("input");
-		formDeliveryTip.setAttribute("name","deliveryTip");
-		formDeliveryTip.setAttribute("type","hidden");
-		formDeliveryTip.value=deliveryTipSpan.innerText;
+			var formShopName = document.createElement("input");
+			formShopName.setAttribute("name", "shopName");
+			formShopName.setAttribute("type", "hidden");
+			formShopName.value = shopNameSpan.innerText;
+			var formShopId = document.createElement("input");
+			formShopId.setAttribute("name", "shopId");
+			formShopId.setAttribute("type", "hidden");
+			formShopId.value = shopIdInput.value;
+			var formDeliveryTip = document.createElement("input");
+			formDeliveryTip.setAttribute("name", "deliveryTip");
+			formDeliveryTip.setAttribute("type", "hidden");
+			formDeliveryTip.value = deliveryTipSpan.innerText;
 
-		var formRoadAddress=document.createElement("input");
-		formRoadAddress.setAttribute("name","roadAddress");
-		formRoadAddress.setAttribute("type","hidden");
-		formRoadAddress.value="풍덕천로 52";
+			var formRoadAddress = document.createElement("input");
+			formRoadAddress.setAttribute("name", "roadAddress");
+			formRoadAddress.setAttribute("type", "hidden");
+			formRoadAddress.value = "풍덕천로 52";
 
-		var formJibeonAddress=document.createElement("input");
-		formJibeonAddress.setAttribute("name","jibeonAddress");
-		formJibeonAddress.setAttribute("type","hidden");
-		formJibeonAddress.value="경기도 용인시 수지구 풍덕천동 1112 신정마을 현대성우아파트";
+			var formJibeonAddress = document.createElement("input");
+			formJibeonAddress.setAttribute("name", "jibeonAddress");
+			formJibeonAddress.setAttribute("type", "hidden");
+			formJibeonAddress.value = "경기도 용인시 수지구 풍덕천동 1112 신정마을 현대성우아파트";
 
-		form.appendChild(formShopName);
-		form.appendChild(formShopId);
-		form.appendChild(formDeliveryTip);
-		form.appendChild(formRoadAddress);
-		form.appendChild(formJibeonAddress);
+			form.appendChild(formShopName);
+			form.appendChild(formShopId);
+			form.appendChild(formDeliveryTip);
+			form.appendChild(formRoadAddress);
+			form.appendChild(formJibeonAddress);
 
 
-		for(var i=0;i<orderFoodList.length;i++){
-			var foodDiv=orderFoodList[i];
-			var foodIdInput=foodDiv.getElementsByClassName("order_food_id")[0];
-			var foodNameSpan=foodDiv.getElementsByClassName("order_food_name")[0];
-			var foodPriceSpan=foodDiv.getElementsByClassName("order_food_price")[0];
-			var foodQtySpan=foodDiv.getElementsByClassName("order_food_qty")[0];
+			for (var i = 0; i < orderFoodList.length; i++) {
+				var foodDiv = orderFoodList[i];
+				var foodIdInput = foodDiv.getElementsByClassName("order_food_id")[0];
+				var foodNameSpan = foodDiv.getElementsByClassName("order_food_name")[0];
+				var foodPriceSpan = foodDiv.getElementsByClassName("order_food_price")[0];
+				var foodQtySpan = foodDiv.getElementsByClassName("order_food_qty")[0];
 
-			// form으로 전송할 input 태그 생성
-			var formFoodId=document.createElement("input");
-			formFoodId.setAttribute("name","orderFoodList["+i+"].foodId");
-			formFoodId.setAttribute("type","hidden");
-			formFoodId.value=foodIdInput.value;
-			var formFoodName=document.createElement("input");
-			formFoodName.setAttribute("name","orderFoodList["+i+"].foodName");
-			formFoodName.setAttribute("type","hidden");
-			formFoodName.value=foodNameSpan.innerText;
-			var formFoodPrice=document.createElement("input");
-			formFoodPrice.setAttribute("name","orderFoodList["+i+"].foodPrice");
-			formFoodPrice.setAttribute("type","hidden");
-			formFoodPrice.value=foodPriceSpan.innerText;
-			var formFoodQty=document.createElement("input");
-			formFoodQty.setAttribute("name","orderFoodList["+i+"].foodQty");
-			formFoodQty.setAttribute("type","hidden");
-			formFoodQty.value=foodQtySpan.innerText;
+				// form으로 전송할 input 태그 생성
+				var formFoodId = document.createElement("input");
+				formFoodId.setAttribute("name", "orderFoodList[" + i + "].foodId");
+				formFoodId.setAttribute("type", "hidden");
+				formFoodId.value = foodIdInput.value;
+				var formFoodName = document.createElement("input");
+				formFoodName.setAttribute("name", "orderFoodList[" + i + "].foodName");
+				formFoodName.setAttribute("type", "hidden");
+				formFoodName.value = foodNameSpan.innerText;
+				var formFoodPrice = document.createElement("input");
+				formFoodPrice.setAttribute("name", "orderFoodList[" + i + "].foodPrice");
+				formFoodPrice.setAttribute("type", "hidden");
+				formFoodPrice.value = foodPriceSpan.innerText;
+				var formFoodQty = document.createElement("input");
+				formFoodQty.setAttribute("name", "orderFoodList[" + i + "].foodQty");
+				formFoodQty.setAttribute("type", "hidden");
+				formFoodQty.value = foodQtySpan.innerText;
 
-			form.appendChild(formFoodId);
-			form.appendChild(formFoodName);
-			form.appendChild(formFoodPrice);
-			form.appendChild(formFoodQty);
+				form.appendChild(formFoodId);
+				form.appendChild(formFoodName);
+				form.appendChild(formFoodPrice);
+				form.appendChild(formFoodQty);
 
-			console.log("food id: "+formFoodId.value+", food name: "+formFoodName.value
-			+", food price: "+formFoodPrice.value+", food qty: "+formFoodQty.value);
+				console.log("food id: " + formFoodId.value + ", food name: " + formFoodName.value
+						+ ", food price: " + formFoodPrice.value + ", food qty: " + formFoodQty.value);
+			}
+			// var shop_name=document.getElementsByClassName("shop_name").getElementsByTagName("span").innerText;
+			// alert(shop_name);
+			form.submit();
 		}
-		// var shop_name=document.getElementsByClassName("shop_name").getElementsByTagName("span").innerText;
-		// alert(shop_name);
-		form.submit();
 	});
-
+	$(document).ready(function (){
+		shopDetailInit();
+	});
 
 </script>
 

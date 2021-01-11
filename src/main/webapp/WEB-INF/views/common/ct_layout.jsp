@@ -23,6 +23,9 @@
     	<header>
         	<tiles:insertAttribute name="header"/>
      	</header>
+        <div>
+            <tiles:insertAttribute name="category"/>
+        </div>
      	<article>
         	<tiles:insertAttribute name="body"/>
         </article>

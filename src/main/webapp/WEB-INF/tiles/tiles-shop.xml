@@ -5,7 +5,8 @@
 <tiles-definitions>
    <definition name="ctLayout"  template="/WEB-INF/views/common/ct_layout.jsp">
       <put-attribute name="title" value="" />
-      <put-attribute name="header" value="/WEB-INF/views/common/ct_header.jsp" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+      <put-attribute name="category" value="/WEB-INF/views/common/category_menu.jsp" />
       <put-attribute name="body" value="" />
       <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
@@ -15,7 +16,7 @@
       <put-attribute name="body" value="/WEB-INF/views/shop/listShop.jsp" />
    </definition>
 
-   <definition name="/shop/shopDetail" extends="ctLayout">
+   <definition name="/shop/shopDetail" extends="baseLayout">
       <put-attribute name="title" value="가게 검색 페이지" />
       <put-attribute name="body" value="/WEB-INF/views/shop/shopDetail.jsp" />
    </definition>
