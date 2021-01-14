@@ -50,6 +50,7 @@ public class ViewNameInterceptor extends HandlerInterceptorAdapter {
 		}
 
 		String fileName = uri.substring(begin, end);
+		System.out.println("viewNameInterceptor filename:"+fileName);
 		if (fileName.indexOf(".") != -1) {
 			fileName = fileName.substring(0, fileName.lastIndexOf("."));
 		}

@@ -129,46 +129,19 @@
 	}
 
 	function collapseButt(butt_id){
-		// if($(this).hasClass("menu1")){
-		// 	alert("menu1");
-		// }else if($(this).hasClass("menu2")){
-		// 	alert("menu2");
-		// }else{
-		// 	alert("menu3");
-		// }
-		var menu1=document.getElementById("collapse1");
-		var menu2=document.getElementById("collapse2");
-		var menu3=document.getElementById("collapse3");
-		var menu1_sect=document.getElementById("collapse1_sect");
-		var menu2_sect=document.getElementById("collapse2_sect");
-		var menu3_sect=document.getElementById("collapse3_sect");
-
-		if(butt_id=="collapse1"){
-			menu1.style.color="#007D2B";
-			menu2.style.color="black";
-			menu3.style.color="black";
-
-			menu1_sect.style.display="block";
-			menu2_sect.style.display="none";
-			menu3_sect.style.display="none";
-		}else if(butt_id=="collapse2"){
-			menu1.style.color="black";
-			menu2.style.color="#007D2B";
-			menu3.style.color="black";
-
-			menu1_sect.style.display="none";
-			menu2_sect.style.display="block";
-			menu3_sect.style.display="none";
-		}else if(butt_id=="collapse3"){
-			menu1.style.color="black";
-			menu2.style.color="black";
-			menu3.style.color="#007D2B";
-
-			menu1_sect.style.display="none";
-			menu2_sect.style.display="none";
-			menu3_sect.style.display="block";
-		}else{
-			alert("unknown menu number!!")
+		var menuIdArray=["collapse1","collapse2","collapse3"];
+		var menuArray=new Array();
+		var menuArraySect= new Array();
+		for(var i=0;i<menuIdArray.length;i++){
+			menuArray[i]=document.getElementById(menuIdArray[i]);
+			menuArraySect[i]=document.getElementById(menuIdArray[i]+"_sect");
+			if(butt_id==menuIdArray[i]){
+				menuArray[i].style.color="#007D2B";
+				menuArraySect[i].style.display="block";
+			}else{
+				menuArray[i].style.color="black";
+				menuArraySect[i].style.display="none";
+			}
 		}
 	}
 

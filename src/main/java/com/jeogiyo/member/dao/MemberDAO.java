@@ -14,4 +14,7 @@ public interface MemberDAO {
     public void insertNewMember(MemberVO memberVO) throws DataAccessException;
 
     public MemberVO login(Map<String, String> loginMap) throws  DataAccessException;
+
+
+    public void updateMemberByIdAndType(MemberVO memberVO) throws DataAccessException;
 }

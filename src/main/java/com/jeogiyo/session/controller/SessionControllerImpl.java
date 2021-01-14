@@ -1,5 +1,6 @@
 package com.jeogiyo.session.controller;
 
+import com.jeogiyo.member.vo.MemberVO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,18 @@ public class SessionControllerImpl implements SessionController{
         session.setAttribute("roadAddr",locMap.get("roadAddr"));
         session.setAttribute("jibunAddr",locMap.get("jibunAddr"));
         session.setAttribute("bcode",locMap.get("bcode"));
+        resEntity=new ResponseEntity(HttpStatus.OK);
+        return resEntity;
+    }
+
+    @PostMapping("/members")
+    public ResponseEntity setLogin(@RequestBody MemberVO memberVO, HttpServletRequest request)throws Exception{
+        System.out.println("call session controller!!");
+        ResponseEntity resEntity=null;
+        HttpSession session= request.getSession();
+        MemberVO beforeMember=(MemberVO) session.getAttribute("memberInfo");
+        memberVO.setDel_yn(beforeMember.getDel_yn());
+        session.setAttribute("memberInfo",memberVO);
         resEntity=new ResponseEntity(HttpStatus.OK);
         return resEntity;
     }

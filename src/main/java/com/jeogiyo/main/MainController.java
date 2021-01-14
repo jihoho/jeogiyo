@@ -18,7 +18,7 @@ import com.jeogiyo.common.base.BaseController;
 public class MainController extends BaseController{
 	
 	
-	@RequestMapping(value="/main.do", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value="/main", method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
 		ModelAndView mav=new ModelAndView();

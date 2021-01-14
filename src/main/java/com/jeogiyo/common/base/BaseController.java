@@ -49,7 +49,7 @@ public abstract class BaseController {
 	}
 	
 	
-	@RequestMapping(value="/*.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="/*" ,method={RequestMethod.POST,RequestMethod.GET})
 	protected  ModelAndView viewForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
 		System.out.println("basecontroller view name: "+viewName);

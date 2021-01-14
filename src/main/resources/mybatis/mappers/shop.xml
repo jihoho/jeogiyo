@@ -42,12 +42,15 @@
 		<result property="shop_id" column="shop_id" />
 	</resultMap> -->
 	
-	<select id="selectShopListByCategory" parameterType="String" resultMap="shopResult">
+	<select id="selectShopListByCategoryAndLocation" parameterType="String" resultMap="shopResult">
 		<![CDATA[
-			SELECT s.* 
-			FROM SHOP s, SHOP_CATEGORY c
-			WHERE c.SHOP_CATEGORY_NAME = #{category}
-			and s.SHOP_ID=c.SHOP_ID
+			SELECT p.*
+			FROM DELIVERY_AREA d, (
+				SELECT s.*
+				FROM SHOP s, SHOP_CATEGORY c
+				WHERE c.SHOP_CATEGORY_NAME = #{category}
+				  and s.SHOP_ID=c.SHOP_ID) p
+			WHERE d.BCODE= #{bcode} AND d.SHOP_ID=p.SHOP_ID
 		]]>
 	</select>
 
@@ -58,7 +61,13 @@
 			WHERE SHOP_ID= #{shop_id}
 		]]>
 	</select>
-	
-	
 
+
+	<select id="selectShopListByLocation" parameterType="String" resultMap="shopResult">
+		<![CDATA[
+			SELECT s.*
+			FROM SHOP s, DELIVERY_AREA d
+			WHERE d.BCODE=#{bcode} and s.shop_id = d.shop_id
+		]]>
+	</select>
 </mapper>

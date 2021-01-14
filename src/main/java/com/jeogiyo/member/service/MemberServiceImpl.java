@@ -36,4 +36,9 @@ public class MemberServiceImpl implements MemberService{
         System.out.println(memberVO);
         memberDAO.insertNewMember(memberVO);
     }
+
+    @Override
+    public void modifyMember(MemberVO memberVO) throws Exception{
+        memberDAO.updateMemberByIdAndType(memberVO);
+    }
 }

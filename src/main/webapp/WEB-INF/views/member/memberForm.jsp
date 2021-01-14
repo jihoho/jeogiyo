@@ -144,7 +144,7 @@
 	function sendSms() {
 		var _hp=document.getElementById("hp");
 		$.ajax({
-			url: "${contextPath}/sms/sendSms.do",
+			url: "/sms/sendSms.do",
 			data: { phone: $("#hp").val() },
 			type: "post",
 			success: function(data) {
@@ -197,6 +197,7 @@
 	* */
 	function fn_overlapped(){
 		var _id=$("#_member_id").val();
+		var _type="NORMAL";
 		var _input_email=document.getElementById('_member_id');
 		if(_id==''){
 		 alert("ID를 입력하세요");
@@ -204,11 +205,9 @@
 		}
 
 		$.ajax({
-		   type:"post",
+		   type:"get",
 		   async:false,
-		   url:"${contextPath}/member/overlapped.do",
-		   dataType:"text",
-		   data: {id:_id},
+		   url:"/members/checkid/"+_id+"/"+_type,
 		   success:function (data,textStatus){
 			  if(data=='false'){
 				alert("사용할 수 있는 ID입니다.");
@@ -242,7 +241,7 @@
     <section id= "memform">
 		<div class="col-lg-4 col-md-6 col-sm-5">
 		<h2 style="margin-top: 30px;">회원가입 정보</h2>
-		<form action="${contextPath}/member/addMember.do" method="post" class="needs-validation" onsubmit="return checkForm();" style="margin-top: 30px;" novalidate>
+		<form action="${contextPath}/members" method="post" class="needs-validation" onsubmit="return checkForm();" style="margin-top: 30px;" novalidate>
 			<input type="hidden" id="member_type" value="NORMAL">
 			<div class="row g-2">
 				<div class="col-xl-8 col-lg-8 col-md-7 col-sm-7">

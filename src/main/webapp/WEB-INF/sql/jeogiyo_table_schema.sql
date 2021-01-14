@@ -112,14 +112,15 @@ SELECT * FROM SHOP
     CREATE TABLE "DELIVERY_AREA" 
     (
         
-        "DO_ADDRESS" VARCHAR2(100 BYTE),
-        "SI_ADDRESS" VARCHAR2(100 BYTE),
-        "GU_ADDRESS" VARCHAR2(100 BYTE),
-        "DONG_ADDRESS" VARCHAR2(100 BYTE),
-        "SHOP_ID" NUMBER(20,0) REFERENCES SHOP(SHOP_ID)
+        "BCODE" VARCHAR2(100 BYTE),
+        "SHOP_ID" NUMBER(20,0) REFERENCES SHOP(SHOP_ID),
+        AREA_NAME VARCHAR2(50 BYTE),
+        CONTRAINT pk_delivery_area primary key(BCODE,SHOP_ID)
         
     );
     
+    ALTER TABLE DELIVERY_AREA ADD PRIMARY KEY(BCODE,SHOP_ID);
+    ALTER TABLE DELIVERY_AREA ADD AREA_NAME VARCHAR2(50 BYTE);
 --------------------------------------------------------
 --  DDL for Table DIB
 --------------------------------------------------------  

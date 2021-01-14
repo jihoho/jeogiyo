@@ -16,12 +16,21 @@ import com.jeogiyo.shop.vo.ShopVO;
 public class ShopServiceImpl implements ShopService {
 	@Autowired
 	ShopDAO shopDAO;
-	
+
 	@Override
-	public List<ShopVO> searchShopListByCategory(String category) throws Exception{
-		List shopList=shopDAO.selectShopListByCategory(category);
+	public List<ShopVO> searchShopListByCategoryAndLocation(String category, String bcode) {
+		List shopList;
+		if (category.equals("tot_ct")){
+			shopList =shopDAO.selectShopListByLocation(bcode);
+		}else{
+
+		shopList= shopDAO.selectShopListByCategoryAndLocation(category,bcode);
+
+		}
 		return shopList;
 	}
+
+
 
 	@Override
 	public ShopVO searchShopById(int shop_id) {

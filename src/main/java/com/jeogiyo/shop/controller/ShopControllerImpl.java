@@ -31,14 +31,14 @@ public class ShopControllerImpl extends BaseController implements ShopController
 	ReviewService reviewService;
 	
 	@Override
-	@RequestMapping(value="/listShop.do", method=RequestMethod.GET)
+	@RequestMapping(value="/listShop", method=RequestMethod.GET)
 	public ModelAndView searchShopListByCategory(@RequestParam("category") String category,
 									@RequestParam("bcode") String bcode,
 									HttpServletRequest request, HttpServletResponse response ) throws Exception{
 		String viewName=(String)request.getAttribute("viewName");
 		System.out.println("shopController.searchShopsByCategory view name : "+viewName+"  category: "+category);
 		System.out.println("bcode: "+bcode);
-		List<ShopVO> shopList=shopService.searchShopListByCategory(category);
+		List<ShopVO> shopList=shopService.searchShopListByCategoryAndLocation(category,bcode);
 
 		if(shopList==null) {
 			System.out.println("shopList null");

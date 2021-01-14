@@ -42,6 +42,19 @@
 		]]>
 	</select>
 
+	<update id="updateMemberByIdAndType" parameterType="memberVO">
+		<![CDATA[
+		update member
+		set
+		    member_pw=#{member_pw},
+			nick_name=#{nick_name},
+		    hp=#{hp}
+		where
+			member_id=#{member_id} and member_type=#{member_type}
+
+		]]>
+	</update>
+
 
 	
 

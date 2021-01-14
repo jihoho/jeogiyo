@@ -12,7 +12,10 @@ import com.jeogiyo.shop.vo.ShopVO;
 public interface ShopDAO {
 
 	
-	public List<ShopVO> selectShopListByCategory(String category) throws DataAccessException;
 
     public ShopVO selectShopById(int shop_id) throws DataAccessException;
+
+    public List selectShopListByCategoryAndLocation(String category, String bcode) throws DataAccessException;
+
+    public List selectShopListByLocation(String bcode) throws DataAccessException;
 }

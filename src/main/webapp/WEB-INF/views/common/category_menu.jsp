@@ -41,6 +41,7 @@
 <script>
     function menu_check(){
         var menu=getParameter("category");
+        console.log("menu: "+menu);
         var el= document.getElementById(menu);
         if(el!=null)
             el.style.color='blue';
@@ -70,7 +71,7 @@
             <%
                 for(int i=0;i<categoryList.size();i++){
                     Map category=(Map)categoryList.get(i);
-            %><a id=<%=category.get("name")%> href="${contextPath}/shop/listShop.do?category=<%=category.get("name")%>">
+            %><a id=<%=category.get("name")%> href="${contextPath}/shop/listShop?category=<%=category.get("name")%>&bcode=${bcode}">
             <span><%=category.get("ko_name") %></span>
         </a><%
             }

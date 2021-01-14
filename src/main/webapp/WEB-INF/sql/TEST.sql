@@ -20,7 +20,12 @@ insert into SHOP( SHOP_NAME,ROAD_ADDRESS,JIBEON_ADDRESS,DETAIL_ADDRESS,
                 40,50,'jihoho','1420915566',
                 '리뷰 이벤트 !! ####미니 핫도그도 공짜리뷰란 이벤트 내용참고하세요! 네네치킨은 건강한 환경에서 건강하게 자란 100% 국내산 닭고기를 사용합니다 ~!',11,30,00,30,'네네치킨.png');   
                 
-        
+UPDATE  SHOP
+SET
+BCODE='4146510100'
+WHERE
+SHOP_ID='401';
+
 select shop_id,shop_name from shop;
 
 insert into SHOP_CATEGORY(SHOP_CATEGORY_NAME,SHOP_ID)
@@ -31,25 +36,6 @@ insert into SHOP_CATEGORY(SHOP_CATEGORY_NAME,SHOP_ID)
 select * from shop_category;
 delete from shop_category where shop_category_name='chicken';
           
-insert into DELIVERY_AREA(DO_ADDRESS,SI_ADDRESS,GU_ADDRESS,DONG_ADDRESS,SHOP_ID)
-        values(
-            '경기도','용인시','수지구','풍덕천동',401
-        );
-   
-insert into DELIVERY_AREA(DO_ADDRESS,SI_ADDRESS,GU_ADDRESS,DONG_ADDRESS,SHOP_ID)
-        values(
-            '경기도','용인시','수지구','상현동',401
-        );
-        
-insert into DELIVERY_AREA(DO_ADDRESS,SI_ADDRESS,GU_ADDRESS,DONG_ADDRESS,SHOP_ID)
-        values(
-            '경기도','용인시','수지구','신봉동',401
-        );
-        
-insert into DELIVERY_AREA(DO_ADDRESS,SI_ADDRESS,GU_ADDRESS,DONG_ADDRESS,SHOP_ID)
-        values(
-            '경기도','용인시','수지구','동천동',401
-        );
            
                 
 SELECT * FROM DELIVERY_AREA;

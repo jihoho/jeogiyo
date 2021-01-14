@@ -43,7 +43,7 @@
 			Map category=(Map)categoryList.get(i);
 			%>
 				<div class="col-xs6 col-sm-4 col-md-3 col-lg-3" style="padding-left: 5px; padding-right: 5px;">
-					<a style="margin: 5px 0;" href="${contextPath}/shop/listShop.do?category=<%=category.get("name")%>&bcode=${bcode}">
+					<a style="margin: 5px 0;" href="${contextPath}/shop/listShop?category=<%=category.get("name")%>&bcode=${bcode}">
 					<div>
 						<img  id="shop_img" style="max-width: 100%; height: auto; margin-left: auto; margin-bottom: auto;" src="<%= category.get("img_file") %>">
 					</div>

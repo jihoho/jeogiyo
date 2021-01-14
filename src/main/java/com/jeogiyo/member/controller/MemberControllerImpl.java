@@ -9,10 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +30,7 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 
 
     @Override
-    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(@RequestParam Map<String,String> loginMap, HttpServletRequest request, HttpServletResponse response) throws  Exception{
 
         ModelAndView mav =new ModelAndView();
@@ -44,22 +41,22 @@ public class MemberControllerImpl extends BaseController implements MemberContro
             session.setAttribute("memberInfo",memberVO);
 
             String action=(String)session.getAttribute("action");
-            if(action!=null && action.equals("/order/orderFoods.do")) {
+            if(action!=null && action.equals("/order/orderFoods")) {
                 mav.setViewName("forward:"+action);
             }else {
-                mav.setViewName("redirect:/main/main.do");
+                mav.setViewName("redirect:/main/main");
             }
         }else{
             String message="아이디나 비밀번호가 틀립니다. 다시 로그인해주세요.";
             mav.addObject("message",message);
             mav.addObject("result","loginFailed");
-            mav.setViewName("forward:/member/loginForm.do");
+            mav.setViewName("forward:/member/loginForm");
         }
         return mav;
     }
 
     @Override
-    @RequestMapping(value = "/loginForm.do", method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/loginForm", method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response)throws Exception{
         String viewName= (String)request.getAttribute("viewName");
 
@@ -73,57 +70,18 @@ public class MemberControllerImpl extends BaseController implements MemberContro
     }
 
     @Override
-    @RequestMapping(value="/logout.do", method = RequestMethod.GET)
+    @RequestMapping(value="/logout", method = RequestMethod.GET)
     public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception{
         ModelAndView mav=new ModelAndView();
         HttpSession session=request.getSession();
         session.setAttribute("isLogOn",false);
         session.removeAttribute("memberInfo");
-        mav.setViewName("redirect:/main/main.do");
+        mav.setViewName("redirect:/main/main");
         return mav;
     }
 
-    @Override
-    @RequestMapping(value = "/overlapped.do", method = RequestMethod.POST)
-    public ResponseEntity overlapped(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception{
-        ResponseEntity resEntity=null;
-        HashMap<String,String> idMap=new HashMap<String,String>();
-        idMap.put("id",id);
-        idMap.put("type","NORMAL");
-        String result = memberService.overlapped(idMap);
-        resEntity=new ResponseEntity(result, HttpStatus.OK);
-        return resEntity;
-    }
 
 
-    @Override
-    @RequestMapping(value = "/addMember.do", method = RequestMethod.POST)
-    public ResponseEntity addMember(@ModelAttribute("memberVO") MemberVO _memberVO,
-                                    HttpServletRequest request, HttpServletResponse response)throws Exception{
-        response.setContentType("text/html; charset=UTF-8");
-        request.setCharacterEncoding("utf-8");
-        String message = null;
-        ResponseEntity resEntity = null;
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-//        일반 계정의 타입 설정
-        _memberVO.setMember_type("NORMAL");
-        try {
-            memberService.addMember(_memberVO);
-            message  = "<script>";
-            message +=" alert('회원 가입을 마쳤습니다.로그인창으로 이동합니다.');";
-            message += " location.href='"+request.getContextPath()+"/member/loginForm.do';";
-            message += " </script>";
 
-        }catch(Exception e) {
-            message  = "<script>";
-            message +=" alert('작업 중 오류가 발생했습니다. 다시 시도해 주세요');";
-            message += " location.href='"+request.getContextPath()+"/member/memberForm.do';";
-            message += " </script>";
-            e.printStackTrace();
-        }
-        resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
-        return resEntity;
-    }
 
 }

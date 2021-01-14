@@ -72,12 +72,12 @@
 <body>
     <section id="login_sect">
         <div>
-            <a href="${contextPath}/main/main.do">
+            <a href="${contextPath}/main/main">
                 <img src="${contextPath}/image/login_logo.png"/>
             </a>
         </div>
         <div>
-            <form name="frmLogin" method="post"  action="${contextPath}/member/login.do">
+            <form name="frmLogin" method="post"  action="${contextPath}/member/login">
                 <div class="login_input">
                     <input type="text" name="member_id" placeholder="아이디" size="20">
                 </div>
@@ -106,7 +106,7 @@
                 </span>
             </a>
             |
-            <a href="${contextPath}/member/memberForm.do">
+            <a href="${contextPath}/member/memberForm">
                 <span>
                     회원가입
                 <span>
