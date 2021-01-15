@@ -37,4 +37,10 @@ public class ShopServiceImpl implements ShopService {
 		ShopVO shopVO=shopDAO.selectShopById(shop_id);
 		return shopVO;
 	}
+
+	@Override
+	public List<ShopVO> searchShopListByMember(String memberId, String memberType) throws Exception {
+		List shopList=shopDAO.selectShopListByMember(memberId,memberType);
+		return shopList;
+	}
 }

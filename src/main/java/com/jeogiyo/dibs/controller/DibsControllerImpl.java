@@ -31,6 +31,7 @@ public class DibsControllerImpl implements  DibsController{
         return resEntity;
     }
 
+
     @PostMapping("/dibs")
     public ResponseEntity addDibs(@RequestParam String shop_id, @RequestParam String member_id,@RequestParam String member_type) throws Exception{
         ResponseEntity resEntity=null;

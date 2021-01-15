@@ -9,7 +9,9 @@ public interface ShopService {
 
     public ShopVO searchShopById(int shop_id) throws  Exception;
 
-    public List<ShopVO> searchShopListByCategoryAndLocation(String category, String bcode);
+    public List<ShopVO> searchShopListByCategoryAndLocation(String category, String bcode) throws Exception;
+
+    public List<ShopVO> searchShopListByMember(String memberId, String memberType) throws Exception;
 
     //    public List<ShopVO> searchShopListByLocation() throws Exception;
 }

@@ -70,4 +70,17 @@
 			WHERE d.BCODE=#{bcode} and s.shop_id = d.shop_id
 		]]>
 	</select>
+
+	<select id="selectShopListByMember" parameterType="String" resultMap="shopResult">
+		<![CDATA[
+			SELECT s.*
+			FROM SHOP s, (
+			    SELECT shop_id
+			    FROM DIBS
+			    WHERE member_id=#{memberId}
+			    and member_type=#{memberType}
+				) d
+			WHERE s.shop_id=d.shop_id
+		]]>
+	</select>
 </mapper>

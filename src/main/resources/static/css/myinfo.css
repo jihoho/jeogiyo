@@ -29,14 +29,25 @@
 
 #myInfoSect{
 	width: 80%;
-	height:800px;
+	height:600px;
 	border: 1px solid black;
 }
 
-#myInfoMenuSect{
+
+.mypage-sect{
 	display: flex;
 	justify-content: center;
 }
+
+.mypage-header{
+	padding: 10px;
+}
+
+.mypage-body{
+/*	border: 1px solid black;
+	height: 700px;*/
+}
+
 #myInfoHeader{
 	background-color: #C4C4C4;
 	height: 70px;
@@ -80,3 +91,48 @@
 	width: 80%;
 	padding: 10px;
 }
+
+#favorite-shop-list{
+
+}
+.shop{
+	width: 80%;
+	height: 150px;
+	background: rgba(196, 196, 196, 0.15);
+	margin: auto;
+	margin-top: 30px;
+
+}
+.shop a{
+	color: black;
+	text-decoration: none;
+}
+
+.shop_img img{
+	float: left;
+	margin-left: 15px;
+	margin-top: 15px;
+	width: 120px;
+	height: 120px;
+}
+
+.shop_name{
+	padding: 20px;
+}
+
+.shop_starpoint{
+	padding: 5px;
+}
+
+.shop_dv_info{
+	margin-left: 180px;
+	margin-top: 10px;
+}
+
+.shop_dv_time{
+	float:right;
+	margin-right: 8px;
+	margin-bottom: 8px;
+}
+
+
