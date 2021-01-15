@@ -41,4 +41,17 @@ public class MemberServiceImpl implements MemberService{
     public void modifyMember(MemberVO memberVO) throws Exception{
         memberDAO.updateMemberByIdAndType(memberVO);
     }
+
+    @Override
+    public void modifyMemberExcludePw(MemberVO memberVO) throws Exception {
+        memberDAO.updateMemberByIdAndTypeExcludePw(memberVO);
+    }
+
+    @Override
+    public String getMemberSaltByIdAndType(String member_id,String member_type) throws Exception{
+        String salt=memberDAO.selectMemberSaltByIdAndType(member_id,member_type);
+        return salt;
+    }
+
+
 }

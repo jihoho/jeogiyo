@@ -17,4 +17,8 @@ public interface MemberDAO {
 
 
     public void updateMemberByIdAndType(MemberVO memberVO) throws DataAccessException;
+
+    public String selectMemberSaltByIdAndType(String member_id, String member_type) throws DataAccessException;
+
+    public void updateMemberByIdAndTypeExcludePw(MemberVO memberVO) throws DataAccessException;
 }

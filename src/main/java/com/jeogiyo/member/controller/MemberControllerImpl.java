@@ -3,11 +3,8 @@ package com.jeogiyo.member.controller;
 import com.jeogiyo.common.base.BaseController;
 import com.jeogiyo.member.service.MemberService;
 import com.jeogiyo.member.vo.MemberVO;
-import org.apache.commons.collections.map.HashedMap;
+import com.jeogiyo.common.util.SHA256Util;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.Map;
 
 @Controller("memberController")
@@ -34,6 +30,11 @@ public class MemberControllerImpl extends BaseController implements MemberContro
     public ModelAndView login(@RequestParam Map<String,String> loginMap, HttpServletRequest request, HttpServletResponse response) throws  Exception{
 
         ModelAndView mav =new ModelAndView();
+        String salt=memberService.getMemberSaltByIdAndType(loginMap.get("member_id"),loginMap.get("member_type"));
+        System.out.println("Salt : "+salt);
+        String encryPasswd= SHA256Util.getEncrypt(loginMap.get("member_pw"),salt);
+        System.out.println("Encry password: "+encryPasswd);
+        loginMap.put("member_pw",encryPasswd);
         memberVO=memberService.login(loginMap);
         if(memberVO!=null&&memberVO.getMember_id()!=null){
             HttpSession session=request.getSession();

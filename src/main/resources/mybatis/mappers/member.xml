@@ -12,12 +12,14 @@
 		<result property="nick_name" column="nick_name"/>
 		<result property="hp" column="hp" />
 		<result property="del_yn" column="del_yn"/>
+		<result property="salt" column="salt"/>
 	</resultMap>
 
 	<select id="login" resultType="memberVO" parameterType="java.util.Map">
 		<![CDATA[
 			select * from member
 			where member_id=#{member_id}
+			and member_type=#{member_type}
 			and member_pw=#{member_pw}
 		]]>
 	</select>
@@ -32,13 +34,24 @@
 
 	<select id="insertNewMember" parameterType="memberVO" >
 		<![CDATA[
-			insert into member(member_id,member_type,member_pw,nick_name,hp)
+			insert into member(member_id,member_type,member_pw,nick_name,hp,salt)
 							 values(#{member_id},
 							        #{member_type},
 									#{member_pw},
 							        #{nick_name},
-							        #{hp})
+							        #{hp},
+							        #{salt})
 
+		]]>
+	</select>
+
+
+	<select id="selectMemberSaltByIdAndType" parameterType="String" resultType="String" >
+		<![CDATA[
+			select salt
+			from member
+			where member_id=#{member_id}
+			and member_type=#{member_type}
 		]]>
 	</select>
 
@@ -47,6 +60,7 @@
 		update member
 		set
 		    member_pw=#{member_pw},
+		    salt=#{salt},
 			nick_name=#{nick_name},
 		    hp=#{hp}
 		where
@@ -55,6 +69,14 @@
 		]]>
 	</update>
 
+	<update id="updateMemberByIdAndTypeExcludePw" parameterType="memberVO">
+		update member
+		set
+			nick_name=#{nick_name},
+			hp=#{hp}
+		where
+			member_id=#{member_id} and member_type=#{member_type}
+	</update>
 
 	
 

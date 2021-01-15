@@ -2,6 +2,7 @@ package com.jeogiyo.member.controller;
 
 import com.jeogiyo.member.service.MemberService;
 import com.jeogiyo.member.vo.MemberVO;
+import com.jeogiyo.common.util.SHA256Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -39,6 +40,15 @@ public class MembersRestController {
         String message = null;
         ResponseEntity resEntity = null;
         HttpHeaders responseHeaders = new HttpHeaders();
+
+
+        //  비밀번호 암호화
+        String salt= SHA256Util.generateSalt();
+        _memberVO.setSalt(salt);
+        String encryPasswd= SHA256Util.getEncrypt(_memberVO.getMember_pw(),salt);
+        _memberVO.setMember_pw(encryPasswd);
+        System.out.println("암호화된 비번: "+encryPasswd);
+
         responseHeaders.add("Content-Type", "text/html; charset=utf-8");
         //        일반 계정의 타입 설정
         _memberVO.setMember_type("NORMAL");
@@ -66,8 +76,20 @@ public class MembersRestController {
                                        @RequestBody MemberVO memberVO)throws Exception{
         ResponseEntity responseEntity=null;
         System.out.println(id+","+type);
+
+        //        pass가 변경된 경우 salt와 encryPass생성하여 update
+        if(memberVO.getMember_pw()!=null&&memberVO.getMember_pw()!=""){
+            String salt=SHA256Util.generateSalt();
+            String encryPasswd=SHA256Util.getEncrypt(memberVO.getMember_pw(),salt);
+            memberVO.setMember_pw(encryPasswd);
+            memberVO.setSalt(salt);
+            memberService.modifyMember(memberVO);
+            System.out.println("pass 변경");
+        }else{  // pass가 변경되지 않은 경우 pass 제외하여 update
+            memberService.modifyMemberExcludePw(memberVO);
+            System.out.println("pass 변경 없음");
+        }
         System.out.println(memberVO);
-        memberService.modifyMember(memberVO);
         responseEntity =new ResponseEntity(HttpStatus.OK);
         return responseEntity;
     }

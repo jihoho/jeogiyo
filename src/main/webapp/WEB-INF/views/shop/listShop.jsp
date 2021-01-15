@@ -99,9 +99,9 @@
 					
 						<td class="shop">
 							
-							<a href="${contextPath}/shop/shopDetail.do?shop_id=${shopList.get(i).shop_id}">
+							<a href="${contextPath}/shop/shopDetail?shop_id=${shopList.get(i).shop_id}">
 							<div class="shop_img">
-								<img alt="" src="${contextPath}/shopThumbnails.do?shop_id=${shopList.get(i).shop_id}&fileName=${shopList.get(i).image_file}">
+								<img alt="" src="${contextPath}/shopThumbnails?shop_id=${shopList.get(i).shop_id}&fileName=${shopList.get(i).image_file}">
 								
 							</div>
 							

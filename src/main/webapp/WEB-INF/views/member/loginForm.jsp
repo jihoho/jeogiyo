@@ -80,6 +80,7 @@
             <form name="frmLogin" method="post"  action="${contextPath}/member/login">
                 <div class="login_input">
                     <input type="text" name="member_id" placeholder="아이디" size="20">
+                    <input type="hidden" name="member_type" value="NORMAL">
                 </div>
                 <div class="login_input">
                     <input type="password" name="member_pw" placeholder="비밀번호" size="20">

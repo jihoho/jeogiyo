@@ -17,6 +17,7 @@ public class MemberVO {
     private String nick_name;
     private String hp;
     private String del_yn;
+    private String salt;
 
 
 }

@@ -52,7 +52,7 @@ public class ShopControllerImpl extends BaseController implements ShopController
 	}
 
 	@Override
-	@RequestMapping(value = "/shopDetail.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/shopDetail", method = RequestMethod.GET)
 	public ModelAndView shopDetail(@RequestParam("shop_id") int shop_id, HttpServletRequest request, HttpServletResponse response)throws Exception{
 		String viewName=(String) request.getAttribute("viewName");
 		ModelAndView mav=new ModelAndView(viewName);

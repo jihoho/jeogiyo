@@ -11,7 +11,7 @@ function sideMenuClick(menuId){
             sideMenuArray[i].style.color="#007D2B";
             sideMenuSectArray[i].style.display="flex";
         }else{
-            sideMenuArray[i].style.color="flex";
+            sideMenuArray[i].style.color="black";
             sideMenuSectArray[i].style.display="none";
         }
     }

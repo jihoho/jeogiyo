@@ -38,7 +38,7 @@ public class FileDownloadController {
 //	}
 	
 	
-	@RequestMapping("/shopThumbnails.do")
+	@RequestMapping("/shopThumbnails")
 	protected void shopThumbnails(@RequestParam("fileName") String fileName,
                             	@RequestParam("shop_id") String shop_id,
                             	HttpServletRequest request,
@@ -61,7 +61,7 @@ public class FileDownloadController {
 	* 	food image file name¿∫ food_[food_id].png
 	* 	ex) food_401.png
 _	* */
-	@RequestMapping("/foodThumbnails.do")
+	@RequestMapping("/foodThumbnails")
 	protected void foodThumbnails(@RequestParam("food_id") String food_id,
 							  @RequestParam("shop_id") String shop_id,
 							  HttpServletRequest request,

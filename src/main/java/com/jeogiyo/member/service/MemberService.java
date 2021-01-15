@@ -12,4 +12,8 @@ public interface MemberService {
     public MemberVO login(Map<String, String> loginMap) throws  Exception;
 
     public void modifyMember(MemberVO memberVO) throws Exception;
+
+    public String getMemberSaltByIdAndType(String member_id,String member_type) throws Exception;
+
+    public void modifyMemberExcludePw(MemberVO memberVO) throws Exception;
 }

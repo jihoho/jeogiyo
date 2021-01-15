@@ -152,14 +152,14 @@
 		var message="food_id: "+food_id+" , food_name: "+food_name+" , food_desc: "+food_desc+" , food_price: "+food_price;
 
 	/*	$("#foodDetailModal").on('show.bs.modal',function(event){
-			$("#modal_food_img").attr("src","${contextPath}/foodThumbnails.do?shop_id="+shop_id+"&food_id="+food_id);
+			$("#modal_food_img").attr("src","${contextPath}/foodThumbnails?shop_id="+shop_id+"&food_id="+food_id);
 			$("#modal_food_name").val(food_name);
 			$("#modal_food_desc").val(food_desc);
 			$("#modal_food_price").val(food_price);
 		})*/
 
 		$("#modal_food_id").val(food_id);
-		$("#modal_food_img").attr("src","${contextPath}/foodThumbnails.do?shop_id="+shop_id+"&food_id="+food_id);
+		$("#modal_food_img").attr("src","${contextPath}/foodThumbnails?shop_id="+shop_id+"&food_id="+food_id);
 		$("#modal_food_name").text(food_name);
 		$("#modal_food_desc").text(food_desc);
 		$("#modal_food_price").text(food_price);
@@ -424,7 +424,7 @@
 				<%--	shop header section	--%>
 					<div id="shop_header">
 						<div class="shop_img">
-							<img alt="" src="${contextPath}/shopThumbnails.do?shop_id=${shop.shop_id}&fileName=${shop.image_file}">
+							<img alt="" src="${contextPath}/shopThumbnails?shop_id=${shop.shop_id}&fileName=${shop.image_file}">
 						</div>
 						<div class="shop_txt">
 							<div id="shop_name">
@@ -539,7 +539,7 @@
 														</div>
 													</div>
 													<div class ="food_img">
-														<img alt="" src="${contextPath}/foodThumbnails.do?shop_id=${foodList.get(i).shop_id}&food_id=${foodList.get(i).food_id}">
+														<img alt="" src="${contextPath}/foodThumbnails?shop_id=${foodList.get(i).shop_id}&food_id=${foodList.get(i).food_id}">
 													</div>
 												</div>
 											</a>
@@ -651,7 +651,7 @@
 							</div>
 						</div>
 						<div>
-							<form:form modelAttribute="orderFormVO" id="orderForm" name="orderForm" action="${contextPath}/order/orderForm.do">
+							<form:form modelAttribute="orderFormVO" id="orderForm" name="orderForm" action="${contextPath}/order/orderForm">
 							</form:form>
 							<button type="button" id="order_butt"><span>주문하기</span></button>
 
