@@ -203,8 +203,10 @@ commit;
    ) ;
     
     ALTER TABLE MEMBER add REG_DATE DATE DEFAULT sysdate;
-    ALTER TABLE MEMBER add salt varchar(10 Byte);
+    ALTER TABLE MEMBER modify salt varchar(20 Byte);
     ALTER TABLE MEMBER MODIFY member_id VARCHAR2(100 BYTE);
+    ALTER TABLE MEMBER MODIFY nick_name VARCHAR2(100 BYTE);
+    ALTER TABLE MEMBER MODIFY DEL_YN DEFAULT 'N';
     ALTER TABLE MEMBER MODIFY member_pw VARCHAR2(100 BYTE);
     ALTER TABLE MEMBER RENAME column JOINT_DATE TO JOIN_DATE;
     select * from MEMBER; 
@@ -265,6 +267,11 @@ commit;
         CONSTRAINT fk_review FOREIGN KEY(MEMBER_ID,MEMBER_TYPE) REFERENCES MEMBER(MEMBER_ID,MEMBER_TYPE)
    ) ;
    
+   ALTER TABLE REVIEW DROP CONSTRAINTS fk_review;
+   ALTER TABLE REVIEW ADD CONSTRAINTS fk_review 
+   ALTER TABLE REVIEW 
+   ADD CONSTRAINT fk_review FOREIGN KEY(MEMBER_ID,MEMBER_TYPE) 
+   REFERENCES MEMBER(MEMBER_ID,MEMBER_TYPE) on delete cascade;
 --------------------------------------------------------
 --  DDL for Table REVIEW
 --------------------------------------------------------
@@ -275,6 +282,12 @@ commit;
         "FILE_NAME" VARCHAR2(200),
         "REG_DATE" DATE DEFAULT sysdate
    ) ;
+   ALTER TABLE REVIEW_IMAGE
+   DROP CONSTRAINTS SYS_C007181;
+   
+   ALTER TABLE REVIEW_IMAGE
+   ADD CONSTRAINT fk_review_image 
+   FOREIGN KEY(REVIEW_ID) REFERENCES REVIEW(REVIEW_ID) on delete cascade;
    
 --------------------------------------------------------
 --  DDL for Table REVIEW

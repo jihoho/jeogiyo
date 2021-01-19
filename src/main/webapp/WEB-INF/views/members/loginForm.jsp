@@ -77,7 +77,7 @@
             </a>
         </div>
         <div>
-            <form name="frmLogin" method="post"  action="${contextPath}/member/login">
+            <form name="frmLogin" method="post"  action="${contextPath}/members/login">
                 <div class="login_input">
                     <input type="text" name="member_id" placeholder="아이디" size="20">
                     <input type="hidden" name="member_type" value="NORMAL">

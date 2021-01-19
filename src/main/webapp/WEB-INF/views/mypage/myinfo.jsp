@@ -37,7 +37,7 @@
 
 
 			<div id="myOrderMenuSect" class="col-9 py-md-3 pl-md-5 bd-content mypage-sect" style="display: none;">
-				<h1>주문 내역</h1>
+				<jsp:include page="myOrderBody.jsp" flush="false"/>
 			</div>
 
 			<div id="myFavoriteShopMenuSect" class="col-9 py-md-3 pl-md-5 bd-content mypage-sect" style="display: none;">
@@ -52,10 +52,9 @@
 	</div>
 
 	<jsp:include page="changePassModal.jsp" flush="false"/>
-
-
-
 	<jsp:include page="changeHpModal.jsp" flush="false"/>
+	<jsp:include page="orderDetailModal.jsp" flush="false"/>
+
 </body>
 </html>
 <script src="${contextPath}/js/myinfo.js"></script>

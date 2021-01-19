@@ -10,14 +10,14 @@
       <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
       
-   <definition name="/member/memberForm" extends="baseLayout">
+   <definition name="/members/memberForm" extends="baseLayout">
       <put-attribute name="title" value="회원등록창" />
-      <put-attribute name="body" value="/WEB-INF/views/member/memberForm.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/members/memberForm.jsp" />
    </definition>
 
-   <definition name="/member/loginForm" extends="loginLayout">
+   <definition name="/members/loginForm" extends="loginLayout">
       <put-attribute name="title" value="로그인" />
-      <put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/members/loginForm.jsp" />
    </definition>
 
    <!--<definition name="/member/viewDetail" extends="baseLayout">

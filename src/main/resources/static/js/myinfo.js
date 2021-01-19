@@ -15,9 +15,12 @@ function sideMenuClick(menuId){
             sideMenuSectArray[i].style.display="none";
         }
     }
+
+
+    var memberId=document.getElementById("member_id").value;
+    var memberType=document.getElementById("member_type").value;
+
     if(menuId=="myFavoriteShopMenu"){
-        var memberId=document.getElementById("member_id").value;
-        var memberType=document.getElementById("member_type").value;
         console.log("myFavoriteShopMenu click!!");
         $.ajax({
             type:"get",
@@ -27,10 +30,50 @@ function sideMenuClick(menuId){
                 console.log(data);
                 createMyFavoriteShopList(data);
             }
+        });
 
+    }else if(menuId=="myOrderMenu"){
+        $.ajax({
+            type:"get",
+            url:"/orders/"+memberId+"/"+memberType,
+            dataType: "json",
+            success: function (data){
+                console.log(data);
+                createMyOrderList(data);
+            }
         });
     }
 }
+
+function createMyOrderList(data){
+    var orderHtml='';
+    var targetEl=document.getElementById("my-order-list");
+    while (targetEl.hasChildNodes()){
+        targetEl.removeChild(targetEl.firstChild);
+    }
+
+    for(var i=0;i<data.length;i++){
+        orderHtml+='<div class="myorder">';
+
+        orderHtml+='<div class="myorder-info">';
+        orderHtml+='<div><span>'+data[i]['reg_date']+'</span></div>';
+        orderHtml+='<div><span>'+data[i]['shop_name']+'</span></div>';
+        orderHtml+='<div><span>총 주문 금액:</span><span>'+data[i]['total_price']+'</span></div>';
+        orderHtml+='</div>';
+
+        orderHtml+='<div class="myorder-butt-list">';
+        orderHtml+='<input type="hidden" class="shop_id" name="shop_id" value="'+data[i]['shop_id']+'"/>';
+        orderHtml+='<input type="hidden" class="order_id" name="order_id" value="'+data[i]['order_id']+'"/>';
+        orderHtml+='<button>리뷰 쓰기</button>';
+        orderHtml+='<button type="button" class="shop-detail-butt">가게 보기</button>';
+        orderHtml+='<button type="button" class="order-detail-butt">주문 상세</button>';
+        orderHtml+='</div>';
+
+        orderHtml+='</div>';
+    }
+    $("#my-order-list").append(orderHtml);
+}
+
 
 function createMyFavoriteShopList(data){
     var shopHtml='';
@@ -67,6 +110,45 @@ function createMyFavoriteShopList(data){
     }
     $("#favorite-shop-list").append(shopHtml);
     console.log(shopHtml);
+}
+
+// 가게보기 클릭 시
+$(document).on("click",".shop-detail-butt",function (){
+    var parent=$(this).parent();
+    console.log(parent.attr("class"));
+    var shopId=parent.children(".shop_id")[0].value;
+    console.log(shopId);
+    window.location.href = '/shop/shopDetail?shop_id='+shopId;
+})
+
+
+// 주문 상세 클릭 시
+$(document).on("click",".order-detail-butt",function (){
+    var parent=$(this).parent();
+    var orderId=parent.children(".order_id")[0].value;
+    console.log(orderId);
+    $.ajax({
+       type:"get",
+       url:"/orders/"+orderId,
+       dataType:"json",
+       success:function (data){
+           // console.log(data);
+            $.ajax({
+               type:"get",
+               url:"/orders/foods/orderid/"+orderId,
+               dataType:"json",
+               success:function (result){
+                   data['foods']=result;
+                   console.log(data);
+               }
+            });
+       }
+    });
+    $('#orderDetailModal').modal('show');
+});
+
+function setDataToOrderModal(jsonData){
+
 }
 
 // modal 창의 input box에 사용자가 값을 입력하면 실시간으로 감지하는 함수

@@ -651,7 +651,7 @@
 							</div>
 						</div>
 						<div>
-							<form:form modelAttribute="orderFormVO" id="orderForm" name="orderForm" action="${contextPath}/order/orderForm">
+							<form:form modelAttribute="orderFormVO" id="orderForm" name="orderForm" action="${contextPath}/orders/orderForm">
 							</form:form>
 							<button type="button" id="order_butt"><span>주문하기</span></button>
 

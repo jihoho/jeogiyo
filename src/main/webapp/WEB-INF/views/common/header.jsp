@@ -36,12 +36,12 @@
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-right: 15px;" >
                     <c:choose>
                     <c:when test="${isLogOn==true}">
-                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/member/logout"><span style="font-weight: 900; color: #046D22; ">로그아웃</span></a></li>
+                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/members/logout"><span style="font-weight: 900; color: #046D22; ">로그아웃</span></a></li>
                         <li class="nav-item"><a class="nav-link active" href="${contextPath}/mypage/myinfo"><span style="font-weight: 900; color: #046D22; ">마이페이지</span></a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/member/loginForm"><span style="font-weight: 900; color: #046D22; ">로그인</span></a></li>
-                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/member/memberForm"><span style="font-weight: 900; color: #046D22; ">회원가입</span></a></li>
+                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/members/loginForm"><span style="font-weight: 900; color: #046D22; ">로그인</span></a></li>
+                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/members/memberForm"><span style="font-weight: 900; color: #046D22; ">회원가입</span></a></li>
                     </c:otherwise>
                 </c:choose>
 				</ul>

@@ -101,4 +101,23 @@ SELECT * FROM REVIEW;
 SELECT * FROM REVIEW_IMAGE;
 SELECT * FROM SHOP_OWNER;
 SELECT * FROM SHOP;
-                
+select * from member where member_id='sha256';
+SELECT * FROM MEMBER WHERE MEMBER_ID='member1@naver.com';
+
+delete from member where member_id!='sha256';
+select * from review;
+SELECT * FROM REVIEW_IMAGE;
+select * from member;
+commit;
+select * from j_order;
+select * from dibs;
+
+update shop
+set dib_cnt=0
+where shop_id='401';
+
+select salt
+			from member
+			where member_id='sha256'
+			and member_type='NORMAL';
+commit;

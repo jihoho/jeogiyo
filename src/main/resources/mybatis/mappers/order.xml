@@ -25,7 +25,14 @@
 		<result property="order_requests" column="order_requests" />
 		<result property="pay_method" column="pay_method" />
 	</resultMap>
-	
+
+	<resultMap id="orderFoodResult" type="orderFoodVO">
+		<result property="orderId" column="order_id" />
+		<result property="foodId" column="food_id"/>
+		<result property="foodQty" column="food_qty"/>
+		<result property="foodName" column="food_name"/>
+		<result property="foodPrice" column="food_price"/>
+	</resultMap>
 
 	
 	<insert id="insertOrder" parameterType="orderVO">
@@ -41,7 +48,7 @@
 		]]>
 	</insert>
 	
-	<select id="selectCurrentOrderIdSequence" resultType="int">
+	<select id="selectCurrentOrderIdSequence" resultType="int" >
 		<![CDATA[
 			SELECT SEQ_J_ORDER_ID.CURRVAL
 			FROM DUAL
@@ -56,7 +63,32 @@
 				  )
 		]]>
 	</insert>
-	
+
+
+	<select id="selectOrderListByMember" parameterType="String" resultMap="orderResult">
+		<![CDATA[
+			SELECT *
+			FROM J_ORDER
+			WHERE orderer_id=#{memberId}
+			and orderer_type=#{memberType}
+		]]>
+	</select>
+
+	<select id="selectOrderById" parameterType="String" resultMap="orderResult">
+		<![CDATA[
+			SELECT *
+			FROM J_ORDER
+			WHERE ORDER_ID=#{orderId}
+		]]>
+	</select>
+
+	<select id="selectOrderFoodByOrderId" parameterType="String" resultMap="orderFoodResult">
+		<![CDATA[
+			SELECT *
+			FROM J_ORDER_FOOD
+			WHERE ORDER_ID=#{orderId}
+		]]>
+	</select>
 	
 
 </mapper>

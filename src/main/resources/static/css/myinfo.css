@@ -95,6 +95,8 @@
 #favorite-shop-list{
 
 }
+
+/* 찜한 가게 리스트 부분 */
 .shop{
 	width: 80%;
 	height: 150px;
@@ -136,3 +138,23 @@
 }
 
 
+/* order list 부분 */
+
+.myorder{
+	border: 1px solid black;
+	width: 80%;height: 150px;
+	margin: auto; margin-top: 30px;
+	position:relative;
+}
+
+.myorder-info{
+	position: absolute;
+	top:10px;
+	left:10px;
+}
+
+.myorder-butt-list{
+	position: absolute;
+	right:10px;
+	bottom:10px;
+}

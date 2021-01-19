@@ -52,7 +52,7 @@ function addOrderAjax(imp_uid){
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=UTF-8",
-            url: "/order",
+            url: "/orders",
             data: orderJsonData,
             success: function (order_id, textStatus) {
                 resolve(order_id);
@@ -71,7 +71,7 @@ function addOrderFoodListAjax(order_id){
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=UTF-8",
-            url:"/order/foods",
+            url:"/orders/foods",
             data: foodJsonData,
             success:function (textStatus) {
                 resolve(order_id);
