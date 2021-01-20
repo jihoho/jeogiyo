@@ -17,7 +17,7 @@ public interface OrderDAO {
     public int selectCurrentOrderIdSequence() throws DataAccessException;
     public int insertOrderFood(Map foodMap) throws DataAccessException;
 
-        public OrderVO selectOrderById(String orderId) throws DataAccessException;
+    public OrderVO selectOrderById(String orderId) throws DataAccessException;
 
     public List<OrderFoodVO> selectOrderFoodByOrderId(String orderId) throws DataAccessException;
 }

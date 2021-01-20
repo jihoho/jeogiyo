@@ -24,6 +24,7 @@
 		<result property="total_price" column="total_price" />
 		<result property="order_requests" column="order_requests" />
 		<result property="pay_method" column="pay_method" />
+		<result property="order_status" column="order_status" />
 	</resultMap>
 
 	<resultMap id="orderFoodResult" type="orderFoodVO">

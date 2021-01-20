@@ -1,11 +1,7 @@
 package com.jeogiyo.main;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -26,6 +22,7 @@ public class ServletContextInit implements ServletContextInitializer {
 	
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
+//        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
 		JSONParser parser = new JSONParser();
 		try {
 			

@@ -239,7 +239,8 @@ commit;
         CONSTRAINT fk_order_2 FOREIGN KEY(ORDERER_ID,ORDERER_TYPE) REFERENCES MEMBER(MEMBER_ID,MEMBER_TYPE)
    ) ;
     
-    
+    ALTER TABLE J_ORDER ADD ORDER_STATUS VARCHAR2(20 BYTE) DEFAULT 'ready';
+    ALTER TABLE J_ORDER ADD (CONSTRAINT "check_order_status"  CHECK(ORDER_STATUS IN('ready','check','in-delivery','complete')));
     CREATE TABLE "J_ORDER_FOOD" 
    (	
         "ORDER_ID" NUMBER(20,0),

@@ -1,9 +1,11 @@
 package com.jeogiyo.order.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 @Data
 @Component("orderVO")
@@ -13,6 +15,7 @@ public class OrderVO {
     String pg;
     int shop_id;
     String shop_name;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     Date reg_date;
     String orderer_id;
     String orderer_type;
@@ -26,4 +29,5 @@ public class OrderVO {
     int total_price;
     String order_requests;
     String pay_method;
+    String order_status;
 }

@@ -4,11 +4,25 @@
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
 
-   <definition name="/mypage/myinfo" extends="baseLayout">
+   <definition name="/mypage/info" extends="baseLayout">
       <put-attribute name="title" value="마이 페이지" />
-      <put-attribute name="body" value="/WEB-INF/views/mypage/myinfo.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/mypage/info.jsp" />
    </definition>
 
+   <definition name="/mypage/order" extends="baseLayout">
+      <put-attribute name="title" value="마이 페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/mypage/order.jsp" />
+   </definition>
+
+   <definition name="/mypage/favorite-shop" extends="baseLayout">
+      <put-attribute name="title" value="마이 페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/mypage/favorite-shop.jsp" />
+   </definition>
+
+   <definition name="/mypage/review" extends="baseLayout">
+      <put-attribute name="title" value="마이 페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/mypage/review.jsp" />
+   </definition>
 
 <!--    <definition name="/member/listMembers" extends="baseLayout">
       <put-attribute name="title" value="회원목록창" />

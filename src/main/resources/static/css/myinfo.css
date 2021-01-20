@@ -1,160 +1,45 @@
-@charset "utf-8";
-
-.bd-navbar {
-	position: sticky;
-	top: 0;
-	z-index: 1071;
-	min-height: 4rem;
-	box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1);
-}
-.bd-sidebar {
-	position: sticky;
-	top: 4rem;
-	z-index: 1000;
-	height: calc(100vh - 4rem);
-	background: #eee;
-	border-right: 1px solid rgba(0,0,0,.1);
-	overflow-y: auto;
-	min-width: 160px;
-	max-width: 220px;
-}
-.bd-sidebar .nav {
-	display: block;
-}
-.bd-sidebar .nav>li>a {
-	display: block;
-	padding: .25rem 1.5rem;
-	font-size: 90%;
-}
 
 #myInfoSect{
-	width: 80%;
-	height:600px;
-	border: 1px solid black;
-}
-
-
-.mypage-sect{
-	display: flex;
-	justify-content: center;
-}
-
-.mypage-header{
-	padding: 10px;
-}
-
-.mypage-body{
-/*	border: 1px solid black;
-	height: 700px;*/
+    width: 80%;
+    height:600px;
+    border: 1px solid black;
 }
 
 #myInfoHeader{
-	background-color: #C4C4C4;
-	height: 70px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.header_txt{
-	font-size: 38px;
-	font-weight: bold;
+    background-color: #C4C4C4;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #myInfoSaveButt{
 }
 
 #myInfoBody{
-	padding: 50px;
+    padding: 50px;
 }
 .myInfoList{
-	display: flex;
-	align-items: center;
-	padding: 10px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
 }
 
 .myInfoField{
-	float:left;
-	width: 20%;
+    float:left;
+    width: 20%;
 }
 
 .myInfoValueDiv{
-	float:left;
-	width: 60%;
+    float:left;
+    width: 60%;
 }
 
 .myInfoFieldChangeButt{
-	padding: 5px;
+    padding: 5px;
 }
 
 .changePassModal-input{
-	width: 80%;
-	padding: 10px;
-}
-
-#favorite-shop-list{
-
-}
-
-/* 찜한 가게 리스트 부분 */
-.shop{
-	width: 80%;
-	height: 150px;
-	background: rgba(196, 196, 196, 0.15);
-	margin: auto;
-	margin-top: 30px;
-
-}
-.shop a{
-	color: black;
-	text-decoration: none;
-}
-
-.shop_img img{
-	float: left;
-	margin-left: 15px;
-	margin-top: 15px;
-	width: 120px;
-	height: 120px;
-}
-
-.shop_name{
-	padding: 20px;
-}
-
-.shop_starpoint{
-	padding: 5px;
-}
-
-.shop_dv_info{
-	margin-left: 180px;
-	margin-top: 10px;
-}
-
-.shop_dv_time{
-	float:right;
-	margin-right: 8px;
-	margin-bottom: 8px;
-}
-
-
-/* order list 부분 */
-
-.myorder{
-	border: 1px solid black;
-	width: 80%;height: 150px;
-	margin: auto; margin-top: 30px;
-	position:relative;
-}
-
-.myorder-info{
-	position: absolute;
-	top:10px;
-	left:10px;
-}
-
-.myorder-butt-list{
-	position: absolute;
-	right:10px;
-	bottom:10px;
+    width: 80%;
+    padding: 10px;
 }

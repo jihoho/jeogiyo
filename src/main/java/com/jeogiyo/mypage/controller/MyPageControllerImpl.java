@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/mypage")
 public class MyPageControllerImpl extends BaseController implements MyPageController{
 
-    @RequestMapping(value = "/myinfo", method = RequestMethod.GET)
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
     public ModelAndView myInfo(HttpServletRequest request) throws Exception{
         ModelAndView mav=new ModelAndView();
         String viewName=(String)request.getAttribute("viewName");

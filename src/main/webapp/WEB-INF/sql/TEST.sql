@@ -121,3 +121,7 @@ select salt
 			where member_id='sha256'
 			and member_type='NORMAL';
 commit;
+alter session set nls_date_format='YYYY-MM-DD HH24:MI:SS';
+
+select order_status from j_order;
+select DBTIMEZONE, SESSIONTIMEZONE FROM DUAL ;

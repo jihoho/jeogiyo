@@ -5,6 +5,8 @@
     <div class="mypage-header">
         <span class="header_txt">주문 내역</span>
     </div>
+    <input type="hidden" id="memberId" value="${memberInfo.member_id}"/>
+    <input type="hidden" id="memberType" value="${memberInfo.member_type}"/>
 
     <div class="mypage-body" id="my-order-list">
         <div class="myorder">
@@ -27,5 +29,9 @@
                 <button>주문 상세</button>
             </div>
         </div>
+    </div>
+
+    <div>
+
     </div>
 </div>

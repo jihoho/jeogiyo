@@ -52,6 +52,7 @@ public class OrderController extends BaseController{
         ResponseEntity responseEntity=null;
         System.out.println("orderController order id:"+orderId);
         OrderVO orderVO=orderService.searchOrderById(orderId);
+        System.out.println(orderVO);
         responseEntity=new ResponseEntity(orderVO,HttpStatus.OK);
         return responseEntity;
     }

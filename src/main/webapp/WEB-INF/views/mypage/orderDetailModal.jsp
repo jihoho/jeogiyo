@@ -24,35 +24,37 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <span style="font-size: 32px; font-weight: bolder">네네치킨 - 수지2지구점</span><br>
+                    <span style="font-size: 32px; font-weight: bolder" id="md_order_shop_name">네네치킨 - 수지2지구점</span><br>
                     <div style="padding: 10px;">
-                        <span>주문 일시: </span><span>2020년 12월 25일 오후 6:19</span><br>
-                        <span>주문 번호: </span><span>401</span><br>
-                        <span>주문 상태: </span><span>배달 완료</span><br>
+                        <span>주문 일시: </span><span id="md_order_reg_date">2020년 12월 25일 오후 6:19</span><br>
+                        <span>주문 번호: </span><span id="md_order_id">401</span><br>
+                        <span>주문 상태: </span><span id="md_order_status">배달 완료</span><br>
                     </div>
 
                 </div>
                 <div class="order-info">
-                    <span class="order-info-field">엽기떡볶이</span>
+                    <span class="order-info-field" id="order_food_name">엽기떡볶이</span>
                     <span class="order-info-field"> x </span>
-                    <span class="order-info-field">1</span>
-                    <span class="order-info-value">14000원</span><br>
+                    <span class="order-info-field" id="md_order_food_qty">1</span>
+                    <span class="order-info-value"><span id="md_order_food_price">14000</span>원</span><br>
                     <span class="order-info-field">배달 요금</span>
-                    <span class="order-info-value">2000원</span><br>
+                    <span class="order-info-value" ><span id="md_order_delivery_price">2000</span>원</span><br>
                     <span class="order-info-field">총 주문 금액</span>
-                    <span class="order-info-value">16000원</span><br>
+                    <span class="order-info-value"> <span id="md_order_total_price">16000</span>원</span><br>
                     <span class="order-info-field">결제 방법</span>
-                    <span class="order-info-value">카드 결제</span><br>
+                    <span class="order-info-value" id="md_order_method">카드 결제</span><br>
                 </div>
                 <div class="order-info">
                     <span class="order-info-field">배달 주소</span><br>
-                    <span>경기도 용인시 수지구 풍덕천동 1112 808동 605호</span><br>
-                    <span>(도로명) 경기도 용인시 수지구 풍덕천로 52 808동 605호</span><br>
+                    <span id="md_order_jibun_addr">경기도 용인시 수지구 풍덕천동 1112</span>
+                    <span id="md_order_detail_addr_1">808동 605호</span><br>
+                    <span>(도로명)</span><span id="md_order_road_addr"> 경기도 용인시 수지구 풍덕천로 52</span>
+                    <span id="md_order_detail_addr_2">808동 605호</span><br>
 
                     <span class="order-info-field">전화번호</span><br>
-                    <span>01056254589</span><br>
+                    <span id="md_order_tel">01056254589</span><br>
                     <span class="order-info-field">요청 사항</span><br>
-                    <span>벨 누르지 말고 문앞에 놔주세요!!</span><br>
+                    <span id="md_order_requests">벨 누르지 말고 문앞에 놔주세요!!</span><br>
                 </div>
             </div>
             <div class="modal-footer">
