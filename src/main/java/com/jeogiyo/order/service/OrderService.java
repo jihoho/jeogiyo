@@ -42,4 +42,13 @@ public class OrderService {
     public List<OrderFoodVO> searchOrderFoodByOrderId(String orderId)  throws Exception{
         return orderDAO.selectOrderFoodByOrderId(orderId);
     }
+
+    public int searchOrderListCntByMember(String memberId, String memberType) throws Exception{
+        return orderDAO.selectOrderListCntByMember(memberId,memberType);
+    }
+
+    public List<OrderVO> searchOrderListByMemberAndPage(Map memberAndPage) throws Exception{
+        return orderDAO.selectOrderListByMemberAndPage(memberAndPage);
+    }
+
 }

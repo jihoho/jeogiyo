@@ -20,4 +20,8 @@ public interface OrderDAO {
     public OrderVO selectOrderById(String orderId) throws DataAccessException;
 
     public List<OrderFoodVO> selectOrderFoodByOrderId(String orderId) throws DataAccessException;
+
+    public int selectOrderListCntByMember(String memberId, String memberType) throws DataAccessException;
+
+    public List<OrderVO> selectOrderListByMemberAndPage(Map memberAndPage) throws DataAccessException;
 }

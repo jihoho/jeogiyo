@@ -1,46 +1,51 @@
 
-$(document).ready(function (){
-    var memberId=document.getElementById("memberId").value;
-    var memberType=document.getElementById("memberType").value;
-    $.ajax({
-        type:"get",
-        url:"/orders/"+ memberId+"/"+memberType,
-        dataType: "json",
-        success: function (data){
-            console.log(data);
-            createMyOrderList(data);
-        }
-    });
-});
+//이전 버튼 이벤트
 
-function createMyOrderList(data){
-    var orderHtml='';
-    var targetEl=document.getElementById("my-order-list");
-    while (targetEl.hasChildNodes()){
-        targetEl.removeChild(targetEl.firstChild);
-    }
+function fn_prev(page, range, rangeSize) {
+    var page = ((range - 2) * rangeSize) + 1;
+    var range = range - 1;
 
-    for(var i=0;i<data.length;i++){
-        orderHtml+='<div class="myorder">';
+    var url = "/mypage/order";
+    url += "/"+page;
+    url +="/"+ range;
 
-        orderHtml+='<div class="myorder-info">';
-        orderHtml+='<div><span>'+data[i]['reg_date']+'</span></div>';
-        orderHtml+='<div><span>'+data[i]['shop_name']+'</span></div>';
-        orderHtml+='<div><span>총 주문 금액:</span><span>'+data[i]['total_price']+'</span></div>';
-        orderHtml+='</div>';
+    location.href = url;
 
-        orderHtml+='<div class="myorder-butt-list">';
-        orderHtml+='<input type="hidden" class="shop_id" name="shop_id" value="'+data[i]['shop_id']+'"/>';
-        orderHtml+='<input type="hidden" class="order_id" name="order_id" value="'+data[i]['order_id']+'"/>';
-        orderHtml+='<button>리뷰 쓰기</button>';
-        orderHtml+='<button type="button" class="shop-detail-butt">가게 보기</button>';
-        orderHtml+='<button type="button" class="order-detail-butt">주문 상세</button>';
-        orderHtml+='</div>';
-
-        orderHtml+='</div>';
-    }
-    $("#my-order-list").append(orderHtml);
 }
+
+
+
+//페이지 번호 클릭
+
+function fn_pagination(page, range, rangeSize, searchType, keyword) {
+    var url = "/mypage/order";
+    url +="/" + page;
+    url += "/" + range;
+
+    location.href = url;
+
+}
+
+
+
+//다음 버튼 이벤트
+
+function fn_next(page, range, rangeSize) {
+
+    var page = parseInt((range * rangeSize)) + 1;
+    var range = parseInt(range) + 1;
+    var url = "/mypage/order";
+    url += "/"+ page;
+
+    url +="/" + range;
+
+
+
+    location.href = url;
+
+}
+
+
 // 가게보기 클릭 시
 $(document).on("click",".shop-detail-butt",function (){
     var parent=$(this).parent();

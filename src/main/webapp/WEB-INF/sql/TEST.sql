@@ -125,3 +125,16 @@ alter session set nls_date_format='YYYY-MM-DD HH24:MI:SS';
 
 select order_status from j_order;
 select DBTIMEZONE, SESSIONTIMEZONE FROM DUAL ;
+
+SELECT rnum,reg_date
+FROM
+(
+    SELECT ROWNUM as rnum,reg_date FROM (
+        SELECT *
+        FROM J_ORDER
+        WHERE orderer_id='sha256'
+        and orderer_type='NORMAL'
+        ORDER BY REG_DATE DESC
+    )
+)
+WHERE  rnum BETWEEN 5 AND 6;

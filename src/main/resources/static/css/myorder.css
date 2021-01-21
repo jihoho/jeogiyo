@@ -4,7 +4,7 @@
 .myorder{
     border: 1px solid black;
     width: 80%;height: 150px;
-    margin: auto; margin-top: 30px;
+    margin: auto; margin-top: 10px;
     position:relative;
 }
 
@@ -18,4 +18,12 @@
     position: absolute;
     right:10px;
     bottom:10px;
+}
+
+#paginationBox{
+    margin-top: 30px;
+}
+
+#paginationBox .pagination{
+    justify-content: center;
 }

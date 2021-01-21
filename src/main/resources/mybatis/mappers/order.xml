@@ -72,6 +72,7 @@
 			FROM J_ORDER
 			WHERE orderer_id=#{memberId}
 			and orderer_type=#{memberType}
+			ORDER BY REG_DATE DESC
 		]]>
 	</select>
 
@@ -89,6 +90,29 @@
 			FROM J_ORDER_FOOD
 			WHERE ORDER_ID=#{orderId}
 		]]>
+	</select>
+
+	<select id="selectOrderListByMemberAndPage"	parameterType="java.util.Map" resultMap="orderResult">
+		SELECT RNUM, T.*
+		FROM (
+				 SELECT ROWNUM AS RNUM, J.*
+				 FROM (
+						  SELECT *
+						  FROM J_ORDER
+						  WHERE orderer_id = #{memberId}
+							and orderer_type = #{memberType}
+						  ORDER BY REG_DATE DESC
+					  ) J
+			 ) T
+		WHERE RNUM BETWEEN #{startList} + 1 AND #{endList} + 1
+
+	</select>
+
+	<select id="selectOrderListCntByMember" parameterType="String" resultType="int">
+		SELECT count(*)
+		FROM J_ORDER
+		WHERE orderer_id=#{memberId}
+		  and orderer_type=#{memberType}
 	</select>
 	
 
