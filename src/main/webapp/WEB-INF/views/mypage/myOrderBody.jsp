@@ -20,7 +20,8 @@
                 <div class="myorder-butt-list">
                     <input type="hidden" class="shop_id" name="shop_id" value="${order.shop_id}"/>
                     <input type="hidden" class="order_id" name="order_id" value="${order.order_id}"/>
-                    <button>리뷰 쓰기</button>
+                    <input type="hidden" class="shop_name" name="shop_name" value="${order.shop_name}"/>
+                    <button type="button" class="write-review-butt">리뷰 쓰기</button>
                     <button type="button" class="shop-detail-butt">가게 보기</button>
                     <button type="button" class="order-detail-butt">주문 상세</button>
                 </div>

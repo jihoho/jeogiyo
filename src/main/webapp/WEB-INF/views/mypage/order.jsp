@@ -42,6 +42,7 @@
 	</div>
 
 	<jsp:include page="orderDetailModal.jsp" flush="false"/>
+	<jsp:include page="reviewFormModal.jsp" flush="false"/>
 
 </body>
 </html>

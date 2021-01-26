@@ -132,3 +132,22 @@ function setDataToOrderModal(jsonData){
     orderRequestsSpan.innerText=jsonData['order_requests'];
 
 }
+
+
+// 리뷰 쓰기 클릭 시
+$(document).on("click",".write-review-butt",function (){
+    var parent=$(this).parent();
+    var orderId=parent.children(".order_id")[0].value;
+    var shopName=parent.children(".shop_name")[0].value;
+    var shopId=parent.children(".shop_id")[0].value;
+    var memberId=document.getElementById("memberId").value;
+    var memberType=document.getElementById("memberType").value;
+
+    $('#rv_order_id').val(orderId);
+    $('#rv_shop_name').text(shopName);
+    $('#rv_shop_id').val(shopId);
+    $('#rv_member_id').val(memberId);
+    $('#rv_member_type').val(memberType);
+
+    $('#reviewFormModal').modal('show');
+});

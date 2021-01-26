@@ -254,10 +254,10 @@ commit;
    ) ;
    
 --------------------------------------------------------
---  DDL for Table REVIEW
+--  DDL for Table J_REVIEW
 --------------------------------------------------------
 
-   CREATE TABLE "REVIEW" 
+   CREATE TABLE "J_REVIEW" 
    (	"REVIEW_ID" NUMBER(20,0) primary key,
         "SHOP_ID" NUMBER(20,0) REFERENCES SHOP(SHOP_ID),
         "STAR_POINT" NUMBER(10,1) not null, 
@@ -265,26 +265,26 @@ commit;
         "REG_DATE" DATE DEFAULT sysdate, 
         "MEMBER_ID" VARCHAR2(200 BYTE),
         "MEMBER_TYPE" VARCHAR2(50 byte),
+        "ORDER_ID" NUMBER(20,0) REFERENCES J_ORDER(ORDER_ID),
         CONSTRAINT fk_review FOREIGN KEY(MEMBER_ID,MEMBER_TYPE) REFERENCES MEMBER(MEMBER_ID,MEMBER_TYPE)
    ) ;
    
-   ALTER TABLE REVIEW DROP CONSTRAINTS fk_review;
-   ALTER TABLE REVIEW ADD CONSTRAINTS fk_review 
-   ALTER TABLE REVIEW 
+  
    ADD CONSTRAINT fk_review FOREIGN KEY(MEMBER_ID,MEMBER_TYPE) 
    REFERENCES MEMBER(MEMBER_ID,MEMBER_TYPE) on delete cascade;
 --------------------------------------------------------
 --  DDL for Table REVIEW
 --------------------------------------------------------
 
-   CREATE TABLE "REVIEW_IMAGE" 
+   CREATE TABLE "J_REVIEW_IMAGE" 
    (	"REVIEW_IMAGE_ID" NUMBER(20,0) primary key,
-        "REVIEW_ID" NUMBER(20,0) REFERENCES REVIEW(REVIEW_ID),
+        "REVIEW_ID" NUMBER(20,0) REFERENCES J_REVIEW(REVIEW_ID),
         "FILE_NAME" VARCHAR2(200),
         "REG_DATE" DATE DEFAULT sysdate
    ) ;
+   
+   
    ALTER TABLE REVIEW_IMAGE
-   DROP CONSTRAINTS SYS_C007181;
    
    ALTER TABLE REVIEW_IMAGE
    ADD CONSTRAINT fk_review_image 
@@ -301,4 +301,5 @@ commit;
         "REG_DATE" DATE DEFAULT sysdate,
         "SHOP_OWNER_ID" varchar2(20 BYTE) REFERENCES SHOP_OWNER(SHOP_OWNER_ID)
    ) ;   
+   
 
