@@ -8,10 +8,12 @@ import java.sql.Date;
 @Data
 @Component("reviewVO")
 public class ReviewVO {
-    private int shop_id;
-    private double star_point;
+    private int reviewId;
+    private int shopId;
+    private double starPoint;
     private String content;
-    private Date reg_date;
-    private String member_id;
-    private String member_type;
+    private Date regDate;
+    private String memberId;
+    private String memberType;
+    private int orderId;
 }

@@ -41,16 +41,16 @@
                 <h5 class="modal-title" id="reviewFormModalLabel">리뷰 쓰기</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/review" method="post" enctype="multipart/form-data">
+            <form  method="post" enctype="multipart/form-data" id="rv_form">
                 <div class="modal-body">
                     <div>
-                        <input name="rv_order_id" id="rv_order_id" type="hidden"/>
+                        <input name="orderId" id="rv_order_id" type="hidden"/>
                         <span id="rv_shop_name">
                         </span>
-                        <input name="rv_shop_id" id="rv_shop_id" type="hidden"/>
+                        <input name="shopId" id="rv_shop_id" type="hidden"/>
 
-                        <input name="rv_member_id" id="rv_member_id"  type="hidden"/>
-                        <input name="rv_member_type" id="rv_member_type"  type="hidden"/>
+                        <input name="memberId" id="rv_member_id"  type="hidden"/>
+                        <input name="memberType" id="rv_member_type"  type="hidden"/>
                     </div>
                     <div>
                         <span>별점</span>
@@ -66,24 +66,24 @@
                             <span class="starR1 on">4.5</span>
                             <span class="starR2 on">5.0</span>
                         </div>
-                        <input name="rv_star_rank" id="rv_star_rank" type="hidden" value="5.0"/>
+                        <input name="starPoint" id="rv_star_rank" type="hidden" value="5.0"/>
                     </div>
                     <div>
-                        <textarea name="rv_content" class="review-txt" cols="50" rows="10" placeholder="가슴은 뜨겁게 배는 부르게 리뷰는 솔직하게">
+                        <textarea name="content" class="review-txt" id="rv_content" cols="50" rows="10" placeholder="가슴은 뜨겁게 배는 부르게 리뷰는 솔직하게">
                         </textarea>
                     </div>
                     <div>
                         <div id='view_area' style='float:left;'>
                         </div>
-                        <input type="file" name="file1" id="input_imgs" style="display: none;" multiple/>
+                        <input type="file" name="input_imgs" id="input_imgs" style="display: none;" multiple/>
                         <img class="file-load" src="/image/camera_icn.png"
                              style="cursor:pointer;"
-                             onclick="document.getElementsByName('file1')[0].click();"/>
+                             onclick="document.getElementById('input_imgs').click();"/>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" onclick="">완료</button>
+                    <button type="button" class="btn btn-primary" id="uploadReviewButt" onclick="uploadReview();">완료</button>
                 </div>
 
             </form>
@@ -159,6 +159,23 @@
 
     function reviewSubmit(){
 
+    }
+
+
+    function uploadReview(){
+        var form=$('#rv_form')[0];
+        var formData=new FormData(form);
+
+        $.ajax({
+            url: "/review",
+            type: 'post',
+            data: formData,
+            contentType : false,
+            processData : false,
+            success: function (){
+                console.log(formData+"  post success!!");
+            }
+        });
     }
 </script>
 

@@ -277,7 +277,7 @@ commit;
 --------------------------------------------------------
 
    CREATE TABLE "J_REVIEW_IMAGE" 
-   (	"REVIEW_IMAGE_ID" NUMBER(20,0) primary key,
+   (	"IMAGE_ID" NUMBER(20,0) primary key,
         "REVIEW_ID" NUMBER(20,0) REFERENCES J_REVIEW(REVIEW_ID),
         "FILE_NAME" VARCHAR2(200),
         "REG_DATE" DATE DEFAULT sysdate

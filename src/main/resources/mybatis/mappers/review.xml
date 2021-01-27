@@ -5,33 +5,50 @@
 	
 <mapper namespace="com.jeogiyo.review.dao.ReviewDAO">
 
-	<resultMap id="shopResult" type="shopVO">
-		<result property="shop_id" column="shop_id" />
+	<resultMap id="reviewResult" type="reviewVO">
+		<result property="reviewId" column="review_id" />
+		<result property="shopId" column="shop_id" />
+		<result property="starPoint" column="star_point" />
+		<result property="content" column="content" />
+		<result property="regDate" column="reg_date" />
+		<result property="memberId" column="member_id" />
+		<result property="memberType" column="member_type" />
+		<result property="orderId" column="order_id" />
 	</resultMap>
 	
+
 	
-<!-- 	<resultMap id="categoryResult" type="shopCategoryVO">
-		<result property="shop_category_name" column="shop_category_name" />
-		<result property="shop_id" column="shop_id" />
-	</resultMap> -->
-	
-	<select id="selectShopListByCategory" parameterType="String" resultMap="shopResult">
+
+	<insert id="insertReview" parameterType="reviewVO">
+
 		<![CDATA[
-			SELECT s.* 
-			FROM SHOP s, SHOP_CATEGORY c
-			WHERE c.SHOP_CATEGORY_NAME = #{category}
-			and s.SHOP_ID=c.SHOP_ID
+			insert into J_REVIEW(SHOP_ID,STAR_POINT,CONTENT,MEMBER_ID,MEMBER_TYPE,ORDER_ID)
+			values(
+			       #{shopId},#{starPoint},#{content},#{memberId},#{memberType},#{orderId}
+				  )
+		]]>
+	</insert>
+
+	<select id="selectCurrentReviewIdSequence" resultType="int">
+		<![CDATA[
+		SELECT SEQ_J_REVIEW_ID.CURRVAL
+		FROM DUAL
 		]]>
 	</select>
 
-	<select id="selectShopById" parameterType="String" resultMap="shopResult">
+	<insert id="insertReviewImage" parameterType="reviewImageVO">
 		<![CDATA[
-			SELECT *
-			FROM SHOP
-			WHERE SHOP_ID= #{shop_id}
+		insert into J_REVIEW_IMAGE(REVIEW_ID,FILE_NAME)
+		values(
+				  #{reviewId},#{fileName}
+			  )
+		]]>
+	</insert>
+
+	<select id="selectCurrentReviewImageIdSequence" resultType="int">
+		<![CDATA[
+		SELECT SEQ_J_REVIEW_IMAGE_ID.CURRVAL
+		FROM DUAL
 		]]>
 	</select>
-	
-	
-
 </mapper>

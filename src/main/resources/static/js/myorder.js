@@ -142,12 +142,18 @@ $(document).on("click",".write-review-butt",function (){
     var shopId=parent.children(".shop_id")[0].value;
     var memberId=document.getElementById("memberId").value;
     var memberType=document.getElementById("memberType").value;
+    // 파일 초기화
+    $("#input_imgs").val("");
+    $("#view_area").empty();
 
     $('#rv_order_id').val(orderId);
     $('#rv_shop_name').text(shopName);
     $('#rv_shop_id').val(shopId);
     $('#rv_member_id').val(memberId);
     $('#rv_member_type').val(memberType);
-
+    $('#rv_content').val("");
+    $('#rv_star_rank').val("5.0");
+    $('.starR1').addClass("on");
+    $('.starR2').addClass("on");
     $('#reviewFormModal').modal('show');
 });

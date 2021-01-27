@@ -9,7 +9,11 @@ import java.util.List;
 @Mapper
 public interface ReviewDAO {
 
-    public List<ReviewVO> selectReviewById(int shop_id) throws DataAccessException;
+    public void insertReview(ReviewVO reviewVO) throws DataAccessException;
 
-    public List<ReviewImageVO> selectReviewImageByReviewId(int review_id) throws DataAccessException;
+    public int selectCurrentReviewIdSequence() throws DataAccessException;
+
+    public void insertReviewImage(ReviewImageVO reviewImageVO) throws DataAccessException;
+
+    public int selectCurrentReviewImageIdSequence() throws DataAccessException;
 }

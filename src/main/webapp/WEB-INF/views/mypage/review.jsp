@@ -32,7 +32,7 @@
 			</div>
 
 			<div id="myReviewMenuSect" class="col-9 py-md-3 pl-md-5 bd-content mypage-sect">
-				<h1>리뷰 관리</h1>
+				<jsp:include page="myReviewBody.jsp" flush="false"/>
 			</div>
 
 		</div>

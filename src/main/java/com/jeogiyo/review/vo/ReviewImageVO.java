@@ -8,8 +8,8 @@ import java.sql.Date;
 @Data
 @Component("reviewImageVO")
 public class ReviewImageVO {
-    private int review_image_id;
-    private int review_id;
-    private String file_name;
-    private Date reg_date;
+    private int imageId;
+    private int reviewId;
+    private String fileName;
+    private Date regDate;
 }
