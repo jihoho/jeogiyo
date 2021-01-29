@@ -138,3 +138,8 @@ FROM
     )
 )
 WHERE  rnum BETWEEN 5 AND 6;
+
+delete from j_review;
+delete from j_review_image;
+select * from j_review;
+select * from j_review_image;

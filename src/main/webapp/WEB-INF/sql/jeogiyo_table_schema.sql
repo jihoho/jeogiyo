@@ -269,7 +269,7 @@ commit;
         CONSTRAINT fk_review FOREIGN KEY(MEMBER_ID,MEMBER_TYPE) REFERENCES MEMBER(MEMBER_ID,MEMBER_TYPE)
    ) ;
    
-  
+   ALTER TABLE J_REVIEW add SHOP_NAME VARCHAR2(100 BYTE);
    ADD CONSTRAINT fk_review FOREIGN KEY(MEMBER_ID,MEMBER_TYPE) 
    REFERENCES MEMBER(MEMBER_ID,MEMBER_TYPE) on delete cascade;
 --------------------------------------------------------
@@ -282,7 +282,6 @@ commit;
         "FILE_NAME" VARCHAR2(200),
         "REG_DATE" DATE DEFAULT sysdate
    ) ;
-   
    
    ALTER TABLE REVIEW_IMAGE
    

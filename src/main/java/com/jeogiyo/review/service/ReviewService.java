@@ -7,11 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ReviewService {
     @Autowired
     ReviewDAO reviewDAO;
+
+    public List<ReviewVO> searchReviewListByMemberAndPage(Map<String, Object> memberAndPage) throws Exception{
+        return reviewDAO.selectReviewListByMemberAndPage(memberAndPage);
+    }
+
     public int addNewReview(ReviewVO reviewVO) throws Exception{
         reviewDAO.insertReview(reviewVO);
         int reviewId=reviewDAO.selectCurrentReviewIdSequence();
@@ -24,5 +30,9 @@ public class ReviewService {
         int reviewImageId=reviewDAO.selectCurrentReviewImageIdSequence();
         System.out.println("reviewService reviewImageId: "+reviewImageId);
         return reviewImageId;
+    }
+
+    public int searchReviewListCntByMember(String memberId, String memberType) throws Exception{
+        return reviewDAO.selectReviewListCntByMember(memberId,memberType);
     }
 }

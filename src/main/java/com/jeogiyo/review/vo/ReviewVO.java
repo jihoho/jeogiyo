@@ -10,10 +10,12 @@ import java.sql.Date;
 public class ReviewVO {
     private int reviewId;
     private int shopId;
+    private String shopName;
     private double starPoint;
     private String content;
     private Date regDate;
     private String memberId;
     private String memberType;
     private int orderId;
+    private int rnum;
 }

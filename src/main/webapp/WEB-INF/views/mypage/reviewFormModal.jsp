@@ -45,10 +45,10 @@
                 <div class="modal-body">
                     <div>
                         <input name="orderId" id="rv_order_id" type="hidden"/>
-                        <span id="rv_shop_name">
+                        <span id="rv_shop_name_span">
                         </span>
                         <input name="shopId" id="rv_shop_id" type="hidden"/>
-
+                        <input name="shopName" id="rv_shop_name_input" type="hidden"/>
                         <input name="memberId" id="rv_member_id"  type="hidden"/>
                         <input name="memberType" id="rv_member_type"  type="hidden"/>
                     </div>

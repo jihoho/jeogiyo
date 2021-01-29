@@ -147,7 +147,8 @@ $(document).on("click",".write-review-butt",function (){
     $("#view_area").empty();
 
     $('#rv_order_id').val(orderId);
-    $('#rv_shop_name').text(shopName);
+    $('#rv_shop_name_span').text(shopName);
+    $('#rv_shop_name_input').val(shopName);
     $('#rv_shop_id').val(shopId);
     $('#rv_member_id').val(memberId);
     $('#rv_member_type').val(memberType);

@@ -17,6 +17,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link href="${contextPath}/css/mypage.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="${contextPath}/css/myreview.css" rel="stylesheet" type="text/css" media="screen">
 </head>
 <body>
 	<div class="container-fluid">

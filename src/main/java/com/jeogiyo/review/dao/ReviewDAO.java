@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
+import java.util.Map;
+
 @Mapper
 public interface ReviewDAO {
 
@@ -16,4 +18,8 @@ public interface ReviewDAO {
     public void insertReviewImage(ReviewImageVO reviewImageVO) throws DataAccessException;
 
     public int selectCurrentReviewImageIdSequence() throws DataAccessException;
+
+    public int selectReviewListCntByMember(String memberId, String memberType) throws DataAccessException;
+
+    public List<ReviewVO> selectReviewListByMemberAndPage(Map<String, Object> memberAndPage) throws DataAccessException;
 }

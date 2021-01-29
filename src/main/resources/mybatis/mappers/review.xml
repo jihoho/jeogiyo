@@ -8,12 +8,14 @@
 	<resultMap id="reviewResult" type="reviewVO">
 		<result property="reviewId" column="review_id" />
 		<result property="shopId" column="shop_id" />
+		<result property="shopName" column="shop_name" />
 		<result property="starPoint" column="star_point" />
 		<result property="content" column="content" />
 		<result property="regDate" column="reg_date" />
 		<result property="memberId" column="member_id" />
 		<result property="memberType" column="member_type" />
 		<result property="orderId" column="order_id" />
+		<result property="rnum" column="rnum" />
 	</resultMap>
 	
 
@@ -22,9 +24,9 @@
 	<insert id="insertReview" parameterType="reviewVO">
 
 		<![CDATA[
-			insert into J_REVIEW(SHOP_ID,STAR_POINT,CONTENT,MEMBER_ID,MEMBER_TYPE,ORDER_ID)
+			insert into J_REVIEW(SHOP_ID,SHOP_NAME,STAR_POINT,CONTENT,MEMBER_ID,MEMBER_TYPE,ORDER_ID)
 			values(
-			       #{shopId},#{starPoint},#{content},#{memberId},#{memberType},#{orderId}
+			       #{shopId},#{shopName},#{starPoint},#{content},#{memberId},#{memberType},#{orderId}
 				  )
 		]]>
 	</insert>
@@ -51,4 +53,27 @@
 		FROM DUAL
 		]]>
 	</select>
+
+	<select id="selectReviewListCntByMember" resultType="int" parameterType="String">
+		SELECT count(*)
+		FROM J_REVIEW
+		WHERE MEMBER_ID=#{memberId}
+		  and MEMBER_TYPE=#{memberType}
+	</select>
+
+	<select id="selectReviewListByMemberAndPage" parameterType="java.util.Map" resultMap="reviewResult">
+		SELECT RNUM, T.*
+		FROM (
+				 SELECT ROWNUM AS RNUM, J.*
+				 FROM (
+						  SELECT *
+						  FROM J_REVIEW
+						  WHERE member_id = #{memberId}
+							and member_type = #{memberType}
+						  ORDER BY REG_DATE DESC
+					  ) J
+			 ) T
+		WHERE RNUM BETWEEN #{startList} + 1 AND #{endList} + 1
+	</select>
+
 </mapper>

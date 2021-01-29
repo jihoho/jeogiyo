@@ -1,0 +1,6 @@
+.myreview{
+    border: 1px solid black;
+    width: 80%;height: 60px;
+    margin: auto; margin-top: 10px;
+    position:relative;
+}
