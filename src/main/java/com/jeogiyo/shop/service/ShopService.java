@@ -13,5 +13,5 @@ public interface ShopService {
 
     public List<ShopVO> searchShopListByMember(String memberId, String memberType) throws Exception;
 
-    //    public List<ShopVO> searchShopListByLocation() throws Exception;
+
 }

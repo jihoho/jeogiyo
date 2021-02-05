@@ -140,6 +140,7 @@ $(document).on("click",".write-review-butt",function (){
     var orderId=parent.children(".order_id")[0].value;
     var shopName=parent.children(".shop_name")[0].value;
     var shopId=parent.children(".shop_id")[0].value;
+    var orderContent=parent.children(".order_content")[0].value;
     var memberId=document.getElementById("memberId").value;
     var memberType=document.getElementById("memberType").value;
     // 파일 초기화
@@ -149,6 +150,8 @@ $(document).on("click",".write-review-butt",function (){
     $('#rv_order_id').val(orderId);
     $('#rv_shop_name_span').text(shopName);
     $('#rv_shop_name_input').val(shopName);
+    $('#rv_order_content_span').text(orderContent);
+    $('#rv_order_content').val(orderContent);
     $('#rv_shop_id').val(shopId);
     $('#rv_member_id').val(memberId);
     $('#rv_member_type').val(memberType);

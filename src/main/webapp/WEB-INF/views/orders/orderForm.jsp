@@ -78,33 +78,19 @@
 							<div class="order_info_header">
 								<span>결제 수단</span>
 							</div>
+
 							<div class="order_info_body">
-								<table>
-									<tr>
-										<td id="tmp_id">
-											<span class="info_txt_lg">카카오페이</span>
-										</td>
-										<td>
-											<span class="info_txt_lg">KG Inicis</span>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span class="info_txt_lg">카카오페이</span>
-										</td>
-										<td>
-											<span class="info_txt_lg">KG Inicis</span>
-										</td>
-									</tr>
-									<tr>
-										<td >
-											<span class="info_txt_lg">카카오페이</span>
-										</td>
-										<td>
-											<span class="info_txt_lg">KG Inicis</span>
-										</td>
-									</tr>
-								</table>
+								<div id="pay-method-radio" class="btn-group" role="group" aria-label="Basic radio toggle button group">
+									<input type="radio" class="btn-check" name="btnradio" id="btnradio1" value="card" autocomplete="off" checked>
+									<label class="btn btn-outline-primary" for="btnradio1">KG Inicis</label>
+
+									<input type="radio" class="btn-check" name="btnradio" id="btnradio2" value="after-card" autocomplete="off">
+									<label class="btn btn-outline-primary" for="btnradio2">만나서 카드결제</label>
+
+									<input type="radio" class="btn-check" name="btnradio" id="btnradio3" value="after-cash" autocomplete="off">
+									<label class="btn btn-outline-primary" for="btnradio3">만나서 현금결제</label>
+								</div>
+								<input type="hidden" id="pay_method" value="card">
 							</div>
 						</div>
 

@@ -20,19 +20,27 @@ public class ReviewService {
 
     public int addNewReview(ReviewVO reviewVO) throws Exception{
         reviewDAO.insertReview(reviewVO);
-        int reviewId=reviewDAO.selectCurrentReviewIdSequence();
+        int reviewId= reviewVO.getReviewId();
         System.out.println("reviewService reviewId: "+reviewId);
         return reviewId;
     }
 
     public int addNewReviewImage(ReviewImageVO reviewImageVO) throws Exception{
         reviewDAO.insertReviewImage(reviewImageVO);
-        int reviewImageId=reviewDAO.selectCurrentReviewImageIdSequence();
+        int reviewImageId=reviewImageVO.getImageId();
         System.out.println("reviewService reviewImageId: "+reviewImageId);
         return reviewImageId;
     }
 
     public int searchReviewListCntByMember(String memberId, String memberType) throws Exception{
         return reviewDAO.selectReviewListCntByMember(memberId,memberType);
+    }
+
+    public ReviewVO searchReviewById(int reviewId) throws Exception{
+        return reviewDAO.selectReviewById(reviewId);
+    }
+
+    public List<ReviewImageVO> searchReviewImageByReviewId(int reviewId)  throws Exception{
+        return reviewDAO.selectReviewImageByReviewId(reviewId);
     }
 }

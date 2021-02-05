@@ -30,4 +30,5 @@ public class OrderVO {
     String order_requests;
     String pay_method;
     String order_status;
+    String order_content;
 }

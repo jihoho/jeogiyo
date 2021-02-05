@@ -20,13 +20,7 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public List<ShopVO> searchShopListByCategoryAndLocation(String category, String bcode) {
 		List shopList;
-		if (category.equals("tot_ct")){
-			shopList =shopDAO.selectShopListByLocation(bcode);
-		}else{
-
 		shopList= shopDAO.selectShopListByCategoryAndLocation(category,bcode);
-
-		}
 		return shopList;
 	}
 
@@ -43,4 +37,6 @@ public class ShopServiceImpl implements ShopService {
 		List shopList=shopDAO.selectShopListByMember(memberId,memberType);
 		return shopList;
 	}
+
+
 }

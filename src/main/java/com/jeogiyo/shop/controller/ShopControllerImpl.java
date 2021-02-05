@@ -38,7 +38,8 @@ public class ShopControllerImpl extends BaseController implements ShopController
 		String viewName=(String)request.getAttribute("viewName");
 		System.out.println("shopController.searchShopsByCategory view name : "+viewName+"  category: "+category);
 		System.out.println("bcode: "+bcode);
-		List<ShopVO> shopList=shopService.searchShopListByCategoryAndLocation(category,bcode);
+		List<ShopVO> shopList=shopService.searchShopListByCategoryAndLocation(category,bcode);;
+
 
 		if(shopList==null) {
 			System.out.println("shopList null");

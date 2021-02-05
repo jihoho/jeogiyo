@@ -25,6 +25,7 @@
 		<result property="order_requests" column="order_requests" />
 		<result property="pay_method" column="pay_method" />
 		<result property="order_status" column="order_status" />
+		<result property="order_content" column="order_content"/>
 	</resultMap>
 
 	<resultMap id="orderFoodResult" type="orderFoodVO">
@@ -40,11 +41,11 @@
 		<![CDATA[
 			insert into J_ORDER(IMP_UID,PG,SHOP_ID,SHOP_NAME,ORDERER_ID,ORDERER_TYPE,ORDERER_NAME,
 								ORDERER_TEL,JIBEON_ADDRESS,ROAD_ADDRESS,DETAIL_ADDRESS,ORDER_PRICE,DELIVERY_TIP,TOTAL_PRICE,
-								ORDER_REQUESTS,PAY_METHOD)
+								ORDER_REQUESTS,PAY_METHOD,ORDER_CONTENT)
 			values(
 				#{imp_uid},#{pg},#{shop_id},#{shop_name},#{orderer_id},#{orderer_type},#{orderer_name},
 				#{orderer_tel},#{jibeon_address},#{road_address},#{detail_address},#{order_price},#{delivery_tip},#{total_price},
-				#{order_requests},#{pay_method}
+				#{order_requests},#{pay_method},#{order_content}
 				)
 		]]>
 	</insert>

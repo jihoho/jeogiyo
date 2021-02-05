@@ -17,7 +17,6 @@ public interface ShopDAO {
 
     public List selectShopListByCategoryAndLocation(String category, String bcode) throws DataAccessException;
 
-    public List selectShopListByLocation(String bcode) throws DataAccessException;
-
     public List selectShopListByMember(String memberId, String memberType) throws DataAccessException;
+
 }

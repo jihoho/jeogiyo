@@ -2,9 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false"%>
 <style>
-    .star-img{
-        width: 36px;
-    }
     .starR1{
         background: url('/image/star_ico.png') no-repeat -52px 0;
         background-size: auto 100%;
@@ -45,12 +42,17 @@
                 <div class="modal-body">
                     <div>
                         <input name="orderId" id="rv_order_id" type="hidden"/>
-                        <span id="rv_shop_name_span">
-                        </span>
+                        <div>
+                            <span id="rv_shop_name_span"></span>
+                        </div>
+                        <div>
+                            <span id="rv_order_content_span"></span>
+                        </div>
                         <input name="shopId" id="rv_shop_id" type="hidden"/>
                         <input name="shopName" id="rv_shop_name_input" type="hidden"/>
                         <input name="memberId" id="rv_member_id"  type="hidden"/>
                         <input name="memberType" id="rv_member_type"  type="hidden"/>
+                        <input name="orderContent" id="rv_order_content" type="hidden"/>
                     </div>
                     <div>
                         <span>별점</span>
@@ -167,7 +169,7 @@
         var formData=new FormData(form);
 
         $.ajax({
-            url: "/review",
+            url: "/reviews",
             type: 'post',
             data: formData,
             contentType : false,

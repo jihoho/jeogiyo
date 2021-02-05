@@ -68,13 +68,14 @@
 
                             <td><c:out value="${review.shopName}"/></td>
 
-                            <td><c:out value="${review.content}"/></td>
+                            <td><c:out value="${review.orderContent}"/></td>
 
                             <td><c:out value="${review.starPoint}"/></td>
 
                             <td><c:out value="${review.regDate}"/></td>
                             <td>
-                                <button type="button" class="btn btn-sm btn-primary">상세 보기</button>
+                                <input class="review-id" type="hidden" value="${review.reviewId}">
+                                <button type="button" class="btn btn-sm btn-primary review-detail-butt">상세 보기</button>
                             </td>
 
                         </tr>

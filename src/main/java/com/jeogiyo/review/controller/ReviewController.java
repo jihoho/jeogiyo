@@ -6,6 +6,7 @@ import com.jeogiyo.member.vo.MemberVO;
 import com.jeogiyo.review.service.ReviewService;
 import com.jeogiyo.review.vo.ReviewImageVO;
 import com.jeogiyo.review.vo.ReviewVO;
+import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +18,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.OutputStream;
 import java.util.*;
 
 @Controller
@@ -26,9 +29,46 @@ public class ReviewController extends BaseController {
     @Autowired
     ReviewService reviewService;
 
+    @Autowired
+    ReviewVO reviewVO;
+
     private static final String CURR_IMAGE_REPO_PATH="C:\\Users\\hojun\\jeogiyo_file_repo\\review_imgs";
 
-    @PostMapping("/review")
+    @GetMapping("/reviews/{reviewId}")
+    public ResponseEntity searchReviewById(@PathVariable int reviewId) throws Exception{
+        ResponseEntity responseEntity=null;
+        reviewVO=reviewService.searchReviewById(reviewId);
+        responseEntity=new ResponseEntity(reviewVO,HttpStatus.OK);
+        return responseEntity;
+    }
+
+    @GetMapping("/reviews/{reviewId}/images")
+    public ResponseEntity searchReviewImageByReviewId(@PathVariable int reviewId) throws Exception{
+        ResponseEntity responseEntity=null;
+        List<ReviewImageVO> reviewImageVOList=reviewService.searchReviewImageByReviewId(reviewId);
+        responseEntity=new ResponseEntity(reviewImageVOList,HttpStatus.OK);
+        return responseEntity;
+    }
+
+    @GetMapping("/reviews/{reviewId}/thumbnails/{fileName}")
+    protected void reviewImageThunmbnails(@PathVariable String reviewId,
+                                          @PathVariable String fileName,
+                                          HttpServletResponse response) throws Exception{
+        OutputStream out=response.getOutputStream();
+        String filePath=CURR_IMAGE_REPO_PATH+"\\"+reviewId+"\\"+fileName;
+        System.out.println("review image file path: "+filePath);
+
+        File image=new File(filePath);
+
+        if (image.exists()) {
+            Thumbnails.of(image).size(300,300).outputFormat("png").toOutputStream(out);
+        }
+        byte[] buffer = new byte[1024 * 8];
+        out.write(buffer);
+        out.close();
+    }
+
+    @PostMapping("/reviews")
     public ResponseEntity addNewReview(MultipartHttpServletRequest request,
                                        @RequestParam("input_imgs") List<MultipartFile> filesList,
                                        @ModelAttribute("reviewVO")ReviewVO reviewVO) throws Exception{

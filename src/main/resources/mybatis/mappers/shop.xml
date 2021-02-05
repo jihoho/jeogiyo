@@ -43,15 +43,49 @@
 	</resultMap> -->
 	
 	<select id="selectShopListByCategoryAndLocation" parameterType="String" resultMap="shopResult">
-		<![CDATA[
-			SELECT p.*
-			FROM DELIVERY_AREA d, (
-				SELECT s.*
-				FROM SHOP s, SHOP_CATEGORY c
-				WHERE c.SHOP_CATEGORY_NAME = #{category}
-				  and s.SHOP_ID=c.SHOP_ID) p
-			WHERE d.BCODE= #{bcode} AND d.SHOP_ID=p.SHOP_ID
-		]]>
+		<choose>
+			<when test="bcode!=null and bcode!=''">
+				<choose>
+					<when test="category=='tot_ct'">
+						<![CDATA[
+							SELECT p.*
+							FROM DELIVERY_AREA d, SHOP p
+							WHERE d.BCODE= #{bcode} AND d.SHOP_ID=p.SHOP_ID
+						]]>
+					</when>
+					<otherwise>
+						<![CDATA[
+							SELECT p.*
+							FROM DELIVERY_AREA d, (
+								SELECT s.*
+								FROM SHOP s, SHOP_CATEGORY c
+								WHERE c.SHOP_CATEGORY_NAME = #{category}
+								  and s.SHOP_ID=c.SHOP_ID) p
+							WHERE d.BCODE= #{bcode} AND d.SHOP_ID=p.SHOP_ID
+						]]>
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				<choose>
+					<when test="category=='tot_ct'">
+						<![CDATA[
+							SELECT s.*
+							FROM SHOP s
+						]]>
+					</when>
+					<otherwise>
+						<![CDATA[
+							SELECT s.*
+							FROM SHOP s,SHOP_CATEGORY c
+							WHERE c.shop_category_name=#{category}
+							and s.shop_id=c.shop_id
+						]]>
+					</otherwise>
+				</choose>
+			</otherwise>
+		</choose>
+
 	</select>
 
 	<select id="selectShopById" parameterType="int" resultMap="shopResult">
@@ -63,24 +97,17 @@
 	</select>
 
 
-	<select id="selectShopListByLocation" parameterType="String" resultMap="shopResult">
+	<select id="selectShopListByMember" parameterType="String" resultMap="shopResult">
 		<![CDATA[
-			SELECT s.*
-			FROM SHOP s, DELIVERY_AREA d
-			WHERE d.BCODE=#{bcode} and s.shop_id = d.shop_id
+		SELECT s.*
+		FROM SHOP s, (
+			SELECT shop_id
+			FROM DIBS
+			WHERE member_id=#{memberId}
+			  and member_type=#{memberType}
+		) d
+		WHERE s.shop_id=d.shop_id
 		]]>
 	</select>
 
-	<select id="selectShopListByMember" parameterType="String" resultMap="shopResult">
-		<![CDATA[
-			SELECT s.*
-			FROM SHOP s, (
-			    SELECT shop_id
-			    FROM DIBS
-			    WHERE member_id=#{memberId}
-			    and member_type=#{memberType}
-				) d
-			WHERE s.shop_id=d.shop_id
-		]]>
-	</select>
 </mapper>

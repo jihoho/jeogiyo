@@ -18,4 +18,5 @@ public class ReviewVO {
     private String memberType;
     private int orderId;
     private int rnum;
+    private String orderContent;
 }

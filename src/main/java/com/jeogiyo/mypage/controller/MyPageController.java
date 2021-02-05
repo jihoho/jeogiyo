@@ -72,7 +72,7 @@ public class MyPageController extends BaseController {
         return mav;
     }
 
-    @GetMapping({"/review","/review/{page}/{range}"})
+    @GetMapping({"/reviews","/reviews/{page}/{range}"})
     public ModelAndView myReview(@PathVariable("page")Optional<Integer> page,
                                  @PathVariable("range")Optional<Integer> range,
                                  HttpServletRequest request)throws Exception{

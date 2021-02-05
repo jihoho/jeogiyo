@@ -30,7 +30,7 @@ select shop_id,shop_name from shop;
 
 insert into SHOP_CATEGORY(SHOP_CATEGORY_NAME,SHOP_ID)
         values(
-                'chicken_ct',403);
+                'tot_ct',407);
             
             
 select * from shop_category;
@@ -139,7 +139,13 @@ FROM
 )
 WHERE  rnum BETWEEN 5 AND 6;
 
+
+select * from shop_category;
+delete from shop_category where shop_category_name='tot_ct';
+commit;
 delete from j_review;
 delete from j_review_image;
 select * from j_review;
 select * from j_review_image;
+
+select* from j_order;

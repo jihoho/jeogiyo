@@ -15,12 +15,14 @@
                 <div class="myorder-info">
                     <div><span>${order.reg_date}</span></div>
                     <div><span>${order.shop_name}</span></div>
+                    <div><span>${order.order_content}</span></div>
                     <div><span>총 주문 금액:</span><span>${order.total_price}</span></div>
                 </div>
                 <div class="myorder-butt-list">
                     <input type="hidden" class="shop_id" name="shop_id" value="${order.shop_id}"/>
                     <input type="hidden" class="order_id" name="order_id" value="${order.order_id}"/>
                     <input type="hidden" class="shop_name" name="shop_name" value="${order.shop_name}"/>
+                    <input type="hidden" class="order_content" name="order_content" value="${order.order_content}"/>
                     <button type="button" class="write-review-butt">리뷰 쓰기</button>
                     <button type="button" class="shop-detail-butt">가게 보기</button>
                     <button type="button" class="order-detail-butt">주문 상세</button>
