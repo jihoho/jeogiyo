@@ -33,6 +33,7 @@
             </div>
             <div class="modal-body">
                 <div>
+                    <input type="hidden" id="md-review-id"/>
                     <span style="font-size: 32px; font-weight: bolder" id="md-review-shop-name"></span><br>
                     <div>
                         <button type="button" class="btn btn-secondary">
@@ -65,7 +66,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="">리뷰 삭제</button>
+                <button type="button" class="btn btn-primary" id="review-del-butt">리뷰 삭제</button>
             </div>
         </div>
     </div>

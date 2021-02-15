@@ -176,6 +176,12 @@
             processData : false,
             success: function (){
                 console.log(formData+"  post success!!");
+                $('#reviewFormModal').modal('hide');
+                alert("리뷰 작성 완료");
+
+            },
+            error: function (){
+                alert("리뷰 작성 에러");
             }
         });
     }

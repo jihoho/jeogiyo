@@ -24,4 +24,8 @@ public interface ReviewDAO {
     public List<ReviewVO> selectReviewListByMemberAndPage(Map<String, Object> memberAndPage) throws DataAccessException;
 
     public List<ReviewImageVO> selectReviewImageByReviewId(int reviewId) throws DataAccessException;
+
+    public void deleteReviewByReviewId(int reviewId) throws DataAccessException;
+
+    public void deleteReviewImagesByReviewId(int reviewId) throws DataAccessException;
 }

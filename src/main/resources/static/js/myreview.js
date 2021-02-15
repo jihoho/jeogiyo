@@ -58,6 +58,7 @@ function setDataToReviewModal(jsonData){
     $('#md-review-reg-date').text(jsonData['regDate']);
     $('#md-order-content-span').text(jsonData['orderContent']);
     $('#md-review-content-span').val(jsonData['content']);
+    $('#md-review-id').val(jsonData['reviewId']);
 }
 
 function searchReviewAjax(reviewId){
@@ -97,4 +98,30 @@ function setImageDataToReviewModal(jsonData){
     console.log(html);
     $('#md-review-image').empty();
     $('#md-review-image').append(html);
+}
+
+
+// 삭제 버튼 클릭 시 이벤트 처리
+$(document).on("click","#review-del-butt",function (){
+    var reviewId=$('#md-review-id').val();
+    console.log(reviewId);
+    deleteReviewAjax(reviewId);
+    $('#reviewDetailModal').modal('hide');
+
+});
+
+// review delete 비동기 처리
+
+function deleteReviewAjax(reviewId){
+    $.ajax({
+        type: "delete",
+        url: "/reviews/"+reviewId,
+        success:function () {
+            location.href="/mypage/reviews"
+            alert("리뷰가 삭제 되었습니다.");
+        },
+        error:function (){
+            alert("리뷰 삭제 에러");
+        }
+    })
 }

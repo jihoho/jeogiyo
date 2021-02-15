@@ -43,4 +43,12 @@ public class ReviewService {
     public List<ReviewImageVO> searchReviewImageByReviewId(int reviewId)  throws Exception{
         return reviewDAO.selectReviewImageByReviewId(reviewId);
     }
+
+    public void deleteReviewByReviewId(int reviewId)  throws Exception{
+        reviewDAO.deleteReviewByReviewId(reviewId);
+    }
+
+    public void deleteReviewImagesByReviewId(int reviewId) {
+        reviewDAO.deleteReviewImagesByReviewId(reviewId);
+    }
 }

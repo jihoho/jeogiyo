@@ -68,6 +68,17 @@ public class ReviewController extends BaseController {
         out.close();
     }
 
+    @DeleteMapping("/reviews/{reviewId}")
+    public ResponseEntity deleteReview(@PathVariable int reviewId) throws  Exception{
+        ResponseEntity responseEntity=null;
+        reviewService.deleteReviewImagesByReviewId(reviewId);
+        reviewService.deleteReviewByReviewId(reviewId);
+        deleteImageFolder(reviewId);
+        responseEntity=new ResponseEntity(HttpStatus.OK);
+        return responseEntity;
+    }
+
+
     @PostMapping("/reviews")
     public ResponseEntity addNewReview(MultipartHttpServletRequest request,
                                        @RequestParam("input_imgs") List<MultipartFile> filesList,
@@ -102,6 +113,8 @@ public class ReviewController extends BaseController {
         return responseEntity;
     }
 
+
+//    이미지 파일 업로드
     protected List<ReviewImageVO> upload(List<MultipartFile> filesList,int reviewId) throws Exception{
         List<ReviewImageVO> reviewImageVOList= new ArrayList<ReviewImageVO>();
 
@@ -132,6 +145,28 @@ public class ReviewController extends BaseController {
        return reviewImageVOList;
     }
 
+
+//    이미지 폴더 삭제 (하위 파일 포함)
+    protected void deleteImageFolder(int reviewId) throws Exception {
+        File folder= new File(CURR_IMAGE_REPO_PATH+"\\"+reviewId);
+        try{
+            while (folder.exists()){
+                File[] imageList=folder.listFiles();
+                for(int i=0;i<imageList.length;i++){
+                    imageList[i].delete();
+                    System.out.println(imageList[i].getName()+" 리뷰 이미지 삭제! ");
+                }
+
+                if(imageList.length==0 && folder.isDirectory()){
+                    folder.delete(); // 이미지 폴더 삭제
+                    System.out.println(CURR_IMAGE_REPO_PATH+"\\"+reviewId+" 리뷰 이미지 폴더 삭제");
+                }
+
+            }
+        }catch (Exception e){
+            e.getStackTrace();
+        }
+    }
 
 
 }

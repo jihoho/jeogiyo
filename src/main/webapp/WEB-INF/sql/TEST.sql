@@ -143,8 +143,8 @@ WHERE  rnum BETWEEN 5 AND 6;
 select * from shop_category;
 delete from shop_category where shop_category_name='tot_ct';
 commit;
-delete from j_review;
-delete from j_review_image;
+--delete from j_review;
+--delete from j_review_image;
 select * from j_review;
 select * from j_review_image;
 
