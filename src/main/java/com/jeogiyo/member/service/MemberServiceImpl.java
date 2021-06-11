@@ -1,7 +1,10 @@
 package com.jeogiyo.member.service;
 
 
+import com.jeogiyo.common.util.SHA256Util;
 import com.jeogiyo.member.dao.MemberDAO;
+import com.jeogiyo.member.dto.MemberInfoDto;
+import com.jeogiyo.member.exception.MemberNotFoundException;
 import com.jeogiyo.member.vo.MemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,14 +15,22 @@ import java.util.Map;
 
 @Service("memberService")
 @Transactional(propagation = Propagation.REQUIRED)
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private MemberDAO memberDAO;
 
     @Override
-    public MemberVO login(Map<String, String> loginMap) throws Exception {
-        return memberDAO.login(loginMap);
+    public MemberInfoDto login(Map<String, String> loginMap) throws Exception {
+        String salt = getMemberSaltByIdAndType(loginMap.get("member_id"),
+                loginMap.get("member_type"));
+
+        loginMap.put("member_pw", SHA256Util.getEncrypt(loginMap.get("member_pw"), salt));
+        MemberVO memberVO = memberDAO.login(loginMap);
+        if (memberVO == null) {
+            throw new MemberNotFoundException();
+        }
+        return MemberInfoDto.createMemberInfoDto(memberVO);
     }
 
     @Override
@@ -48,8 +59,12 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public String getMemberSaltByIdAndType(String member_id,String member_type) throws Exception{
-        String salt=memberDAO.selectMemberSaltByIdAndType(member_id,member_type);
+    public String getMemberSaltByIdAndType(String memberId, String memberType) throws Exception {
+        System.out.println(memberId + ", " + memberType);
+        String salt = memberDAO.selectMemberSaltByIdAndType(memberId, memberType);
+        if (salt == null) {
+            throw new MemberNotFoundException();
+        }
         return salt;
     }
 

@@ -1,6 +1,7 @@
 package com.jeogiyo.member.controller;
 
-import com.jeogiyo.common.base.BaseController;
+import com.jeogiyo.member.dto.MemberInfoDto;
+import com.jeogiyo.member.exception.MemberNotFoundException;
 import com.jeogiyo.member.service.MemberService;
 import com.jeogiyo.member.vo.MemberVO;
 import com.jeogiyo.common.util.SHA256Util;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,8 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller("memberController")
-@RequestMapping("/members")
-public class MemberController extends BaseController {
+public class MemberController {
 
     @Autowired
     MemberService memberService;
@@ -28,48 +29,31 @@ public class MemberController extends BaseController {
     MemberVO memberVO;
 
 
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView login(@RequestParam Map<String,String> loginMap, HttpServletRequest request, HttpServletResponse response) throws  Exception{
-
-        ModelAndView mav =new ModelAndView();
-        String salt=memberService.getMemberSaltByIdAndType(loginMap.get("member_id"),loginMap.get("member_type"));
-        System.out.println("Salt : "+salt);
-        String encryPasswd= SHA256Util.getEncrypt(loginMap.get("member_pw"),salt);
-        System.out.println("Encry password: "+encryPasswd);
-        loginMap.put("member_pw",encryPasswd);
-        memberVO=memberService.login(loginMap);
-        if(memberVO!=null&&memberVO.getMember_id()!=null){
-            HttpSession session=request.getSession();
-            session.setAttribute("isLogOn",true);
-            session.setAttribute("memberInfo",memberVO);
-
-            String action=(String)session.getAttribute("action");
-            if(action!=null && action.equals("/order/orderFoods")) {
-                mav.setViewName("forward:"+action);
-            }else {
-                mav.setViewName("redirect:/main/main");
+    @PostMapping("/members/login")
+    public String login(@RequestParam Map<String, String> loginMap, HttpServletRequest request,
+            Model model) throws Exception {
+        try {
+            MemberInfoDto memberInfoDto = memberService.login(loginMap);
+            HttpSession session = request.getSession();
+            session.setAttribute("isLogOn", true);
+            session.setAttribute("memberInfo", memberInfoDto);
+            String action = (String) session.getAttribute("action");
+            if (action != null && action.equals("/order/orderFoods")) {
+                return "forward:" + action;
+            } else {
+                return "redirect:/";
             }
-        }else{
-            String message="아이디나 비밀번호가 틀립니다. 다시 로그인해주세요.";
-            mav.addObject("message",message);
-            mav.addObject("result","loginFailed");
-            mav.setViewName("forward:/members/loginForm");
+        } catch (MemberNotFoundException e) {
+            String message = "아이디나 비밀번호가 틀립니다. 다시 로그인해주세요.";
+            model.addAttribute("message", message);
+            model.addAttribute("result", "loginFailed");
+            return "forward:/members/login-form";
         }
-        return mav;
     }
 
-    @RequestMapping(value = "/loginForm", method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response)throws Exception{
-        String viewName= (String)request.getAttribute("viewName");
-
-        ModelAndView mav=new ModelAndView(viewName);
-        String result= (String)request.getAttribute("result");
-        System.out.println("loginForm result:"+result);
-        if(result!=null&& result.equals("loginFailed")){
-            mav.addObject("result","loginFailed");
-        }
-        return mav;
+    @RequestMapping(value = "/members/login-form", method = {RequestMethod.GET, RequestMethod.POST})
+    public String loginForm() {
+        return "/members/loginForm";
     }
 
     @GetMapping(value="/logout")
