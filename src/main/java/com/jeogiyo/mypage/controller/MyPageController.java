@@ -44,8 +44,8 @@ public class MyPageController extends BaseController {
         ModelAndView mav=new ModelAndView();
         HttpSession session=request.getSession();
         MemberVO memberVO=(MemberVO) session.getAttribute("memberInfo");
-        String memberId=memberVO.getMember_id();
-        String memberType=memberVO.getMember_type();
+        String memberId=memberVO.getId();
+        String memberType=memberVO.getType();
         String viewName="/mypage/order";
         mav.setViewName(viewName);
         int pageNum=page.isPresent()? page.get():1;
@@ -80,8 +80,8 @@ public class MyPageController extends BaseController {
         HttpSession session=request.getSession();
         MemberVO memberVO=(MemberVO) session.getAttribute("memberInfo");
 
-        String memberId=memberVO.getMember_id();
-        String memberType=memberVO.getMember_type();
+        String memberId=memberVO.getId();
+        String memberType=memberVO.getType();
         String viewName="/mypage/review";
         mav.setViewName(viewName);
         int pageNum=page.isPresent()? page.get():1;

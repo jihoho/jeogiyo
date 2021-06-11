@@ -11,12 +11,12 @@ import org.springframework.stereotype.Component;
 @ToString
 @Component("memberVO")
 public class MemberVO {
-    private String member_id;
-    private String member_pw;
-    private String member_type;
-    private String nick_name;
+    private String id;
+    private String pw;
+    private String type;
+    private String nickname;
     private String hp;
-    private String del_yn;
+    private String isDelete;
     private String salt;
 
 

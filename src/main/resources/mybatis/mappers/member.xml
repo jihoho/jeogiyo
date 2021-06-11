@@ -6,12 +6,12 @@
 <mapper namespace="com.jeogiyo.member.dao.MemberDAO">
 	<!-- 리절트 맵 정의 -->
 	<resultMap id="memberResult" type="memberVO">
-		<result property="member_id" column="member_id" />
-		<result property="member_type" column="member_type"/>
-		<result property="member_pw" column="member_pw" />
-		<result property="nick_name" column="nick_name"/>
+		<result property="id" column="member_id" />
+		<result property="type" column="member_type"/>
+		<result property="pw" column="member_pw" />
+		<result property="nickname" column="nick_name"/>
 		<result property="hp" column="hp" />
-		<result property="del_yn" column="del_yn"/>
+		<result property="isDelete" column="del_yn"/>
 		<result property="salt" column="salt"/>
 	</resultMap>
 
@@ -50,8 +50,8 @@
 		<![CDATA[
 			select salt
 			from member
-			where member_id=#{member_id}
-			and member_type=#{member_type}
+			where member_id=#{memberId}
+			and member_type=#{memberType}
 		]]>
 	</select>
 
