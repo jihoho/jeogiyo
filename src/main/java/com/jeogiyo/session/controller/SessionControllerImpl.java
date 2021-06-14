@@ -35,7 +35,7 @@ public class SessionControllerImpl implements SessionController{
         ResponseEntity resEntity=null;
         HttpSession session= request.getSession();
         MemberVO beforeMember=(MemberVO) session.getAttribute("memberInfo");
-        memberVO.setDel_yn(beforeMember.getDel_yn());
+        memberVO.setIsDelete(beforeMember.getIsDelete());
         session.setAttribute("memberInfo",memberVO);
         resEntity=new ResponseEntity(HttpStatus.OK);
         return resEntity;

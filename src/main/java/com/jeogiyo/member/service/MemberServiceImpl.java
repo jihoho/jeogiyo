@@ -34,22 +34,22 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String overlapped(Map idMap) throws Exception{
-        System.out.println("call service overlapped id :" +idMap.get("id"));
-        String result =memberDAO.selectOverlappedID(idMap);
-        System.out.println("result: "+result);
+    public String overlapped(Map idMap) throws Exception {
+        System.out.println("call service overlapped id :" + idMap.get("id"));
+        String result = memberDAO.selectOverlappedID(idMap);
+        System.out.println("result: " + result);
         return result;
     }
 
     @Override
-    public void addMember(MemberVO memberVO) throws Exception{
+    public void addMember(MemberVO memberVO) throws Exception {
         System.out.println("service:addmember");
         System.out.println(memberVO);
         memberDAO.insertNewMember(memberVO);
     }
 
     @Override
-    public void modifyMember(MemberVO memberVO) throws Exception{
+    public void modifyMember(MemberVO memberVO) throws Exception {
         memberDAO.updateMemberByIdAndType(memberVO);
     }
 

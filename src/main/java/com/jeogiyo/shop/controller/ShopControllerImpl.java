@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.jeogiyo.food.service.FoodService;
 import com.jeogiyo.food.vo.FoodVO;
 import com.jeogiyo.review.service.ReviewService;
-import com.jeogiyo.review.vo.ReviewVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +37,7 @@ public class ShopControllerImpl extends BaseController implements ShopController
 		String viewName=(String)request.getAttribute("viewName");
 		System.out.println("shopController.searchShopsByCategory view name : "+viewName+"  category: "+category);
 		System.out.println("bcode: "+bcode);
-		List<ShopVO> shopList=shopService.searchShopListByCategoryAndLocation(category,bcode);;
+		List<ShopVO> shopList=shopService.searchShopListByCategoryAndLocation(category,bcode);
 
 
 		if(shopList==null) {
