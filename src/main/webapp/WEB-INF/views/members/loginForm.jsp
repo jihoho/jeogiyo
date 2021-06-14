@@ -56,8 +56,8 @@
   <meta charset="UTF-8">
 <title>로그인창</title>
 
-<link href="${contextPath}/lib/bootstrap-5.0.0-beta1-dist/css/bootstrap.css" rel="stylesheet" >
-<script src="${contextPath}/lib/bootstrap-5.0.0-beta1-dist/js/bootstrap.js" type="text/javascripta"></script>
+<link href="${contextPath}/static/lib/bootstrap-5.0.0-beta1-dist/css/bootstrap.css" rel="stylesheet" >
+<script src="${contextPath}/static/lib/bootstrap-5.0.0-beta1-dist/js/bootstrap.js" type="text/javascripta"></script>
 <c:choose>
 	<c:when test="${result=='loginFailed' }">
 	  <script>
@@ -73,7 +73,7 @@
     <section id="login_sect">
         <div>
             <a href="${contextPath}/main/main">
-                <img src="${contextPath}/image/login_logo.png"/>
+                <img src="${contextPath}/static/image/login_logo.png"/>
             </a>
         </div>
         <div>
@@ -110,7 +110,7 @@
             <a href="${contextPath}/member/memberForm">
                 <span>
                     회원가입
-                <span>
+                </span>
             </a>
         </div>
     </section>

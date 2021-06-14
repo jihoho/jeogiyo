@@ -13,16 +13,16 @@
 <head>
   <meta charset="UTF-8">
 <title>header</title>
-<link href="${contextPath}/lib/bootstrap-5.0.0-beta1-dist/css/bootstrap.css" rel="stylesheet" >
-<script src="${contextPath}/lib/bootstrap-5.0.0-beta1-dist/js/bootstrap.js" type="text/javascript"></script>
+<link href="${contextPath}/static/lib/bootstrap-5.0.0-beta1-dist/css/bootstrap.css" rel="stylesheet" >
+<script src="${contextPath}/static/lib/bootstrap-5.0.0-beta1-dist/js/bootstrap.js" type="text/javascript"></script>
 
 
 
 </head>
 <body onload="headerInit();">
-	    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-image: url('/image/header_img.png'); height: 250px; width: 100%;" >
+	    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-image: url('/static/image/header_img.png'); height: 250px; width: 100%;" >
           <div class="container-fluid">
-			<a class="navbar-brand" href="${contextPath}/main/main"><img src="${contextPath}/image/logo.png"></a>
+			<a class="navbar-brand" href="${contextPath}/"><img src="${contextPath}/static/image/logo.png"></a>
 			
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -30,7 +30,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
              
 				<div style="margin-left: auto!important;margin-right: auto!important;">
-					<img src="${contextPath}/image/header_txt.png">
+					<img src="${contextPath}/static/image/header_txt.png">
 				</div>
 
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-right: 15px;" >
@@ -40,7 +40,7 @@
                         <li class="nav-item"><a class="nav-link active" href="${contextPath}/mypage/info"><span style="font-weight: 900; color: #046D22; ">마이페이지</span></a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/members/loginForm"><span style="font-weight: 900; color: #046D22; ">로그인</span></a></li>
+                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/members/login-form"><span style="font-weight: 900; color: #046D22; ">로그인</span></a></li>
                         <li class="nav-item"><a class="nav-link active" href="${contextPath}/members/memberForm"><span style="font-weight: 900; color: #046D22; ">회원가입</span></a></li>
                     </c:otherwise>
                 </c:choose>

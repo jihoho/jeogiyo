@@ -22,7 +22,7 @@
 <body>
 	<div>
 		<div id="logo">
-			<img src="${contextPath}/image/mini_logo.png">
+			<img src="${contextPath}/static/image/mini_logo.png">
 		</div>
 		<div id="company_info">
 			<h3>HJ 딜리버리 코리아</h3>

@@ -3,7 +3,7 @@
          pageEncoding="UTF-8" isELIgnored="false"%>
 <style>
     .starR1{
-        background: url('/image/star_ico.png') no-repeat -52px 0;
+        background: url('/static/image/star_ico.png') no-repeat -52px 0;
         background-size: auto 100%;
         width: 15px;
         height: 30px;
@@ -12,7 +12,7 @@
         cursor: pointer;
     }
     .starR2{
-        background: url('/image/star_ico.png') no-repeat right 0;
+        background: url('/static/image/star_ico.png') no-repeat right 0;
         background-size: auto 100%;
         width: 15px;
         height: 30px;

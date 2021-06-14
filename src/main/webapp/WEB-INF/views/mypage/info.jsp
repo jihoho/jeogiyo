@@ -16,8 +16,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="${contextPath}/css/mypage.css" rel="stylesheet" type="text/css" media="screen">
-	<link href="${contextPath}/css/myinfo.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="${contextPath}/static/css/mypage.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="${contextPath}/static/css/myinfo.css" rel="stylesheet" type="text/css" media="screen">
 </head>
 <body>
 	<div class="container-fluid">
@@ -44,4 +44,4 @@
 
 </body>
 </html>
-<script src="${contextPath}/js/myinfo.js"></script>
+<script src="${contextPath}/static/js//myinfo.js"></script>
