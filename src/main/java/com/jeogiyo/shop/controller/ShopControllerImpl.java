@@ -10,46 +10,36 @@ import com.jeogiyo.food.vo.FoodVO;
 import com.jeogiyo.review.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.jeogiyo.common.base.BaseController;
 import com.jeogiyo.shop.service.ShopService;
 import com.jeogiyo.shop.vo.ShopVO;
 
 @Controller("shopController")
-@RequestMapping(value="/shop")
-public class ShopControllerImpl extends BaseController implements ShopController {
-	@Autowired
-	ShopService shopService;
-	@Autowired
-	FoodService foodService;
-	@Autowired
-	ReviewService reviewService;
-	
-	@Override
-	@RequestMapping(value="/listShop", method=RequestMethod.GET)
-	public ModelAndView searchShopListByCategory(@RequestParam("category") String category,
-									@RequestParam("bcode") String bcode,
-									HttpServletRequest request, HttpServletResponse response ) throws Exception{
-		String viewName=(String)request.getAttribute("viewName");
-		System.out.println("shopController.searchShopsByCategory view name : "+viewName+"  category: "+category);
-		System.out.println("bcode: "+bcode);
-		List<ShopVO> shopList=shopService.searchShopListByCategoryAndLocation(category,bcode);
+@RequestMapping(value = "/shop")
+public class ShopControllerImpl implements ShopController {
 
+    @Autowired
+    ShopService shopService;
+    @Autowired
+    FoodService foodService;
+    @Autowired
+    ReviewService reviewService;
 
-		if(shopList==null) {
-			System.out.println("shopList null");
-		}
-		for(ShopVO shop: shopList) {
-			System.out.println("shop_id: "+shop.getShop_id()+", shop_name: "+shop.getShop_name());
-		}
-		ModelAndView mav=new ModelAndView(viewName);
-		mav.addObject("shopList", shopList);
-		return mav;
-	}
+    @Override
+    @GetMapping("/listShop")
+    public String searchShopListByCategory(@RequestParam("category") String category,
+            @RequestParam("bcode") String bcode, Model model) throws Exception {
+
+        List<ShopVO> shopList = shopService.searchShopListByCategoryAndLocation(category, bcode);
+        model.addAttribute("shopList", shopList);
+        return "/shop/listShop";
+    }
 
 	@Override
 	@RequestMapping(value = "/shopDetail", method = RequestMethod.GET)
