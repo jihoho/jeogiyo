@@ -1,57 +1,57 @@
 [
-	{
-		"name": "tot_ct",
-		"img_file": "/static/image/ct_img/tot_ct_img.png",
-		"ko_name": "ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½"
-	},
-	{
-		"name": "chicken_ct",
-		"img_file": "/static/image/ct_img/chicken_ct_img.png",
-		"ko_name": "Ä¡Å²"
-	},
-	{
-		"name": "pizza_ct",
-		"img_file": "/static/image/ct_img/pizza_ct_img.png",
-		"ko_name": "ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½"
-	},
-	{
-		"name": "china_ct",
-		"img_file": "/static/image/ct_img/china_ct_img.png",
-		"ko_name": "ï¿½ß±ï¿½ï¿½ï¿½"
-	},
-	{
-		"name": "korea_ct",
-		"img_file": "/static/image/ct_img/korea_ct_img.png",
-		"ko_name": "ï¿½Ñ½ï¿½"
-	},
-	{
-		"name": "bossam_ct",
-		"img_file": "/static/image/ct_img/bossam_ct_img.png",
-		"ko_name": "ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½"
-	},
-	{
-		"name": "nightsnack_ct",
-		"img_file": "/static/image/ct_img/nightsnack_ct_img.png",
-		"ko_name": "ï¿½ß½ï¿½"
-	},
-	{
-		"name": "bunsik_ct",
-		"img_file": "/static/image/ct_img/bunsik_ct_img.png",
-		"ko_name": "ï¿½Ð½ï¿½"
-	},
-	{
-		"name": "cafe_ct",
-		"img_file": "/static/image/ct_img/cafe_ct_img.png",
-		"ko_name": "Ä«ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½Æ®"
-	},
-	{
-		"name": "mart_ct",
-		"img_file": "/static/image/ct_img/mart_ct_img.png",
-		"ko_name": "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½Æ®"
-	},
-	{
-		"name": "fastfood_ct",
-		"img_file": "/static/image/ct_img/fastfood_ct_img.png",
-		"ko_name": "ï¿½Ð½ï¿½Æ® Çªï¿½ï¿½"
-	}
+  {
+    "name": "tot_ct",
+    "img_file": "/static/image/ct_img/tot_ct_img.png",
+    "ko_name": "ÀüÃ¼ º¸±â"
+  },
+  {
+    "name": "chicken_ct",
+    "img_file": "/static/image/ct_img/chicken_ct_img.png",
+    "ko_name": "Ä¡Å²"
+  },
+  {
+    "name": "pizza_ct",
+    "img_file": "/static/image/ct_img/pizza_ct_img.png",
+    "ko_name": "ÇÇÀÚ/¾ç½Ä"
+  },
+  {
+    "name": "china_ct",
+    "img_file": "/static/image/ct_img/china_ct_img.png",
+    "ko_name": "Áß±¹Áý"
+  },
+  {
+    "name": "korea_ct",
+    "img_file": "/static/image/ct_img/korea_ct_img.png",
+    "ko_name": "ÇÑ½Ä"
+  },
+  {
+    "name": "bossam_ct",
+    "img_file": "/static/image/ct_img/bossam_ct_img.png",
+    "ko_name": "Á·¹ß/º¸½Ó"
+  },
+  {
+    "name": "nightsnack_ct",
+    "img_file": "/static/image/ct_img/nightsnack_ct_img.png",
+    "ko_name": "¾ß½Ä"
+  },
+  {
+    "name": "bunsik_ct",
+    "img_file": "/static/image/ct_img/bunsik_ct_img.png",
+    "ko_name": "ºÐ½Ä"
+  },
+  {
+    "name": "cafe_ct",
+    "img_file": "/static/image/ct_img/cafe_ct_img.png",
+    "ko_name": "Ä«Æä/µðÀúÆ®"
+  },
+  {
+    "name": "mart_ct",
+    "img_file": "/static/image/ct_img/mart_ct_img.png",
+    "ko_name": "ÆíÀÇÁ¡/¸¶Æ®"
+  },
+  {
+    "name": "fastfood_ct",
+    "img_file": "/static/image/ct_img/fastfood_ct_img.png",
+    "ko_name": "ÆÐ½ºÆ®Çªµå"
+  }
 ]
