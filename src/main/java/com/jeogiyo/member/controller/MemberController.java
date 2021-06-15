@@ -1,6 +1,5 @@
 package com.jeogiyo.member.controller;
 
-import com.jeogiyo.member.dto.MemberInfoDto;
 import com.jeogiyo.member.exception.MemberNotFoundException;
 import com.jeogiyo.member.service.MemberService;
 import com.jeogiyo.member.vo.MemberVO;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,16 +31,9 @@ public class MemberController {
     public String login(@RequestParam Map<String, String> loginMap, HttpServletRequest request,
             Model model) throws Exception {
         try {
-            MemberInfoDto memberInfoDto = memberService.login(loginMap);
             HttpSession session = request.getSession();
-            session.setAttribute("isLogOn", true);
-            session.setAttribute("memberInfo", memberInfoDto);
-            String action = (String) session.getAttribute("action");
-            if (action != null && action.equals("/order/orderFoods")) {
-                return "forward:" + action;
-            } else {
-                return "redirect:/";
-            }
+            memberService.login(loginMap, session);
+            return getViewBySession(session);
         } catch (MemberNotFoundException e) {
             String message = "아이디나 비밀번호가 틀립니다. 다시 로그인해주세요.";
             model.addAttribute("message", message);
@@ -51,22 +42,30 @@ public class MemberController {
         }
     }
 
+    private String getViewBySession(HttpSession session) {
+        String action = (String) session.getAttribute("action");
+        if (action != null && action.equals("/order/orderFoods")) {
+            return "forward:" + action;
+        } else {
+            return "redirect:/";
+        }
+    }
+
     @RequestMapping(value = "/members/login-form", method = {RequestMethod.GET, RequestMethod.POST})
-    public String loginForm() {
+    public String getLoginForm() {
         return "/members/loginForm";
     }
 
-    @GetMapping(value = "/logout")
-    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
-        ModelAndView mav = new ModelAndView();
-        HttpSession session = request.getSession();
-        session.setAttribute("isLogOn", false);
-        session.removeAttribute("memberInfo");
-        mav.setViewName("redirect:/main/main");
-        return mav;
+    @GetMapping("/members/logout")
+    public String logout(HttpServletRequest request) {
+        memberService.logout(request.getSession());
+        return "redirect:/";
     }
 
+    @GetMapping("/members/sign-up")
+    public String getSignUpForm() {
+        return "/members/memberForm";
+    }
 
     @GetMapping(value = "/checkid/{id}/{type}")
     @ResponseBody

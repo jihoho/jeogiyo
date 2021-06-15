@@ -1,11 +1,12 @@
 package com.jeogiyo.member.service;
 
-
 import com.jeogiyo.common.util.SHA256Util;
 import com.jeogiyo.member.dao.MemberDAO;
 import com.jeogiyo.member.dto.MemberInfoDto;
+import com.jeogiyo.member.exception.InvalidLogoutException;
 import com.jeogiyo.member.exception.MemberNotFoundException;
 import com.jeogiyo.member.vo.MemberVO;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -21,16 +22,25 @@ public class MemberServiceImpl implements MemberService {
     private MemberDAO memberDAO;
 
     @Override
-    public MemberInfoDto login(Map<String, String> loginMap) throws Exception {
+    public void login(Map<String, String> loginMap, HttpSession session) throws Exception {
         String salt = getMemberSaltByIdAndType(loginMap.get("member_id"),
                 loginMap.get("member_type"));
-
         loginMap.put("member_pw", SHA256Util.getEncrypt(loginMap.get("member_pw"), salt));
         MemberVO memberVO = memberDAO.login(loginMap);
         if (memberVO == null) {
             throw new MemberNotFoundException();
         }
-        return MemberInfoDto.createMemberInfoDto(memberVO);
+        session.setAttribute("isLogOn", true);
+        session.setAttribute("memberInfo", MemberInfoDto.createMemberInfoDto(memberVO));
+    }
+
+    @Override
+    public void logout(HttpSession session) throws InvalidLogoutException{
+        if(!(boolean) session.getAttribute("isLogOn")){
+            throw new InvalidLogoutException();
+        }
+        session.setAttribute("isLogOn", false);
+        session.removeAttribute("memberInfo");
     }
 
     @Override

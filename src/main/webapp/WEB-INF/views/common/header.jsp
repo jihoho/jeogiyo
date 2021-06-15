@@ -41,7 +41,7 @@
                     </c:when>
                     <c:otherwise>
                         <li class="nav-item"><a class="nav-link active" href="${contextPath}/members/login-form"><span style="font-weight: 900; color: #046D22; ">로그인</span></a></li>
-                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/members/memberForm"><span style="font-weight: 900; color: #046D22; ">회원가입</span></a></li>
+                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/members/sign-up"><span style="font-weight: 900; color: #046D22; ">회원가입</span></a></li>
                     </c:otherwise>
                 </c:choose>
 				</ul>

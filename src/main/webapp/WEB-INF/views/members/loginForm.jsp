@@ -107,7 +107,7 @@
                 </span>
             </a>
             |
-            <a href="${contextPath}/member/memberForm">
+            <a href="${contextPath}/members/sign-up">
                 <span>
                     회원가입
                 </span>
