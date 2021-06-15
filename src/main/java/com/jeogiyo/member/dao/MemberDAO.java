@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Mapper
 public interface MemberDAO {
-    String selectOverlappedID(Map<String,String> idMap) throws DataAccessException;
+    String selectOverlappedID(@Param("memberId") String memberId,@Param("memberType") String memberType) throws DataAccessException;
 
     void insertNewMember(MemberVO memberVO) throws DataAccessException;
 

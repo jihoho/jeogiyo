@@ -1,5 +1,6 @@
 package com.jeogiyo.member.controller;
 
+import com.jeogiyo.member.dto.MemberSaveDto;
 import com.jeogiyo.member.exception.MemberNotFoundException;
 import com.jeogiyo.member.service.MemberService;
 import com.jeogiyo.member.vo.MemberVO;
@@ -13,9 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.Map;
 
 @Controller("memberController")
@@ -67,18 +66,12 @@ public class MemberController {
         return "/members/memberForm";
     }
 
-    @GetMapping(value = "/checkid/{id}/{type}")
+    @GetMapping("/members/checkid/{id}/{type}")
     @ResponseBody
     public ResponseEntity overlapped(@PathVariable String id, @PathVariable String type)
             throws Exception {
-        ResponseEntity resEntity = null;
-        HashMap<String, String> idMap = new HashMap<String, String>();
-        idMap.put("id", id);
-        idMap.put("type", type);
-        System.out.println("call rest!");
-        String result = memberService.overlapped(idMap);
-        resEntity = new ResponseEntity(result, HttpStatus.OK);
-        return resEntity;
+        String result = memberService.overlapped(id, type);
+        return new ResponseEntity(result, HttpStatus.OK);
     }
 
     @PostMapping(value = "/members")

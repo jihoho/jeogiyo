@@ -3,6 +3,7 @@ package com.jeogiyo.member.service;
 import com.jeogiyo.common.util.SHA256Util;
 import com.jeogiyo.member.dao.MemberDAO;
 import com.jeogiyo.member.dto.MemberInfoDto;
+import com.jeogiyo.member.dto.MemberSaveDto;
 import com.jeogiyo.member.exception.InvalidLogoutException;
 import com.jeogiyo.member.exception.MemberNotFoundException;
 import com.jeogiyo.member.vo.MemberVO;
@@ -44,11 +45,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String overlapped(Map idMap) throws Exception {
-        System.out.println("call service overlapped id :" + idMap.get("id"));
-        String result = memberDAO.selectOverlappedID(idMap);
-        System.out.println("result: " + result);
-        return result;
+    public String overlapped(String memberId, String memberType) throws Exception {
+        return memberDAO.selectOverlappedID(memberId, memberType);
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 public interface MemberService {
-    String overlapped(Map<String,String> idMap) throws Exception;
+    String overlapped(String memberId, String memberType) throws Exception;
 
     void addMember(MemberVO memberVO) throws Exception;
 
