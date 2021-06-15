@@ -1,5 +1,6 @@
 package com.jeogiyo.member.service;
 
+import com.jeogiyo.member.dto.MemberSaveDto;
 import com.jeogiyo.member.exception.InvalidLogoutException;
 import com.jeogiyo.member.vo.MemberVO;
 
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpSession;
 public interface MemberService {
     String overlapped(String memberId, String memberType) throws Exception;
 
-    void addMember(MemberVO memberVO) throws Exception;
+    void saveMember(MemberSaveDto memberSaveDto) throws Exception;
 
     void login(Map<String, String> loginMap, HttpSession session) throws  Exception;
 

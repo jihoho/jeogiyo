@@ -1,83 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.jeogiyo.member.dao.MemberDAO">
-	<!-- 리절트 맵 정의 -->
-	<resultMap id="memberResult" type="memberVO">
-		<result property="id" column="member_id" />
-		<result property="type" column="member_type"/>
-		<result property="pw" column="member_pw" />
-		<result property="nickname" column="nick_name"/>
-		<result property="hp" column="hp" />
-		<result property="isDelete" column="del_yn"/>
-		<result property="salt" column="salt"/>
-	</resultMap>
+  <!-- 리절트 맵 정의 -->
+  <resultMap id="memberResult" type="memberVO">
+    <result property="id" column="member_id"/>
+    <result property="type" column="member_type"/>
+    <result property="pw" column="member_pw"/>
+    <result property="nickname" column="nick_name"/>
+    <result property="hp" column="hp"/>
+    <result property="isDelete" column="del_yn"/>
+    <result property="salt" column="salt"/>
+  </resultMap>
 
-	<select id="login" resultType="memberVO" parameterType="java.util.Map">
+  <select id="login" resultType="memberVO" parameterType="java.util.Map">
 		<![CDATA[
-			select * from member
-			where member_id=#{member_id}
-			and member_type=#{member_type}
-			and member_pw=#{member_pw}
-		]]>
+    select *
+    from member
+    where member_id = #{member_id}
+      and member_type = #{member_type}
+      and member_pw = #{member_pw}
+    ]]>
 	</select>
 
-	<select id="selectOverlappedID" parameterType="java.util.Map" resultType="String">
+  <select id="selectOverlappedID" parameterType="String" resultType="String">
 		<![CDATA[
-			select decode(count(*),1,'true',0,'false')
-			from member
-			where member_id=#{id} and member_type=#{type}
-		]]>
+    select decode(count(*), 1, 'true', 0, 'false')
+    from member
+    where member_id = #{memberId}
+      and member_type = #{memberType}
+    ]]>
 	</select>
 
-	<select id="insertNewMember" parameterType="memberVO" >
+  <select id="insertNewMember" parameterType="memberVO">
 		<![CDATA[
-			insert into member(member_id,member_type,member_pw,nick_name,hp,salt)
-							 values(#{member_id},
-							        #{member_type},
-									#{member_pw},
-							        #{nick_name},
-							        #{hp},
-							        #{salt})
-
-		]]>
+    insert into member(member_id, member_type, member_pw, nick_name, hp, salt)
+    values (#{id},
+            #{type},
+            #{pw},
+            #{nickname},
+            #{hp},
+            #{salt})
+    ]]>
 	</select>
 
 
-	<select id="selectMemberSaltByIdAndType" parameterType="String" resultType="String" >
+  <select id="selectMemberSaltByIdAndType" parameterType="String" resultType="String">
 		<![CDATA[
-			select salt
-			from member
-			where member_id=#{memberId}
-			and member_type=#{memberType}
-		]]>
+    select salt
+    from member
+    where member_id = #{memberId}
+      and member_type = #{memberType}
+    ]]>
 	</select>
 
-	<update id="updateMemberByIdAndType" parameterType="memberVO">
+  <update id="updateMemberByIdAndType" parameterType="memberVO">
 		<![CDATA[
-		update member
-		set
-		    member_pw=#{member_pw},
-		    salt=#{salt},
-			nick_name=#{nick_name},
-		    hp=#{hp}
-		where
-			member_id=#{member_id} and member_type=#{member_type}
-
-		]]>
+    update member
+    set member_pw=#{member_pw},
+        salt=#{salt},
+        nick_name=#{nick_name},
+        hp=#{hp}
+    where member_id = #{member_id}
+      and member_type = #{member_type}
+    ]]>
 	</update>
 
-	<update id="updateMemberByIdAndTypeExcludePw" parameterType="memberVO">
-		update member
-		set
-			nick_name=#{nick_name},
-			hp=#{hp}
-		where
-			member_id=#{member_id} and member_type=#{member_type}
-	</update>
+  <update id="updateMemberByIdAndTypeExcludePw" parameterType="memberVO">
+    update member
+    set nick_name=#{nick_name},
+        hp=#{hp}
+    where member_id = #{member_id}
+      and member_type = #{member_type}
+  </update>
 
-	
 
 </mapper>

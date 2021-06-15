@@ -76,40 +76,31 @@ public class MemberController {
 
     @PostMapping(value = "/members")
     @ResponseBody
-    public ResponseEntity addMember(@ModelAttribute("memberVO") MemberVO _memberVO,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
-        response.setContentType("text/html; charset=UTF-8");
-        request.setCharacterEncoding("utf-8");
-        String message = null;
-        ResponseEntity resEntity = null;
+    public ResponseEntity saveMember(@ModelAttribute MemberSaveDto memberSaveDto,
+            HttpServletRequest request) {
+
+        // * todo Validation 추가 구현
+
         HttpHeaders responseHeaders = new HttpHeaders();
-
-        //  비밀번호 암호화
-        String salt = SHA256Util.generateSalt();
-        _memberVO.setSalt(salt);
-        String encryPasswd = SHA256Util.getEncrypt(_memberVO.getPw(), salt);
-        _memberVO.setPw(encryPasswd);
-        System.out.println("암호화된 비번: " + encryPasswd);
-
         responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-        //        일반 계정의 타입 설정
-        _memberVO.setType("NORMAL");
+
+        String message = null;
         try {
-            memberService.addMember(_memberVO);
+            memberService.saveMember(memberSaveDto);
             message = "<script>";
             message += " alert('회원 가입을 마쳤습니다.로그인창으로 이동합니다.');";
-            message += " location.href='" + request.getContextPath() + "/member/loginForm.do';";
+            message += " location.href='" + request.getContextPath() + "/members/login-form';";
             message += " </script>";
 
         } catch (Exception e) {
             message = "<script>";
             message += " alert('작업 중 오류가 발생했습니다. 다시 시도해 주세요');";
-            message += " location.href='" + request.getContextPath() + "/member/memberForm.do';";
+            message += " location.href='" + request.getContextPath() + "/member/sign-up';";
             message += " </script>";
             e.printStackTrace();
         }
-        resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
-        return resEntity;
+        return new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+
     }
 
 

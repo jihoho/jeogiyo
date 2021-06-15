@@ -36,8 +36,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void logout(HttpSession session) throws InvalidLogoutException{
-        if(!(boolean) session.getAttribute("isLogOn")){
+    public void logout(HttpSession session) throws InvalidLogoutException {
+        boolean isLogOn = (boolean) session.getAttribute("isLogOn");
+        if (!isLogOn) {
             throw new InvalidLogoutException();
         }
         session.setAttribute("isLogOn", false);
@@ -50,10 +51,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void addMember(MemberVO memberVO) throws Exception {
-        System.out.println("service:addmember");
-        System.out.println(memberVO);
-        memberDAO.insertNewMember(memberVO);
+    public void saveMember(MemberSaveDto memberSaveDto) throws Exception {
+        memberSaveDto.setSalt(SHA256Util.generateSalt());
+        memberSaveDto.setMemberPw(
+                SHA256Util.getEncrypt(memberSaveDto.getMemberPw(), memberSaveDto.getSalt()));
+        memberDAO.insertNewMember(memberSaveDto.toVo());
     }
 
     @Override
