@@ -7,7 +7,7 @@ import com.jeogiyo.order.service.OrderService;
 import com.jeogiyo.order.vo.OrderVO;
 import com.jeogiyo.review.service.ReviewService;
 import com.jeogiyo.review.vo.ReviewVO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,21 +19,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@Controller("myPageController")
-@RequestMapping("/mypage")
+@Controller
+@RequiredArgsConstructor
 public class MyPageController extends BaseController {
-    @Autowired
-    OrderService orderService;
 
-    @Autowired
-    ReviewService reviewService;
 
-    @RequestMapping(value = "/info", method = RequestMethod.GET)
-    public ModelAndView myInfo(HttpServletRequest request) throws Exception{
-        ModelAndView mav=new ModelAndView();
-        String viewName=(String)request.getAttribute("viewName");
-        mav.setViewName(viewName);
-        return mav;
+    private final OrderService orderService;
+
+    private final ReviewService reviewService;
+
+    @GetMapping("/mypage")
+    public String myInfo() {
+        return "/mypage/info";
     }
 
 

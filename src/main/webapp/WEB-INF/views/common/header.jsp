@@ -37,7 +37,7 @@
                     <c:choose>
                     <c:when test="${isLogOn==true}">
                         <li class="nav-item"><a class="nav-link active" href="${contextPath}/members/logout"><span style="font-weight: 900; color: #046D22; ">로그아웃</span></a></li>
-                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/mypage/info"><span style="font-weight: 900; color: #046D22; ">마이페이지</span></a></li>
+                        <li class="nav-item"><a class="nav-link active" href="${contextPath}/mypage"><span style="font-weight: 900; color: #046D22; ">마이페이지</span></a></li>
                     </c:when>
                     <c:otherwise>
                         <li class="nav-item"><a class="nav-link active" href="${contextPath}/members/login-form"><span style="font-weight: 900; color: #046D22; ">로그인</span></a></li>
