@@ -1,19 +1,22 @@
 package com.jeogiyo.member.service;
 
-import com.jeogiyo.member.vo.MemberVO;
+import com.jeogiyo.member.dto.MemberSaveDto;
+import com.jeogiyo.member.dto.MemberUpdateDto;
+import com.jeogiyo.member.exception.InvalidLogoutException;
 
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 
 public interface MemberService {
-    public String overlapped(Map<String,String> idMap) throws Exception;
+    String overlapped(String memberId, String memberType) throws Exception;
 
-    public void addMember(MemberVO memberVO) throws Exception;
+    void saveMember(MemberSaveDto memberSaveDto) throws Exception;
 
-    public MemberVO login(Map<String, String> loginMap) throws  Exception;
+    void login(Map<String, String> loginMap, HttpSession session) throws  Exception;
 
-    public void modifyMember(MemberVO memberVO) throws Exception;
+    void logout(HttpSession session) throws InvalidLogoutException;
 
-    public String getMemberSaltByIdAndType(String member_id,String member_type) throws Exception;
+    String getMemberSaltByIdAndType(String memberId,String memberType) throws Exception;
 
-    public void modifyMemberExcludePw(MemberVO memberVO) throws Exception;
+    void updateMember(MemberUpdateDto memberUpdateDto,HttpSession session) throws Exception;
 }

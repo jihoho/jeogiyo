@@ -2,23 +2,21 @@ package com.jeogiyo.member.dao;
 
 import com.jeogiyo.member.vo.MemberVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Repository;
 
 import java.util.Map;
 
 @Mapper
 public interface MemberDAO {
-    public String selectOverlappedID(Map<String,String> idMap) throws DataAccessException;
+    String selectOverlappedID(@Param("memberId") String memberId,@Param("memberType") String memberType) throws DataAccessException;
 
-    public void insertNewMember(MemberVO memberVO) throws DataAccessException;
+    void insertNewMember(MemberVO memberVO) throws DataAccessException;
 
-    public MemberVO login(Map<String, String> loginMap) throws  DataAccessException;
+    MemberVO login(Map<String, String> loginMap) throws  DataAccessException;
 
+    void updateMemberByIdAndType(MemberVO memberVO) throws DataAccessException;
 
-    public void updateMemberByIdAndType(MemberVO memberVO) throws DataAccessException;
+    String selectMemberSaltByIdAndType(@Param("memberId") String memberId,@Param("memberType") String memberType) throws DataAccessException;
 
-    public String selectMemberSaltByIdAndType(String member_id, String member_type) throws DataAccessException;
-
-    public void updateMemberByIdAndTypeExcludePw(MemberVO memberVO) throws DataAccessException;
 }

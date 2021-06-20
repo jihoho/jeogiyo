@@ -7,7 +7,7 @@
 }
 /* header {
   border: 0px solid #bcbcbc;
-  background-image: url("/image/header_img.png");
+  background-image: url("/static/image/header_img.png");
   height: 207px;
   display: flex;
   justify-content: center;

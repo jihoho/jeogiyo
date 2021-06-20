@@ -20,7 +20,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="${contextPath}/css/orderForm.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="${contextPath}/static/css/orderForm.css" rel="stylesheet" type="text/css" media="screen">
 </head>
 <body>
 	<div class="container" >
@@ -147,6 +147,6 @@
 			</div>
 	</div>
 
-	<script src="${contextPath}/js/orderForm.js"></script>
+	<script src="${contextPath}/static/js//orderForm.js"></script>
 </body>
 </html>

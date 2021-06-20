@@ -146,32 +146,20 @@ function updateMyInfo(){
     var nick_name=document.getElementById("nick_name").value;
     var hp=document.getElementById("hp").value;
     var memberObj=new Object();
-    memberObj.member_id=member_id;
-    memberObj.member_type=member_type;
-    memberObj.member_pw=member_pw;
-    memberObj.nick_name=nick_name;
+    memberObj.memberId=member_id;
+    memberObj.memberType=member_type;
+    memberObj.memberPw=member_pw;
+    memberObj.nickname=nick_name;
     memberObj.hp=hp
     var jsonData=JSON.stringify(memberObj);
     console.log(jsonData);
     $.ajax({
-        url: "/members/"+member_id+"/"+member_type,
+        url: "/members/update/"+member_id+"/"+member_type,
         type: "post",
         contentType:"application/json; charset=UTF-8",
         data: jsonData,
         success: function() {
             alert("데이터 전송 성공!!");
-            $.ajax({
-                url:"/session/members",
-                type: "post",
-                contentType: "application/json; charset=UTF-8",
-                data:jsonData,
-                success:function (){
-
-                },
-                error:function (){
-                    alert('member session 저장 실패!');
-                }
-            });
         },
         error: function (){
             alert("error!!");

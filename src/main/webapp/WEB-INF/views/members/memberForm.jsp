@@ -242,12 +242,12 @@
 		<div class="col-lg-4 col-md-6 col-sm-5">
 		<h2 style="margin-top: 30px;">회원가입 정보</h2>
 		<form action="${contextPath}/members" method="post" class="needs-validation" onsubmit="return checkForm();" style="margin-top: 30px;" novalidate>
-			<input type="hidden" id="member_type" value="NORMAL">
+			<input type="hidden" id="member_type" name="memberType" value="NORMAL">
 			<div class="row g-2">
 				<div class="col-xl-8 col-lg-8 col-md-7 col-sm-7">
 					<div class="form-floating mb-3">
 						<input type="email" class="form-control" id="_member_id" placeholder="name@example.com">
-						<input type="hidden" name="member_id" id="member_id">
+						<input type="hidden" name="memberId" id="member_id">
 						<label for="_member_id">이메일</label>
 						<div class="valid-feedback">
 							Looks good!
@@ -263,7 +263,7 @@
 				</div>
 			</div>
 			<div class="form-floating mb-3">
-				<input type="password" class="form-control" id="member_pw" name="member_pw" placeholder="Password" required>
+				<input type="password" class="form-control" id="member_pw" name="memberPw" placeholder="Password" required>
 				<label for="member_pw">비밀번호</label>
 				<div class="invalid-feedback">
 					비밀번호 4자리 이상 입력해주세요!
@@ -279,7 +279,7 @@
 			</div>
 
 			<div class="form-floating mb-3">
-				<input type="text" class="form-control" id="nick_name" name="nick_name" placeholder="닉네임" required>
+				<input type="text" class="form-control" id="nick_name" name="nickname" placeholder="닉네임" required>
 				<label for="nick_name">닉네임</label>
 				<div class="invalid-feedback">
 					닉네임 입력해주세요!

@@ -1,8 +1,12 @@
-package com.jeogiyo.common.util;
+package com.jeogiyo.common.pagination;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+
+@Getter
+@Setter
+
 public class Pagination {
     private int listSize = 5;                //초기값으로 목록개수를 5으로 셋팅
     private int rangeSize = 10;            //초기값으로 페이지범위를 10으로 셋팅
@@ -17,7 +21,11 @@ public class Pagination {
     private boolean prev;
     private boolean next;
 
-    public void pageInfo(int page, int range, int listCnt) {
+    public static Pagination createPagination(PageRequestDto pageRequestDto, int totalListCount) {
+        return  new Pagination(pageRequestDto.getPage(),pageRequestDto.range,totalListCount);
+    }
+
+    public Pagination(int page, int range, int listCnt) {
         this.page = page;
         this.range = range;
         this.listCnt = listCnt;

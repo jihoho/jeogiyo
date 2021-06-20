@@ -6,23 +6,23 @@
     <div class="mypage-header">
         <span class="header_txt">주문 내역</span>
     </div>
-    <input type="hidden" id="memberId" value="${memberInfo.member_id}"/>
-    <input type="hidden" id="memberType" value="${memberInfo.member_type}"/>
+    <input type="hidden" id="memberId" value="${memberInfo.memberId}"/>
+    <input type="hidden" id="memberType" value="${memberInfo.memberType}"/>
 
     <div class="mypage-body" id="my-order-list">
         <c:forEach var="order" items="${orderList}">
             <div class="myorder">
                 <div class="myorder-info">
-                    <div><span>${order.reg_date}</span></div>
-                    <div><span>${order.shop_name}</span></div>
-                    <div><span>${order.order_content}</span></div>
-                    <div><span>총 주문 금액:</span><span>${order.total_price}</span></div>
+                    <div><span>${order.regDate}</span></div>
+                    <div><span>${order.shopName}</span></div>
+                    <div><span>${order.orderContent}</span></div>
+                    <div><span>총 주문 금액:</span><span>${order.totalPrice}</span></div>
                 </div>
                 <div class="myorder-butt-list">
-                    <input type="hidden" class="shop_id" name="shop_id" value="${order.shop_id}"/>
-                    <input type="hidden" class="order_id" name="order_id" value="${order.order_id}"/>
-                    <input type="hidden" class="shop_name" name="shop_name" value="${order.shop_name}"/>
-                    <input type="hidden" class="order_content" name="order_content" value="${order.order_content}"/>
+                    <input type="hidden" class="shop_id" name="shop_id" value="${order.shopId}"/>
+                    <input type="hidden" class="order_id" name="order_id" value="${order.orderId}"/>
+                    <input type="hidden" class="shop_name" name="shop_name" value="${order.shopName}"/>
+                    <input type="hidden" class="order_content" name="order_content" value="${order.orderContent}"/>
                     <button type="button" class="write-review-butt">리뷰 쓰기</button>
                     <button type="button" class="shop-detail-butt">가게 보기</button>
                     <button type="button" class="order-detail-butt">주문 상세</button>
@@ -47,7 +47,7 @@
 
             <c:forEach var="idx" begin='${pagination.startPage}' end='${pagination.endPage}'>
 
-                <li class="page-item ${pagination.page == idx ? 'active' : ''}"><a class="page-link" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">${idx}</a></li>
+                <li class="page-item ${pagination.page == idx ? 'active' : ''}"><a class="page-link" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">${idx}</a></li>
             </c:forEach>
 
 

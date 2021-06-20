@@ -1,8 +1,14 @@
 package com.jeogiyo.member.service;
 
-
+import com.jeogiyo.common.util.SHA256Util;
 import com.jeogiyo.member.dao.MemberDAO;
+import com.jeogiyo.member.dto.MemberInfoDto;
+import com.jeogiyo.member.dto.MemberSaveDto;
+import com.jeogiyo.member.dto.MemberUpdateDto;
+import com.jeogiyo.member.exception.InvalidLogoutException;
+import com.jeogiyo.member.exception.MemberNotFoundException;
 import com.jeogiyo.member.vo.MemberVO;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -12,44 +18,73 @@ import java.util.Map;
 
 @Service("memberService")
 @Transactional(propagation = Propagation.REQUIRED)
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private MemberDAO memberDAO;
 
     @Override
-    public MemberVO login(Map<String, String> loginMap) throws Exception {
-        return memberDAO.login(loginMap);
+    public void login(Map<String, String> loginMap, HttpSession session) throws Exception {
+        String salt = getMemberSaltByIdAndType(loginMap.get("member_id"),
+                loginMap.get("member_type"));
+        loginMap.put("member_pw", SHA256Util.getEncrypt(loginMap.get("member_pw"), salt));
+        MemberVO memberVO = memberDAO.login(loginMap);
+        if (memberVO == null) {
+            throw new MemberNotFoundException();
+        }
+        saveLoginInfoInSession(session, memberVO);
+    }
+
+    private void saveLoginInfoInSession(HttpSession session, MemberVO memberVO) {
+        session.setAttribute("isLogOn", true);
+        session.setAttribute("memberInfo", MemberInfoDto.createMemberInfoDto(memberVO));
     }
 
     @Override
-    public String overlapped(Map idMap) throws Exception{
-        System.out.println("call service overlapped id :" +idMap.get("id"));
-        String result =memberDAO.selectOverlappedID(idMap);
-        System.out.println("result: "+result);
-        return result;
+    public void logout(HttpSession session) throws InvalidLogoutException {
+        boolean isLogOn = (boolean) session.getAttribute("isLogOn");
+        if (!isLogOn) {
+            throw new InvalidLogoutException();
+        }
+        session.setAttribute("isLogOn", false);
+        session.removeAttribute("memberInfo");
     }
 
     @Override
-    public void addMember(MemberVO memberVO) throws Exception{
-        System.out.println("service:addmember");
-        System.out.println(memberVO);
-        memberDAO.insertNewMember(memberVO);
+    public String overlapped(String memberId, String memberType) throws Exception {
+        return memberDAO.selectOverlappedID(memberId, memberType);
     }
 
     @Override
-    public void modifyMember(MemberVO memberVO) throws Exception{
+    public void saveMember(MemberSaveDto memberSaveDto) throws Exception {
+        memberSaveDto.setSalt(SHA256Util.generateSalt());
+        memberSaveDto.setMemberPw(
+                SHA256Util.getEncrypt(memberSaveDto.getMemberPw(), memberSaveDto.getSalt()));
+        memberDAO.insertNewMember(memberSaveDto.toVo());
+    }
+
+    @Override
+    public void updateMember(MemberUpdateDto memberUpdateDto, HttpSession session)
+            throws Exception {
+        if (memberUpdateDto.getMemberPw() != null && memberUpdateDto.getMemberPw() != "") {
+            String salt = SHA256Util.generateSalt();
+            memberUpdateDto.setSalt(salt);
+            memberUpdateDto.setMemberPw(SHA256Util.getEncrypt(memberUpdateDto.getMemberPw(), salt));
+        }
+        MemberVO memberVO = memberUpdateDto.toVo();
         memberDAO.updateMemberByIdAndType(memberVO);
+        saveLoginInfoInSession(session, memberVO);
+
     }
 
-    @Override
-    public void modifyMemberExcludePw(MemberVO memberVO) throws Exception {
-        memberDAO.updateMemberByIdAndTypeExcludePw(memberVO);
-    }
 
     @Override
-    public String getMemberSaltByIdAndType(String member_id,String member_type) throws Exception{
-        String salt=memberDAO.selectMemberSaltByIdAndType(member_id,member_type);
+    public String getMemberSaltByIdAndType(String memberId, String memberType) throws Exception {
+        System.out.println(memberId + ", " + memberType);
+        String salt = memberDAO.selectMemberSaltByIdAndType(memberId, memberType);
+        if (salt == null) {
+            throw new MemberNotFoundException();
+        }
         return salt;
     }
 
