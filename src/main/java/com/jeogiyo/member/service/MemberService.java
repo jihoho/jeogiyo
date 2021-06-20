@@ -1,8 +1,8 @@
 package com.jeogiyo.member.service;
 
 import com.jeogiyo.member.dto.MemberSaveDto;
+import com.jeogiyo.member.dto.MemberUpdateDto;
 import com.jeogiyo.member.exception.InvalidLogoutException;
-import com.jeogiyo.member.vo.MemberVO;
 
 import java.util.Map;
 import javax.servlet.http.HttpSession;
@@ -16,9 +16,7 @@ public interface MemberService {
 
     void logout(HttpSession session) throws InvalidLogoutException;
 
-    void modifyMember(MemberVO memberVO) throws Exception;
-
     String getMemberSaltByIdAndType(String memberId,String memberType) throws Exception;
 
-    void modifyMemberExcludePw(MemberVO memberVO) throws Exception;
+    void updateMember(MemberUpdateDto memberUpdateDto,HttpSession session) throws Exception;
 }

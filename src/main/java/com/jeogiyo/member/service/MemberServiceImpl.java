@@ -4,6 +4,7 @@ import com.jeogiyo.common.util.SHA256Util;
 import com.jeogiyo.member.dao.MemberDAO;
 import com.jeogiyo.member.dto.MemberInfoDto;
 import com.jeogiyo.member.dto.MemberSaveDto;
+import com.jeogiyo.member.dto.MemberUpdateDto;
 import com.jeogiyo.member.exception.InvalidLogoutException;
 import com.jeogiyo.member.exception.MemberNotFoundException;
 import com.jeogiyo.member.vo.MemberVO;
@@ -31,6 +32,10 @@ public class MemberServiceImpl implements MemberService {
         if (memberVO == null) {
             throw new MemberNotFoundException();
         }
+        saveLoginInfoInSession(session, memberVO);
+    }
+
+    private void saveLoginInfoInSession(HttpSession session, MemberVO memberVO) {
         session.setAttribute("isLogOn", true);
         session.setAttribute("memberInfo", MemberInfoDto.createMemberInfoDto(memberVO));
     }
@@ -59,14 +64,19 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void modifyMember(MemberVO memberVO) throws Exception {
+    public void updateMember(MemberUpdateDto memberUpdateDto, HttpSession session)
+            throws Exception {
+        if (memberUpdateDto.getMemberPw() != null && memberUpdateDto.getMemberPw() != "") {
+            String salt = SHA256Util.generateSalt();
+            memberUpdateDto.setSalt(salt);
+            memberUpdateDto.setMemberPw(SHA256Util.getEncrypt(memberUpdateDto.getMemberPw(), salt));
+        }
+        MemberVO memberVO = memberUpdateDto.toVo();
         memberDAO.updateMemberByIdAndType(memberVO);
+        saveLoginInfoInSession(session, memberVO);
+
     }
 
-    @Override
-    public void modifyMemberExcludePw(MemberVO memberVO) throws Exception {
-        memberDAO.updateMemberByIdAndTypeExcludePw(memberVO);
-    }
 
     @Override
     public String getMemberSaltByIdAndType(String memberId, String memberType) throws Exception {

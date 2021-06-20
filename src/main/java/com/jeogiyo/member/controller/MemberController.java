@@ -103,28 +103,12 @@ public class MemberController {
     }
 
 
-    @PostMapping(value = "/{id}/{type}")
+    @PostMapping("/members/update/{id}/{type}")
     @ResponseBody
-    public ResponseEntity modifyMember(@PathVariable String id, @PathVariable String type,
-            @RequestBody MemberVO memberVO) throws Exception {
-        ResponseEntity responseEntity = null;
-        System.out.println(id + "," + type);
-
-        //        pass가 변경된 경우 salt와 encryPass생성하여 update
-        if (memberVO.getPw() != null && memberVO.getPw() != "") {
-            String salt = SHA256Util.generateSalt();
-            String encryPasswd = SHA256Util.getEncrypt(memberVO.getPw(), salt);
-            memberVO.setPw(encryPasswd);
-            memberVO.setSalt(salt);
-            memberService.modifyMember(memberVO);
-            System.out.println("pass 변경");
-        } else {  // pass가 변경되지 않은 경우 pass 제외하여 update
-            memberService.modifyMemberExcludePw(memberVO);
-            System.out.println("pass 변경 없음");
-        }
-        System.out.println(memberVO);
-        responseEntity = new ResponseEntity(HttpStatus.OK);
-        return responseEntity;
+    public ResponseEntity updateMember(@PathVariable String id, @PathVariable String type,
+            @RequestBody MemberUpdateDto memberUpdateDto, HttpSession session) throws Exception {
+        memberService.updateMember(memberUpdateDto, session);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 

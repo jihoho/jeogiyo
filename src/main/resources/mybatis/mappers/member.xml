@@ -15,7 +15,7 @@
     <result property="salt" column="salt"/>
   </resultMap>
 
-  <select id="login" resultType="memberVO" parameterType="java.util.Map">
+  <select id="login" resultMap="memberResult" parameterType="java.util.Map">
 		<![CDATA[
     select *
     from member
@@ -57,24 +57,15 @@
 	</select>
 
   <update id="updateMemberByIdAndType" parameterType="memberVO">
-		<![CDATA[
     update member
-    set member_pw=#{member_pw},
-        salt=#{salt},
-        nick_name=#{nick_name},
-        hp=#{hp}
-    where member_id = #{member_id}
-      and member_type = #{member_type}
-    ]]>
-	</update>
-
-  <update id="updateMemberByIdAndTypeExcludePw" parameterType="memberVO">
-    update member
-    set nick_name=#{nick_name},
-        hp=#{hp}
-    where member_id = #{member_id}
-      and member_type = #{member_type}
+    set nick_name=#{nickname},
+    hp=#{hp}
+    <if test="pw!=null and pw!=''">
+      ,member_pw=#{pw},
+      salt=#{salt}
+    </if>
+    where member_id = #{id}
+    and member_type = #{type}
   </update>
-
 
 </mapper>

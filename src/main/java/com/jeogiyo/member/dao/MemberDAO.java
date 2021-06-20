@@ -15,10 +15,8 @@ public interface MemberDAO {
 
     MemberVO login(Map<String, String> loginMap) throws  DataAccessException;
 
-
     void updateMemberByIdAndType(MemberVO memberVO) throws DataAccessException;
 
     String selectMemberSaltByIdAndType(@Param("memberId") String memberId,@Param("memberType") String memberType) throws DataAccessException;
 
-    void updateMemberByIdAndTypeExcludePw(MemberVO memberVO) throws DataAccessException;
 }
