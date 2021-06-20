@@ -26,6 +26,7 @@ dependencies {
 	compile group: 'net.coobird', name: 'thumbnailator', version: '0.4.11'
 	compile group: 'net.nurigo', name: 'javaSDK', version: '2.2'
 	compile group: 'commons-codec', name: 'commons-codec', version: '1.15'
+	implementation 'org.springframework.boot:spring-boot-devtools'
 
 // 롬복
 	compile('org.projectlombok:lombok')

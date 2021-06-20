@@ -1,8 +1,14 @@
 package com.jeogiyo.order.service;
 
+import com.jeogiyo.common.pagination.PageRequestDto;
+import com.jeogiyo.common.pagination.Pagination;
+import com.jeogiyo.member.dto.MemberInfoDto;
 import com.jeogiyo.order.dao.OrderDAO;
+import com.jeogiyo.order.dto.OrderListDto;
 import com.jeogiyo.order.vo.OrderFoodVO;
 import com.jeogiyo.order.vo.OrderVO;
+import java.util.HashMap;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -47,8 +53,22 @@ public class OrderService {
         return orderDAO.selectOrderListCntByMember(memberId,memberType);
     }
 
-    public List<OrderVO> searchOrderListByMemberAndPage(Map memberAndPage) throws Exception{
-        return orderDAO.selectOrderListByMemberAndPage(memberAndPage);
+    public Pagination getPaginationOfOrdersByMember(HttpSession session,
+            PageRequestDto pageRequestDto) {
+        MemberInfoDto memberInfo = (MemberInfoDto) session.getAttribute("memberInfo");
+        int totalListCount = orderDAO.selectOrderListCntByMember(
+                memberInfo.getMemberId(), memberInfo.getMemberType());
+        return Pagination.createPagination(pageRequestDto, totalListCount);
     }
 
+    public List<OrderListDto> getOrdersBySessionMemberAndPage(HttpSession session,
+            Pagination pagination) {
+        MemberInfoDto memberInfo = (MemberInfoDto) session.getAttribute("memberInfo");
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("memberId", memberInfo.getMemberId());
+        params.put("memberType", memberInfo.getMemberType());
+        params.put("startList", pagination.getStartList() + 1);
+        params.put("endList", pagination.getEndList() + 1);
+        return orderDAO.selectOrderListByMemberAndPage(params);
+    }
 }

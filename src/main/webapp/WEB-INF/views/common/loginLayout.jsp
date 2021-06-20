@@ -14,7 +14,7 @@
   <head>
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width">
-	<link href="${contextPath}/css/layout.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="${contextPath}/static/css/layout.css" rel="stylesheet" type="text/css" media="screen">
 	
     <title><tiles:insertAttribute name="title" /></title>
   </head>

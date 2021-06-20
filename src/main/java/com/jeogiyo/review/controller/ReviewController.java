@@ -25,7 +25,7 @@ import java.io.OutputStream;
 import java.util.*;
 
 @Controller
-public class ReviewController extends BaseController {
+public class ReviewController {
     @Autowired
     ReviewService reviewService;
 

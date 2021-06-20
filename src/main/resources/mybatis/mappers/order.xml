@@ -28,6 +28,15 @@
 		<result property="order_content" column="order_content"/>
 	</resultMap>
 
+	<resultMap id="orderListResult" type="orderListDto">
+		<result property="orderId" column="order_id" />
+		<result property="shopId" column="shop_id" />
+		<result property="shopName" column="shop_name" />
+		<result property="regDate" column="reg_date" />
+		<result property="totalPrice" column="total_price" />
+		<result property="orderContent" column="order_content" />
+	</resultMap>
+
 	<resultMap id="orderFoodResult" type="orderFoodVO">
 		<result property="orderId" column="order_id" />
 		<result property="foodId" column="food_id"/>
@@ -93,8 +102,8 @@
 		]]>
 	</select>
 
-	<select id="selectOrderListByMemberAndPage"	parameterType="java.util.Map" resultMap="orderResult">
-		SELECT RNUM, T.*
+	<select id="selectOrderListByMemberAndPage"	parameterType="java.util.Map" resultMap="orderListResult">
+		SELECT RNUM, T.ORDER_ID,T.SHOP_ID,T.SHOP_NAME,T.REG_DATE,T.TOTAL_PRICE,T.ORDER_CONTENT
 		FROM (
 				 SELECT ROWNUM AS RNUM, J.*
 				 FROM (

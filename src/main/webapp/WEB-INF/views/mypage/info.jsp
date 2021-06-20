@@ -16,8 +16,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="${contextPath}/css/mypage.css" rel="stylesheet" type="text/css" media="screen">
-	<link href="${contextPath}/css/myinfo.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="${contextPath}/static/css/mypage.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="${contextPath}/static/css/myinfo.css" rel="stylesheet" type="text/css" media="screen">
 </head>
 <body>
 	<div class="container-fluid">
@@ -25,7 +25,7 @@
 			<div class="col-3 bd-sidebar">
 				<ul class="nav">
 					<li><a id="myInfoMenu" href="/mypage/info">나의 정보</a></li>
-					<li><a id="myOrderMenu" href="/mypage/order">주문 내역</a></li>
+					<li><a id="myOrderMenu" href="/mypage/orders">주문 내역</a></li>
 					<li><a id="myFavoriteShopMenu" href="/mypage/favorite-shop">찜한 가게</a></li>
 					<li><a id="myReviewMenu" href="/mypage/reviews">리뷰 관리</a></li>
 				</ul>
@@ -44,4 +44,4 @@
 
 </body>
 </html>
-<script src="${contextPath}/js/myinfo.js"></script>
+<script src="${contextPath}/static/js//myinfo.js"></script>

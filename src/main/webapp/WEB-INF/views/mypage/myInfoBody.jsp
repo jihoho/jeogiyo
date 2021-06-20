@@ -15,7 +15,7 @@
 								</span>
             </div>
             <div class="form-floating myInfoValueDiv">
-                <input type="text" class="form-control" id="nick_name" value="${memberInfo.nick_name}">
+                <input type="text" class="form-control" id="nick_name" value="${memberInfo.nickname}">
                 <label for="nick_name">닉네임</label>
             </div>
         </div>
@@ -27,8 +27,8 @@
 								</span>
             </div>
             <div class="form-floating myInfoValueDiv">
-                <input type="email" class="form-control" id="member_id" value="${memberInfo.member_id}" disabled>
-                <input type="hidden" id="member_type" value="${memberInfo.member_type}"/>
+                <input type="email" class="form-control" id="member_id" value="${memberInfo.memberId}" disabled>
+                <input type="hidden" id="member_type" value="${memberInfo.memberType}"/>
                 <label for="member_id">이메일 아이디</label>
             </div>
         </div>

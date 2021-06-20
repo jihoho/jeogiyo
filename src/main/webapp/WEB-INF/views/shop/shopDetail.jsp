@@ -22,7 +22,7 @@
 		console.log(isLogOn);
 		var dib_butt=document.getElementById("dibs_butt");
 		if(isLogOn=="false" || isLogOn=="null"){ //로그인이 안되어 있을 경우
-			dib_butt.setAttribute("src","/image/dib/none_dib_butt.png");
+			dib_butt.setAttribute("src","/static/image/dib/none_dib_butt.png");
 		}else if (isLogOn=="true"){
 			// 로그인이 되어 있을 경우 shop id, member id, member type을 rest controller에 전달
 			var shop_id="${shop.shop_id}";
@@ -38,9 +38,9 @@
 				data: {shop_id:shop_id, member_id:member_id, member_type:member_type},
 				success:function (data,textStatus){
 					if(data=='false'){
-						dib_butt.setAttribute("src","/image/dib/none_dib_butt.png");
+						dib_butt.setAttribute("src","/static/image/dib/none_dib_butt.png");
 					}else{
-						dib_butt.setAttribute("src","/image/dib/dib_butt.png");
+						dib_butt.setAttribute("src","/static/image/dib/dib_butt.png");
 					}
 				},
 				error:function(data,textStatus){
@@ -79,7 +79,7 @@
 					dataType:"text",
 					data: {shop_id:shop_id, member_id:member_id, member_type:member_type},
 					success:function (data,textStatus){
-						dibs_butt.setAttribute("src","/image/dib/dib_butt.png");
+						dibs_butt.setAttribute("src","/static/image/dib/dib_butt.png");
 					},
 					error:function(data,textStatus){
 						alert("에러가 발생했습니다.");
@@ -98,7 +98,7 @@
 					dataType:"text",
 					data: {shop_id:shop_id, member_id:member_id, member_type:member_type},
 					success:function (data,textStatus){
-						dibs_butt.setAttribute("src","/image/dib/none_dib_butt.png");
+						dibs_butt.setAttribute("src","/static/image/dib/none_dib_butt.png");
 					},
 					error:function(data,textStatus){
 						alert("에러가 발생했습니다.");
@@ -201,7 +201,7 @@
 		var removeA=document.createElement("a");
 		removeA.setAttribute("class","order_remove_butt");
 		var removeImg=document.createElement("img");
-		removeImg.setAttribute("src","${contextPath}/image/x_butt.png");
+		removeImg.setAttribute("src","${contextPath}/static/image/x_butt.png");
 		removeImg.setAttribute("style","height:20px; width:20px;");
 		removeA.appendChild(removeImg);
 		foodPriceDiv.setAttribute("style","float:left;");
@@ -221,7 +221,7 @@
 		var plusA=document.createElement("a");
 		plusA.setAttribute("class","order_plus_butt");
 		var plusImg=document.createElement("img");
-		plusImg.setAttribute("src","${contextPath}/image/plus_butt.png");
+		plusImg.setAttribute("src","${contextPath}/static/image/plus_butt.png");
 		plusImg.setAttribute("style","height:20px; width:20px;");
 		plusA.appendChild(plusImg);
 
@@ -229,7 +229,7 @@
 		minusA.setAttribute("class","order_minus_butt");
 		// minusA.setAttribute("onclick","orderQtyClick()")
 		var minusImg=document.createElement("img");
-		minusImg.setAttribute("src","${contextPath}/image/minus_butt.png");
+		minusImg.setAttribute("src","${contextPath}/static/image/minus_butt.png");
 		minusImg.setAttribute("style","height:20px; width:20px;");
 		minusA.appendChild(minusImg);
 
@@ -414,7 +414,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="${contextPath}/css/shopDetail.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="${contextPath}/static/css/shopDetail.css" rel="stylesheet" type="text/css" media="screen">
 </head>
 <body>
 	<section id="shopInfo">
@@ -695,13 +695,13 @@
 								</div>
 								<div style="float: right;">
 									<a id="modal_minus" onclick="modalQtyClick(this.id)">
-										<img src="${contextPath}/image/minus_butt.png" style="width: 20px; height: 20px;">
+										<img src="${contextPath}/static/image/minus_butt.png" style="width: 20px; height: 20px;">
 									</a>
 									<span id="modal_food_qty">
 										1
 									</span>
 									<a id="modal_plus" onclick="modalQtyClick(this.id)">
-										<img src="${contextPath}/image/plus_butt.png" style="width: 20px; height: 20px;">
+										<img src="${contextPath}/static/image/plus_butt.png" style="width: 20px; height: 20px;">
 									</a>
 								</div>
 							</div>
