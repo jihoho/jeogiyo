@@ -16,15 +16,15 @@ public class MemberInfoDto {
 
     private String memberId;
     private String memberType;
-    private String nickName;
+    private String nickname;
     private String hp;
     private String isDelete;
 
-    public MemberInfoDto(String memberId, String memberType, String nickName, String hp,
+    public MemberInfoDto(String memberId, String memberType, String nickname, String hp,
             String isDelete) {
         this.memberId = memberId;
         this.memberType = memberType;
-        this.nickName = nickName;
+        this.nickname = nickname;
         this.hp = hp;
         this.isDelete = isDelete;
     }

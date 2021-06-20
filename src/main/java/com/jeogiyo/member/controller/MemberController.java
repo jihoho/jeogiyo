@@ -1,10 +1,10 @@
 package com.jeogiyo.member.controller;
 
 import com.jeogiyo.member.dto.MemberSaveDto;
+import com.jeogiyo.member.dto.MemberUpdateDto;
 import com.jeogiyo.member.exception.MemberNotFoundException;
 import com.jeogiyo.member.service.MemberService;
 import com.jeogiyo.member.vo.MemberVO;
-import com.jeogiyo.common.util.SHA256Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,10 +27,9 @@ public class MemberController {
 
 
     @PostMapping("/members/login")
-    public String login(@RequestParam Map<String, String> loginMap, HttpServletRequest request,
+    public String login(@RequestParam Map<String, String> loginMap, HttpSession session,
             Model model) throws Exception {
         try {
-            HttpSession session = request.getSession();
             memberService.login(loginMap, session);
             return getViewBySession(session);
         } catch (MemberNotFoundException e) {
