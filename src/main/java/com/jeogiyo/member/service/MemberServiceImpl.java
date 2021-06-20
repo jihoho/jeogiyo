@@ -2,7 +2,7 @@ package com.jeogiyo.member.service;
 
 import com.jeogiyo.common.util.SHA256Util;
 import com.jeogiyo.member.dao.MemberDAO;
-import com.jeogiyo.member.dto.MemberInfoDto;
+import com.jeogiyo.member.dto.SessionMember;
 import com.jeogiyo.member.dto.MemberSaveDto;
 import com.jeogiyo.member.dto.MemberUpdateDto;
 import com.jeogiyo.member.exception.InvalidLogoutException;
@@ -37,7 +37,7 @@ public class MemberServiceImpl implements MemberService {
 
     private void saveLoginInfoInSession(HttpSession session, MemberVO memberVO) {
         session.setAttribute("isLogOn", true);
-        session.setAttribute("memberInfo", MemberInfoDto.createMemberInfoDto(memberVO));
+        session.setAttribute("memberInfo", SessionMember.createSessionMember(memberVO));
     }
 
     @Override
