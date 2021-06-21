@@ -9,7 +9,7 @@ import com.jeogiyo.member.exception.InvalidLogoutException;
 import com.jeogiyo.member.exception.MemberNotFoundException;
 import com.jeogiyo.member.vo.MemberVO;
 import javax.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,13 +18,15 @@ import java.util.Map;
 
 @Service("memberService")
 @Transactional(propagation = Propagation.REQUIRED)
+@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
-    @Autowired
-    private MemberDAO memberDAO;
+    private final MemberDAO memberDAO;
+
+    private final HttpSession session;
 
     @Override
-    public void login(Map<String, String> params, HttpSession session) throws Exception {
+    public void login(Map<String, String> params) throws Exception {
         String salt = getMemberSaltByIdAndType(params.get("member_id"),
                 params.get("member_type"));
         params.put("member_pw", SHA256Util.getEncrypt(params.get("member_pw"), salt));
@@ -32,16 +34,16 @@ public class MemberServiceImpl implements MemberService {
         if (memberVO == null) {
             throw new MemberNotFoundException();
         }
-        saveLoginInfoInSession(session, memberVO);
+        saveLoginInfoInSession(memberVO);
     }
 
-    private void saveLoginInfoInSession(HttpSession session, MemberVO memberVO) {
+    private void saveLoginInfoInSession(MemberVO memberVO) {
         session.setAttribute("isLogOn", true);
         session.setAttribute("memberInfo", SessionMember.createSessionMember(memberVO));
     }
 
     @Override
-    public void logout(HttpSession session) throws InvalidLogoutException {
+    public void logout() throws InvalidLogoutException {
         boolean isLogOn = (boolean) session.getAttribute("isLogOn");
         if (!isLogOn) {
             throw new InvalidLogoutException();
@@ -64,7 +66,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void updateMember(MemberUpdateDto memberUpdateDto, HttpSession session)
+    public void updateMember(MemberUpdateDto memberUpdateDto)
             throws Exception {
         if (memberUpdateDto.getMemberPw() != null && memberUpdateDto.getMemberPw() != "") {
             String salt = SHA256Util.generateSalt();
@@ -73,7 +75,7 @@ public class MemberServiceImpl implements MemberService {
         }
         MemberVO memberVO = memberUpdateDto.toVo();
         memberDAO.updateMemberByIdAndType(memberVO);
-        saveLoginInfoInSession(session, memberVO);
+        saveLoginInfoInSession(memberVO);
 
     }
 
