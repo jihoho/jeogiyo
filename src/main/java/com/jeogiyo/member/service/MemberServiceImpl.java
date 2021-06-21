@@ -24,11 +24,11 @@ public class MemberServiceImpl implements MemberService {
     private MemberDAO memberDAO;
 
     @Override
-    public void login(Map<String, String> loginMap, HttpSession session) throws Exception {
-        String salt = getMemberSaltByIdAndType(loginMap.get("member_id"),
-                loginMap.get("member_type"));
-        loginMap.put("member_pw", SHA256Util.getEncrypt(loginMap.get("member_pw"), salt));
-        MemberVO memberVO = memberDAO.login(loginMap);
+    public void login(Map<String, String> params, HttpSession session) throws Exception {
+        String salt = getMemberSaltByIdAndType(params.get("member_id"),
+                params.get("member_type"));
+        params.put("member_pw", SHA256Util.getEncrypt(params.get("member_pw"), salt));
+        MemberVO memberVO = memberDAO.selectMemberByIdAndTypeAndPw(params);
         if (memberVO == null) {
             throw new MemberNotFoundException();
         }

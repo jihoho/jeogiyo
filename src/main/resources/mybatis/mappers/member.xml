@@ -15,7 +15,7 @@
     <result property="salt" column="salt"/>
   </resultMap>
 
-  <select id="login" resultMap="memberResult" parameterType="java.util.Map">
+  <select id="selectMemberByIdAndTypeAndPw" resultMap="memberResult" parameterType="java.util.Map">
 		<![CDATA[
     select *
     from member

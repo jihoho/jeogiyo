@@ -13,7 +13,7 @@ public interface MemberDAO {
 
     void insertNewMember(MemberVO memberVO) throws DataAccessException;
 
-    MemberVO login(Map<String, String> loginMap) throws  DataAccessException;
+    MemberVO selectMemberByIdAndTypeAndPw(Map<String, String> params) throws  DataAccessException;
 
     void updateMemberByIdAndType(MemberVO memberVO) throws DataAccessException;
 
