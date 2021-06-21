@@ -5,7 +5,7 @@ import com.jeogiyo.member.dto.MemberUpdateDto;
 import com.jeogiyo.member.exception.MemberNotFoundException;
 import com.jeogiyo.member.service.MemberService;
 import com.jeogiyo.member.vo.MemberVO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,19 +18,18 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller("memberController")
+@RequiredArgsConstructor
 public class MemberController {
 
-    @Autowired
-    MemberService memberService;
-    @Autowired
-    MemberVO memberVO;
+    private final MemberService memberService;
+    private final HttpSession session;
 
 
     @PostMapping("/members/login")
-    public String login(@RequestParam Map<String, String> loginMap, HttpSession session,
-            Model model) throws Exception {
+    public String login(@RequestParam Map<String, String> loginParams, Model model)
+            throws Exception {
         try {
-            memberService.login(loginMap, session);
+            memberService.login(loginParams);
             return getViewBySession(session);
         } catch (MemberNotFoundException e) {
             String message = "아이디나 비밀번호가 틀립니다. 다시 로그인해주세요.";
@@ -55,8 +54,8 @@ public class MemberController {
     }
 
     @GetMapping("/members/logout")
-    public String logout(HttpServletRequest request) {
-        memberService.logout(request.getSession());
+    public String logout() {
+        memberService.logout();
         return "redirect:/";
     }
 
@@ -106,8 +105,8 @@ public class MemberController {
     @PostMapping("/members/update/{id}/{type}")
     @ResponseBody
     public ResponseEntity updateMember(@PathVariable String id, @PathVariable String type,
-            @RequestBody MemberUpdateDto memberUpdateDto, HttpSession session) throws Exception {
-        memberService.updateMember(memberUpdateDto, session);
+            @RequestBody MemberUpdateDto memberUpdateDto) throws Exception {
+        memberService.updateMember(memberUpdateDto);
         return new ResponseEntity(HttpStatus.OK);
     }
 

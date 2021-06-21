@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MemberInfoDto {
+public class SessionMember {
 
     private String memberId;
     private String memberType;
@@ -20,7 +20,7 @@ public class MemberInfoDto {
     private String hp;
     private String isDelete;
 
-    public MemberInfoDto(String memberId, String memberType, String nickname, String hp,
+    public SessionMember(String memberId, String memberType, String nickname, String hp,
             String isDelete) {
         this.memberId = memberId;
         this.memberType = memberType;
@@ -29,8 +29,8 @@ public class MemberInfoDto {
         this.isDelete = isDelete;
     }
 
-    public static MemberInfoDto createMemberInfoDto(MemberVO memberVO) {
-        return new MemberInfoDto(memberVO.getId(), memberVO.getType(), memberVO.getNickname(),
+    public static SessionMember createSessionMember(MemberVO memberVO) {
+        return new SessionMember(memberVO.getId(), memberVO.getType(), memberVO.getNickname(),
                 memberVO.getHp(), memberVO.getIsDelete());
     }
 }
