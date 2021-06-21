@@ -5,18 +5,17 @@ import com.jeogiyo.member.dto.MemberUpdateDto;
 import com.jeogiyo.member.exception.InvalidLogoutException;
 
 import java.util.Map;
-import javax.servlet.http.HttpSession;
 
 public interface MemberService {
     String overlapped(String memberId, String memberType) throws Exception;
 
     void saveMember(MemberSaveDto memberSaveDto) throws Exception;
 
-    void login(Map<String, String> loginMap, HttpSession session) throws  Exception;
+    void login(Map<String, String> loginMap) throws  Exception;
 
-    void logout(HttpSession session) throws InvalidLogoutException;
+    void logout() throws InvalidLogoutException;
 
     String getMemberSaltByIdAndType(String memberId,String memberType) throws Exception;
 
-    void updateMember(MemberUpdateDto memberUpdateDto,HttpSession session) throws Exception;
+    void updateMember(MemberUpdateDto memberUpdateDto) throws Exception;
 }

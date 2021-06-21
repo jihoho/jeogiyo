@@ -1,5 +1,6 @@
 package com.jeogiyo.member.vo;
 
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +25,25 @@ public class MemberVO {
     private String isDelete;
     private String salt;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        MemberVO memberVO = (MemberVO) o;
+        return Objects.equals(id, memberVO.id) && Objects.equals(pw, memberVO.pw)
+                && Objects.equals(type, memberVO.type) && Objects
+                .equals(nickname, memberVO.nickname) && Objects.equals(hp, memberVO.hp)
+                && Objects.equals(isDelete, memberVO.isDelete) && Objects
+                .equals(salt, memberVO.salt);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, pw, type, nickname, hp, isDelete, salt);
+    }
 }
 
