@@ -1,6 +1,7 @@
 package com.jeogiyo.member.dto;
 
 import com.jeogiyo.member.vo.MemberVO;
+import java.util.Objects;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,5 +33,25 @@ public class SessionMember {
     public static SessionMember createSessionMember(MemberVO memberVO) {
         return new SessionMember(memberVO.getId(), memberVO.getType(), memberVO.getNickname(),
                 memberVO.getHp(), memberVO.getIsDelete());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        SessionMember that = (SessionMember) o;
+        return Objects.equals(memberId, that.memberId) && Objects
+                .equals(memberType, that.memberType) && Objects
+                .equals(nickname, that.nickname) && Objects.equals(hp, that.hp)
+                && Objects.equals(isDelete, that.isDelete);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(memberId, memberType, nickname, hp, isDelete);
     }
 }
